@@ -1,0 +1,121 @@
+// 主体
+.main {
+  // position: absolute;
+  // top: 68px;
+  // left: 0;
+  padding: 26px 48px 50px 48px;
+  background-color: #f8f8f8;
+  .el-input {
+    width: 360px;
+    height: 36px;
+  }
+  .reset {
+    color: #000000;
+    background-color: #eceef5;
+  }
+  .el-button {
+    font-family: PingFangSC-Semibold;
+    // font-size: 18px;
+    // color: #ffffff;
+    letter-spacing: 0;
+    text-align: center;
+    width: 100px;
+    // height: 36px;
+    margin: 0 8px;
+  }
+  // 展示主体
+  .tbody {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .showlist {
+    position: relative;
+    // margin-right: 27px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 36px 36px 70px 36px;
+  }
+  .card {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    font-family: PingFangSC-Medium;
+    font-size: 18px;
+    color: #212121;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+  .data-number {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #212121;
+    letter-spacing: 0;
+    text-align: right;
+    line-height: 24px;
+  }
+  .data,
+  .aldown {
+    opacity: 0.72;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #212121;
+    letter-spacing: 0;
+    line-height: 14px;
+  }
+  .aldown {
+    margin-left: 20px;
+  }
+  .introduce {
+    margin-top: 24px;
+    height: 180px;
+    background: #f8f8f8;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    div {
+      margin-top: 10px;
+      margin-left: 10px;
+      font-size: 16px;
+    }
+    p {
+      margin-top: 10px;
+      margin-left: 36px;
+      padding-right: 20px;
+      font-size: 12px;
+      // text-indent: 2em;
+      word-break: break-all;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
+    }
+  }
+  .operation {
+    position: absolute;
+    right: 40px;
+    bottom: 28px;
+    .el-icon-s-data {
+      color: orange;
+    }
+    .el-icon-s-comment {
+      color: hotpink;
+    }
+    .el-icon-tickets {
+      color: blue;
+    }
+    .el-icon-download {
+      color: green;
+    }
+    span {
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: #212121;
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,0 +1,155 @@
+.deta .el-dialog {
+  position: relative;
+  box-sizing: border-box;
+  width: 1160px;
+  height: 712px;
+  padding: 16px 32px 24px 16px;
+  margin-top: 88px !important;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+}
+.deta .el-dialog .el-dialog__header {
+  margin-top: -20px;
+}
+.deta .el-dialog .el-dialog__title {
+  width: 120px;
+  height: 24px;
+  font-family: PingFangSC-Medium;
+  font-size: 24px;
+  color: #010101;
+  line-height: 24px;
+}
+.deta .el-dialog .bd {
+  margin-top: -20px;
+  position: absolute;
+  left: 24px;
+  top: 72px;
+  width: 1112px;
+  height: 1px;
+  background: #d8d8d8;
+}
+.deta .el-dialog .detail-show {
+  height: 254px;
+}
+.deta .el-dialog .detail-show .detail-list {
+  width: 592px;
+  height: 254px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-top {
+  height: 18px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-top span {
+  display: inline-block;
+  font-family: PingFangSC-Regular;
+  font-size: 18px;
+  color: #010101;
+  margin-top: -4px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-top span:nth-child(1) {
+  width: 180px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-top span:nth-child(2) {
+  width: 180px;
+  margin-left: 120px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-top span:nth-child(3) {
+  margin-left: -18px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-body {
+  height: 36px;
+  margin-top: 16px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-body span {
+  background: #f5f5f5;
+  border-radius: 4px;
+  display: inline-block;
+  font-family: PingFangSC-Medium;
+  font-size: 18px;
+  color: #010101;
+  line-height: 36px;
+  height: 36px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-body span:nth-child(1) {
+  width: 272px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-body span:nth-child(2) {
+  width: 132px;
+  margin: 0 28px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-bott {
+  margin-top: 32px;
+  width: 180px;
+  font-family: PingFangSC-Regular;
+  font-size: 18px;
+  color: #010101;
+  line-height: 18px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-footer {
+  box-sizing: border-box;
+  margin-top: 16px;
+  width: 592px;
+  height: 118px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 14px 32px;
+  font-family: PingFangSC-Regular;
+  font-size: 18px;
+  color: #010101;
+}
+.deta .el-dialog .detail-show .video {
+  width: 445px;
+  height: 254px;
+  line-height: 254px;
+  background: #fafafa;
+  border: 1px solid #a4a4a4;
+  border-radius: 4px;
+  text-align: center;
+  margin-left: 28px;
+}
+.deta .el-dialog .detail-show .video video {
+  width: 100%;
+  height: 100%;
+  background-color: pink;
+}
+.deta .el-dialog .detail-show .video span {
+  font-size: 32px;
+}
+.deta .el-dialog .detail-table {
+  margin-top: 40px;
+  width: 100%;
+}
+.deta .el-dialog .detail-table .el-scrollbar {
+  width: 100%;
+}
+.deta .el-dialog .detail-table .el-scrollbar .el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+.deta .el-dialog .detail-table .el-scrollbar .el-scrollbar__bar {
+  top: 50px;
+}
+.deta .el-dialog .detail-table span {
+  font-family: PingFangSC-Regular;
+  font-size: 18px;
+  color: #010101;
+  line-height: 18px;
+  margin-bottom: 15px;
+}
+.deta .el-dialog .detail-table button {
+  position: absolute;
+  left: 512px;
+  bottom: 8px;
+  border: none;
+  background-color: #3a71fa;
+  font-family: PingFangSC-Semibold;
+  font-size: 18px;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin: 0 auto;
+  width: 136px;
+  height: 36px;
+  text-align: center;
+  line-height: 36px;
+  border-radius: 4px;
+}

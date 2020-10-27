@@ -1,0 +1,123 @@
+.anay {
+  .el-dialog {
+    position: relative;
+    box-sizing: border-box;
+    width: 1160px;
+    // height: 712px;
+    padding: 16px 32px 24px 16px;
+    margin-top: 88px !important;
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    .el-dialog__header {
+      margin-top: -20px;
+    }
+    .el-dialog__title {
+      width: 120px;
+      height: 24px;
+      font-family: PingFangSC-Medium;
+      font-size: 24px;
+      color: #010101;
+      line-height: 24px;
+    }
+    // 下划线
+    .bd {
+      margin-top: -20px;
+      position: absolute;
+      left: 24px;
+      top: 72px;
+      width: 1112px;
+      height: 1px;
+      background: #d8d8d8;
+    }
+    // .el-form-item__label {
+    //   font-family: PingFangSC-Regular;
+    //   font-size: 18px;
+    //   color: #010101;
+    //   line-height: 18px;
+    // }
+
+    .el-input__inner {
+      width: 268px;
+      height: 34px;
+    }
+    .el-form {
+      // margin-top: 20px;
+      .el-form-item {
+        margin-bottom: 0;
+        // 选择框样式
+        // 录入完成按钮
+        .icon-buttons {
+          // margin-left: -20px;
+          margin-right: 10px;
+        }
+        .el-select {
+          .el-input .el-input__inner {
+            width: 268px;
+            height: 34px;
+            text-align: left;
+          }
+        }
+        .el-input .el-input__inner {
+          text-align: center;
+          width: 160px;
+        }
+      }
+
+      .el-table__expanded-cell {
+        padding: 0px;
+        border-bottom: 0;
+      }
+      .el-table {
+        .el-table--fit {
+          margin-top: 0px;
+        }
+        margin-top: 20px;
+        .el-table__footer-wrapper,
+        .el-table__header-wrapper {
+          background-color: #f5f7fa;
+        }
+      }
+    }
+    // 日志右侧图标显示
+    .el-icon-caret-bottom {
+      position: absolute;
+      color: #1677ff;
+      top: 11px;
+      right: -18px;
+    }
+    // 滚动条横向轴
+
+    .el-scrollbar .el-scrollbar__wrap {overflow-x: hidden;}
+    // 滚动条纵向轴
+    .el-scrollbar__bar  {
+        top: 70px;
+        bottom: 50px;
+    }
+    // 录入图标
+    .el-icon-success {
+      font-size: 18px;
+      color: green;
+    }
+    .el-icon-error {
+      font-size: 18px;
+      color: black;
+    }
+    // 表各行高亮
+    .current-row > td {
+      background: #d7e2fe !important;
+    }
+    // 日志表格横线
+    .hide {
+      .el-table__row > td {
+        border: none;
+      }
+    }
+    // 表格列居中
+    .has-gutter {
+      td {
+        text-align: center;
+      }
+    }
+  }
+}

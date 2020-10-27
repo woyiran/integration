@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* p {
+            width: 200px;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        } */
+        div {
+            position: relative;
+            width: 1000px;
+            margin: 0 auto;
+            /* background-color: pink; */
+        }
+
+        .box {
+            /* width: 500px; */
+            position: absolute;
+            /* width: 100%; */
+            left: 50%;
+            transform: translate(-50%);
+            top: 0;
+            /* margin: 0 auto; */
+            background-color: red;
+        }
+
+        .psps {
+            color: red;
+        }
+
+        .psps {
+            color: blue;
+            /* font-weight: ; */
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="../element.css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div>
+            468949
+            <div class="box">894</div>
+            <el-pagination background layout="prev, pager, next" :total="1000">
+            </el-pagination>
+        </div> -->
+        <!-- <div class="psps" @click='fn()' :style={fontwe}>
+            49861
+        </div> -->
+        <!-- <div v-for='item in app2' :key='item'>
+            <el-row :gutter='20'>
+                <div v-for='item in app3' :key='item'>
+                    <el-col :span='8'>
+                        <el-card class="box-card">
+                            <div slot="header" class="clearfix">
+                                <span>单卡信用卡模型</span>
+                                <el-button style="float:right;padding:3px 0px" type='text'>操作按键</el-button>
+                            </div>
+                            <div>
+                                <p v-for='item in app3' :key='item' class="text item">
+
+                                </p>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </div>
+            </el-row>
+
+       </div> -->
+        <!-- <el-upload
+        class="upload-demo"
+        ref="upload"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        
+        
+        
+        :auto-upload="false">
+       <el-input slot="trigger" size="small" type="primary">选取文件</el-input>
+       <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload> -->
+        <!-- <el-select v-model="value" placeholder="请选择" @change='changeVal'>
+            <el-option v-for="item in options"
+                :key="item.value" 
+                :label="item.label" 
+                :value="item.value"
+                >
+            </el-option>
+        </el-select> -->
+        <!-- <el-switch style="display: block" v-model="value2" active-color="#13ce66" inactive-color="#ff4949"
+            active-text="发布" inactive-text="暂停" @change='changeSwich'>
+        </el-switch> -->
+        <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/"
+        :show-file-list="false"
+        :on-success="handleSuccess"
+        :before-upload="beforeUpload"
+        :auto-upload="false">
+            <el-input  size="small" type="primary" :value="fileName" slot="trigger">选取文件</el-input>
+            <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传</el-button>
+            <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
+        </el-upload>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./element.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                options: [{
+                    value: '选项1',
+                    label: '黄金糕'
+                }, {
+                    value: '选项2',
+                    label: '双皮奶'
+                }, {
+                    value: '选项3',
+                    label: '蚵仔煎'
+                }, {
+                    value: '选项4',
+                    label: '龙须面'
+                }, {
+                    value: '选项5',
+                    label: '北京烤鸭'
+                }],
+                value: '',
+                value2: true,
+                fontwe: {
+                    fontWeight: 900
+                },
+                app2: [0, 1],
+                app3: [0, 1, 2],
+                msg: 900,
+                arr: ['营销名单', '名单维护'],
+                arr1: [
+                    {
+                        modelName: '单卡(信用卡)拉新模型',
+                        modelNumber: '88888',
+                        modelData: new Date(),
+                        modelDownNum: 20,
+                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+
+                    },
+                    {
+                        modelName: '单卡(信用卡)拉新模型',
+                        modelNumber: '88888',
+                        modelData: new Date(),
+                        modelDownNum: 20,
+                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+
+                    },
+                    {
+                        modelName: '单卡(信用卡)拉新模型',
+                        modelNumber: '88888',
+                        modelData: new Date(),
+                        modelDownNum: 20,
+                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+
+                    },
+                    {
+                        modelName: '单卡(信用卡)拉新模型',
+                        modelNumber: '88888',
+                        modelData: new Date(),
+                        modelDownNum: 20,
+                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+
+                    },
+                    {
+                        modelName: '单卡(信用卡)拉新模型',
+                        modelNumber: '88888',
+                        modelData: new Date(),
+                        modelDownNum: 20,
+                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+
+                    },
+                    {
+                        modelName: '单卡(信用卡)拉新模型',
+                        modelNumber: '88888',
+                        modelData: new Date(),
+                        modelDownNum: 20,
+                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+
+                    },
+
+                ],
+                fileName:null
+            },
+            methods: {
+                fn() {
+                    this.msg = !this.msg
+                    // console.log(e)
+                    // console.log(JSON.stringify(this.arr1))
+                },
+                // fn1() {
+                //     this.msg = false
+                // }
+                changeVal(val) {
+                    console.log(val)
+                },
+                changeSwich(val) {
+                    console.log(val)
+                },
+                // 手动上传
+                submitUpload() {
+                    this.$refs.upload.submit();
+                       
+                },
+                handleSuccess(res,file,filelist){
+                        // console.log(file)
+                        this.$message.success('上传成功')
+                },
+                beforeUpload(file){
+                    console.log(file)
+                   this.fileName= file.name
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

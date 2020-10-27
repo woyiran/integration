@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
+    <link rel="stylesheet" href="../element.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/detail.css">
+
+</head>
+
+<body>
+    <div id="app">
+        <el-button type="text" @click="detail = true">点击打开 Dialog</el-button>
+        <el-dialog title="详情" :visible.sync="detail" width="1160px" class="deta">
+            <div class="bd"></div>
+            <div class="detail-show">
+                <div class=" detail-list left">
+                    <div class='detail-list-top'>
+                        <span>模型名称</span>
+                        <span>数据日期</span>
+                        <span>数据量</span>
+                    </div>
+                    <div class="detail-list-body">
+                        <span>单卡(信用卡)模型</span>
+                        <span>2020/08/28</span>
+                        <span>20,200.34</span>
+                    </div>
+                    <div class="detail-list-bott">模型介绍</div>
+                    <div class="detail-list-footer">介绍内容</div>
+                </div>
+                <div class=" video right">
+                    <!-- <span class="el-icon-video-camera"></span> -->
+                    <video src=""></video>
+                </div>
+            </div>
+            <div class="detail-table">
+                <div>
+                    <span class="left">下载日志</span>
+                    <span class="right">累计下载N次</span>
+                </div>
+                <div>
+                    <el-scrollbar style="height:250px;">
+                        <el-table :data="tableData" style="width: 100%" :header-cell-style='headClass'
+                            :cell-style='rowClass'>
+                            <el-table-column prop="date" label="日期">
+                            </el-table-column>
+                            <el-table-column prop="name" label="姓名">
+                            </el-table-column>
+                            <el-table-column prop="address" label="地址">
+                            </el-table-column>
+                        </el-table>
+                    </el-scrollbar>
+                </div>
+                <div>总记录 30 条</div>
+                <button>立即下载</button>
+            </div>
+            <span slot="footer" class="dialog-footer">
+            </span>
+        </el-dialog>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
+    <script src="../vue.js"></script>
+    <script src="../element.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                // dialogVisible: true,
+                detail: true,
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1517 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1516 弄'
+                },
+                {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                },]
+
+            },
+            methods: {
+                headClass() {
+                    return 'text-align: center;background:#F5F7FA;height:40px'
+                },
+                rowClass() {
+                    return 'text-align: center;'
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

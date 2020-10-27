@@ -1,0 +1,93 @@
+.anay .el-dialog {
+  position: relative;
+  box-sizing: border-box;
+  width: 1160px;
+  padding: 16px 32px 24px 16px;
+  margin-top: 88px !important;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+}
+.anay .el-dialog .el-dialog__header {
+  margin-top: -20px;
+}
+.anay .el-dialog .el-dialog__title {
+  width: 120px;
+  height: 24px;
+  font-family: PingFangSC-Medium;
+  font-size: 24px;
+  color: #010101;
+  line-height: 24px;
+}
+.anay .el-dialog .bd {
+  margin-top: -20px;
+  position: absolute;
+  left: 24px;
+  top: 72px;
+  width: 1112px;
+  height: 1px;
+  background: #d8d8d8;
+}
+.anay .el-dialog .el-input__inner {
+  width: 268px;
+  height: 34px;
+}
+.anay .el-dialog .el-form .el-form-item {
+  margin-bottom: 0;
+}
+.anay .el-dialog .el-form .el-form-item .icon-buttons {
+  margin-right: 10px;
+}
+.anay .el-dialog .el-form .el-form-item .el-select .el-input .el-input__inner {
+  width: 268px;
+  height: 34px;
+  text-align: left;
+}
+.anay .el-dialog .el-form .el-form-item .el-input .el-input__inner {
+  text-align: center;
+  width: 160px;
+}
+.anay .el-dialog .el-form .el-table__expanded-cell {
+  padding: 0px;
+  border-bottom: 0;
+}
+.anay .el-dialog .el-form .el-table {
+  margin-top: 20px;
+}
+.anay .el-dialog .el-form .el-table .el-table--fit {
+  margin-top: 0px;
+}
+.anay .el-dialog .el-form .el-table .el-table__footer-wrapper,
+.anay .el-dialog .el-form .el-table .el-table__header-wrapper {
+  background-color: #f5f7fa;
+}
+.anay .el-dialog .el-icon-caret-bottom {
+  position: absolute;
+  color: #1677ff;
+  top: 11px;
+  right: -18px;
+}
+.anay .el-dialog .el-scrollbar .el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+.anay .el-dialog .el-scrollbar__bar {
+  top: 70px;
+  bottom: 50px;
+}
+.anay .el-dialog .el-icon-success {
+  font-size: 18px;
+  color: green;
+}
+.anay .el-dialog .el-icon-error {
+  font-size: 18px;
+  color: black;
+}
+.anay .el-dialog .current-row > td {
+  background: #d7e2fe !important;
+}
+.anay .el-dialog .hide .el-table__row > td {
+  border: none;
+}
+.anay .el-dialog .has-gutter td {
+  text-align: center;
+}

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- <link rel="stylesheet" href="../element.css"> -->
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/analysis.css">
+</head>
+
+<body>
+  <div id="app">
+    <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
+    <el-dialog title="分析" :visible.sync="dialogVisible" width="1160px" class="anay">
+      <div class="bd"></div>
+      <!-- 表格表单 -->
+      <el-form :model='formAna' ref='ayaForm' >
+        <el-form-item>
+          <el-select v-model="formAna.value" placeholder="请选择" @change='changeVal'>
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-scrollbar style="height: 350px;">
+          <el-table ref="table" :data="tableDataAna" show-summary :summary-method="handleSummary" style="width: 100%"
+            :header-cell-style='ayaheadClass' :cell-style='rowClass' highlight-current-row>
+            <el-table-column prop="date" label="月份" width="180">
+            </el-table-column>
+            <el-table-column  label="干预人数" width="180">
+              <template slot-scope="scope">
+                <div v-show='scope.row.openfm'>{{scope.row.num2}}</div>
+                <el-form-item v-show="!scope.row.openfm" >
+                  <el-input v-model='formAna.trouble'  placeholder="请输入数字" autocomplete="off"></el-input>
+                </el-form-item>
+              </template>
+            </el-table-column>
+            <el-table-column  label="转化人数">
+              <template slot-scope="scope">
+                <div v-show='scope.row.openfm'>{{scope.row.num}}</div>
+                <el-form-item v-show="!scope.row.openfm" >
+                  <el-input v-model='formAna.trasform' placeholder="请输入数字"></el-input>
+                </el-form-item>
+              </template>
+            </el-table-column>
+            <el-table-column  label="AUM提升">
+              <template slot-scope="scope">
+                <div v-show='scope.row.openfm'>{{scope.row.num}}</div>
+                <el-form-item v-show="!scope.row.openfm" >
+                  <el-input v-model='formAna.incres' placeholder="请输入数字"></el-input>
+                </el-form-item>
+              </template>
+            </el-table-column>
+            <el-table-column  label="转化率">
+              <template slot-scope='scope'>
+                {{scope.row.trans+'%'}}
+              </template>
+            </el-table-column>
+            <el-table-column label="操作" label-width='100px'>
+              <template slot-scope="scope">
+                <div v-show='scope.row.openfm'>
+                  <el-button type="text" @click='openform(scope.row)' v-show='!power'>录入</el-button>
+                  <el-button type="text"
+                  @click="toogleExpand(scope.row)" 
+                  style="position: relative;"
+                  :style='scope.row.logColor? fontwe:""'
+                  >日志
+                  
+                    <i class="el-icon-caret-bottom"
+                     aria-hidden="false"
+                      v-show='scope.row.caretBottom'></i>
+                  </el-button>
+                </div>
+                <el-form-item v-show='!scope.row.openfm'>
+                  <!-- 录入成功 -->
+                  <el-button class="icon-buttons" type='text' @click='onsubmit(scope.row)'>
+                    <i class="el-icon-success" aria-hidden="true"></i>
+                  </el-button>
+                  <!-- 退出录入 -->
+                  <el-button type='text' class="icon-buttonc" @click='signOut(scope.row)'>
+                    <i class="el-icon-error" aria-hidden="true"></i>
+                  </el-button>
+                </el-form-item>
+              </template>
+            </el-table-column>
+            <el-table-column type="expand" width="1">
+              <template slot-scope="scope">
+                <el-table :data='scope.row.log' style="width:100%"  :header-cell-style='ayaLogheadClass'
+                  :cell-style='ayarowClass' class="hide">
+                  <el-table-column prop='linktime' label='录入时间'></el-table-column>
+                  <el-table-column prop='name' label='录入姓名'></el-table-column>
+                  <el-table-column prop='machine' label='录入机构'></el-table-column>
+                  <el-table-column prop='moon' label='月份'></el-table-column>
+                </el-table>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-scrollbar>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+      </span>
+    </el-dialog>
+  </div>
+  <script src="../vue.js"></script>
+  <script src="../element.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        // form: {
+          // 录入打开
+          // openfm: true,
+     
+         
+          power:false,
+          fontwe:{
+                    fontWeight:900
+                },
+          formAna:{
+
+            trouble:null,
+            trasform:null,
+            incres:null,
+            value:'选项1',
+          },
+            // 分析数据
+            tableDataAna: [{
+            date: '1月',
+            
+            // 日志下拉
+            // caretBottom: true,
+            address: '上海市普陀区金沙江路 1518 弄',
+            num: '1',
+            num2: '300',
+            trans: 'kk',
+            log: [{
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }, {
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }, {
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }
+            ]
+          }, {
+            date: '2月',
+            address: '上海市普陀区金沙江路 1517 弄',
+            num: '1',
+            // openfm: true,
+            // caretBottom: true,
+            num2: '300',
+            trans: 'kk',
+            log: [{
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }, {
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }
+            ]
+          }, {
+            date: '3月',
+            address: '上海市普陀区金沙江路 1519 弄',
+            num: '1',
+            num2: '300',
+            // openfm: true,
+            // caretBottom: true,
+            trans: 'kk',
+            log: [{
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }, {
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }
+            ]
+          }, {
+            date: '4月',
+            address: '上海市普陀区金沙江路 1516 弄',
+            num: '1',
+            num2: '300',
+            // openfm: true,
+            // caretBottom: true,
+            trans: 'kk',
+            log: [{
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }, {
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }, {
+              // 录入时间
+              linktime: '2020',
+              // 录入姓名
+              name: '王小虎',
+              // 录入机构
+              machine: '北京银行',
+              // 月份
+              moon: '09'
+            }
+            ]
+          }],
+          
+          options: [{
+          value: '选项1',
+          label: '北京分行'
+        }, {
+          value: '选项2',
+          label: '上海分行'
+        }, {
+          value: '选项3',
+          label: '广东分行'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
+        // value: '选项1',
+          // troubel:"",
+          // transform:'',
+          // increase:'',
+         
+        // },
+        dialogVisible: true,
+
+
+        // caretBottom:false,
+       
+
+      },
+      created() {
+        this.initData()
+        // this.getDataAna()
+
+      },
+      methods: {
+        // 表格合计
+        // getColumns
+        // 打开表格（手风琴）
+        toogleExpand(row) {
+          // this.msg=true
+          // console.log(row)
+          let $table = this.$refs.table;
+          row.caretBottom=!row.caretBottom
+          row.logColor=!row.logColor
+          this.tableDataAna.map((item) => {
+            // console.log(item)
+            if (row.date != item.date) {
+              // console.log(row.data)
+              // console.log(item)
+              // console.log(item.caretBottom)
+              item.caretBottom=false
+              item.logColor=false
+              $table.toggleRowExpansion(item, false)
+            }
+          })
+          // row.caretBottom=false
+          $table.toggleRowExpansion(row)
+
+
+        },
+        // 表格转化率计算
+        initData() {
+          this.tableDataAna.forEach(item => {
+            item.trans = ((item.num / item.num2) * 100).toFixed(2)
+            // 录入打开
+            item.openfm=true
+            // 日志下拉
+            item.caretBottom=false
+            // 日志颜色加粗
+            item.logColor=false
+          })
+          // console.log(this.tableDataAna)
+        },
+        // 接口获取对表格处理
+          getDataAna(){
+              // axios.get().then((res)=>{
+              //   const {data}=res.data
+              // this.tableDataAna=data
+              // })
+              // this.tableDataAna.forEach((item)=>{
+              //     item.openfm=true
+              // })
+              // console.log(this.tableDataAna.openfm)
+              // console.log(this.tableDataAna)
+          },
+        // 表格总计
+        handleSummary({ columns, data }) {
+          // console.log(columns, data)
+          var sum = []
+          var totalnum = 0;
+          var totalnum2 = 0;
+          data.forEach((item, index) => {
+            totalnum += Number(item.num)
+            totalnum2 += Number(item.num2)
+          })
+          columns.forEach((item, index) => {
+
+            if (index === 0) {
+              sum[index] = '总计'
+              return
+            }
+            if (item.label === '转化率') {
+
+
+              sum[index] = ((totalnum / totalnum2) * 100).toFixed(2) + '%'
+              return
+            }
+            sum[1] = totalnum2
+            sum[2] = totalnum
+            sum[3] = totalnum
+
+          })
+          // return ['总和', 1200, 300, 300, 300, '33%']
+          return sum
+
+        },
+        // 下拉选择变化
+        changeVal(val) {
+                    console.log(val)
+                    // 调接口重新渲染
+                },
+        // 表单录入打开
+        openform(row) {
+            // console.log(row)
+            row.openfm = false
+            this.tableDataAna.map((item) => {
+            // console.log(item)
+            if (row.date != item.date) {
+              item.openfm=true
+              // console.log(row.data)
+              // console.log(item)
+              // console.log(item.caretBottom)
+              // item.caretBottom=false
+              // item.logColor=false
+              // $table.toggleRowExpansion(item, false)
+
+            }
+          })
+          
+          // this.formAna = {
+          //   trouble: row.num2,
+          //   trasform: row.num,
+          //   incres: row.num,
+          //   value: '选项1',
+          // }
+          this.formAna.trouble=row.num2,
+          this.formAna.trasform=row.num,
+          this.formAna.incres=row.num
+            // console.log(row)
+            // console.log(this.tableDataAna)
+        },
+        // 录入完成
+        onsubmit(row) {
+          let param = {
+            trouble: this.formAna.trouble,
+            trasform: this.formAna.trasform,
+            incres: this.formAna.incres,
+            value: this.formAna.value,
+          }
+          console.log(param)
+          // row.num=null
+          // row.num2=null
+          // this.formAna = {
+          //   trouble: null,
+          //   trasform: null,
+          //   incres: null,
+          //   value: '选项1',
+          // }
+          this.formAna.trouble=null,
+          this.formAna.trasform=null,
+          this.formAna.incres=null
+          if(param.trouble==""|| isNaN(param.trouble)){//进行数字校验，如果不是数字填出对话框进行提示
+		   	alert("请填写数字");
+         return
+		   }else{
+
+       }
+       if(param.trasform==""|| isNaN(param.trasform)){//进行数字校验，如果不是数字填出对话框进行提示
+		   	alert("请填写数字");
+         return
+		   }
+       if(param.incres==""|| isNaN(param.incres)){//进行数字校验，如果不是数字填出对话框进行提示
+		   	alert("请填写数字");
+         return
+		   }
+
+
+          row.openfm = true
+          // 调用接口
+        },
+        // 退出录入
+        signOut(row) {
+          // this.formAna = {
+          //   trouble: null,
+          //   trasform: null,
+          //   incres: null,
+          //   value: '选项1',
+          // }
+          this.formAna.trouble=null,
+          this.formAna.trasform=null,
+          this.formAna.incres=null
+          row.openfm = true
+        },
+        // 分析页表头表格样式
+        ayaheadClass() {
+          return 'text-align: center;background:#F5F7FA;height:40px'
+        },
+        // 分析页日志表格格式
+        ayaLogheadClass() {
+          return 'text-align: center;background:#f5f8ff;height:40px'
+        },
+        // 日志页
+        ayarowClass() {
+          return 'text-align: center;background:#f5f8ff'
+        },
+        rowClass() {
+          return 'text-align: center;'
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: 'iconfont';
+  src: url('../icon/iconfont.eot');
+  src: url('../icon/iconfont.eot?#iefix') format('embedded-opentype'),
+      url('../icon/iconfont.woff2') format('woff2'),
+      url('../icon/iconfont.woff') format('woff'),
+      url('../icon/iconfont.ttf') format('truetype'),
+      url('../icon/iconfont.svg#iconfont') format('svg');
+}
+.iconfont {
+	font-family: 'iconfont' !important;
+	// color: red;
+	// font-size: 40px;
+}
+
+body,html{
+  width: 100%;
+  height:100%;
+}
+.contain {
+  // position: absolute;
+  // left: 0;
+  // top: 0;
+  width: 100%; 
+  // height: 100%;
+  margin: 0 auto;
+  //头部
+  .header {
+    height: 68px;
+    background: #364151;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+    .bank {
+      display: inline-block;
+      width: 144px;
+      height: 39px;
+      margin-left: 24px;
+      color: #ffffff;
+    }
+    .market {
+      display: inline-table;
+      width: 216px;
+      height: 32px;
+      font-family: PingFangSC-Medium;
+      font-size: 24px;
+      color: #ffffff;
+      margin: 18px 0 18px 44px;
+    }
+    .vericon {
+      position: absolute;
+      display: block;
+      background: #929292;
+      width: 1px;
+      height: 48px;
+      left: 472px;
+      top: 10px;
+    }
+    .button-group {
+      display: inline-block;
+      margin-left: 68px;
+      span {
+        display: inline-block;
+        margin-right: 40px;
+        // opacity: 0.72;
+        font-family: PingFangSC-Medium;
+        font-size: 21px;
+        color: #ffffff;
+      }
+    }
+    .user {
+      float: right;
+      .userinfo {
+        display: inline-block;
+        font-family: PingFangSC-Regular;
+        font-size: 21px;
+        color: #ffffff;
+        margin: 26px 80px;
+      }
+      .logout {
+        margin-right: 64px;
+        margin-top: 24px;
+        vertical-align: top;
+        display: inline-block;
+        color: #fff;
+        font-size: 24px;
+        width: 30px;
+        height: 30px;
+        // // background: url(../assets/icon/tabbar/Logout.png);
+        // background-size: 30px 30px;
+        // // background-color: #FFF;
+      }
+    }
+  }
+}

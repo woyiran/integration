@@ -1,0 +1,105 @@
+.rebu .el-dialog {
+  position: relative;
+  box-sizing: border-box;
+  width: 1160px;
+  height: 712px;
+  padding: 16px 32px 24px 16px;
+  margin-top: 88px !important;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+}
+.rebu .el-dialog .el-dialog__header {
+  margin-top: -20px;
+}
+.rebu .el-dialog .el-dialog__title {
+  width: 120px;
+  height: 24px;
+  font-family: PingFangSC-Medium;
+  font-size: 24px;
+  color: #010101;
+  line-height: 24px;
+}
+.rebu .el-dialog .bd {
+  margin-top: -20px;
+  position: absolute;
+  left: 24px;
+  top: 72px;
+  width: 1112px;
+  height: 1px;
+  background: #d8d8d8;
+}
+.rebu .el-dialog .el-form-item__label {
+  font-family: PingFangSC-Regular;
+  font-size: 18px;
+  color: #010101;
+  line-height: 18px;
+}
+.rebu .el-dialog .model-name {
+  width: 260px;
+  margin-left: -85px;
+  border-bottom: 1px solid #c1c1c1;
+}
+.rebu .el-dialog .model-name .el-input__inner {
+  border: none;
+  margin-top: 44px;
+  margin-left: -14px;
+  font-family: PingFangSC-Medium;
+  font-size: 18px;
+  color: #010101;
+}
+.rebu .el-dialog .intruduce .el-input__inner {
+  border: none;
+  margin-top: 23px;
+  padding-left: 40px;
+  font-family: PingFangSC-Regular;
+  font-size: 18px;
+  color: #010101;
+  border-bottom: 1px solid #c1c1c1;
+}
+.rebu .el-dialog .upvideo {
+  width: 360px;
+  margin-left: -85px;
+}
+.rebu .el-dialog .upvideo .el-input__inner {
+  margin-top: 30px;
+  height: 36px;
+  width: 360px;
+}
+.rebu .el-dialog .select,
+.rebu .el-dialog .relation {
+  width: 100px;
+  height: 36px;
+  text-align: center;
+  margin-left: 15px;
+  vertical-align: middle;
+  line-height: 14px;
+}
+.rebu .el-dialog .relation {
+  margin-left: 0px;
+}
+.rebu .el-dialog .updata {
+  width: 360px;
+  margin-left: -85px;
+}
+.rebu .el-dialog .updata .el-input__inner {
+  margin-top: 30px;
+  height: 36px;
+  margin-left: -15px;
+  width: 360px;
+}
+.rebu .el-dialog .updata .el-input__inner,
+.rebu .el-dialog .upvideo .el-input__inner {
+  width: 360px;
+}
+.rebu .el-dialog .last {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #E6E6E6;
+  margin-top: 30px;
+}
+.rebu .el-dialog .last .el-button {
+  width: 100px;
+  margin-right: 48px;
+  height: 36px;
+}

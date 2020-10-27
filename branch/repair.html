@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
+    <link rel="stylesheet" href="../element.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/repair-main.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="contain">
+            <!-- 头部导航 -->
+            <div class="header">
+                <span class="bank">中信银行</span>
+                <span class="market">分行销售一体化系统</span>
+                <span class="vericon"></span>
+                <div class="button-group">
+                    <span v-for="item in curent" :style="active === item ? activeButton : ''"
+                        @click="handleCurent">{{ item }}</span>
+                </div>
+                <div class="user">
+                    <span class="userinfo">用户名</span>
+                    <span @click='logOut'></span>
+                </div>
+
+            </div>
+            <!-- 主体 -->
+            <div class=" repair-main">
+                <div class="repair-main-contain">
+                    <div style="margin-top: 20px;">
+                        <el-input></el-input>
+                        <el-button type="primary" class="search" @click='repairSearch()'>查询</el-button>
+                        <el-button class="reset" @click='rebulidReset()'>重置</el-button>
+                        <el-button type=primary class="rebuild">新建模型</el-button>
+                    </div>
+                    <!-- 表格 -->
+                    <div class="repair-table">
+                        <el-table :data="tableData" :header-cell-style='headClass' :cell-style='rowClass'
+                            style="width: 100%" fit>
+                            <el-table-column prop="number" label="序号" show-overflow-tooltip width="70px">
+                            </el-table-column>
+                            <el-table-column prop="name" label="模型名称" width='200px'>
+                            </el-table-column>
+                            <el-table-column prop="address" label="作者" >
+                            </el-table-column>
+                            <el-table-column prop="date" label="投产日期" >
+                            </el-table-column>
+                            <el-table-column prop="newDate" label="最近更新日期" >
+                            </el-table-column>
+                            <el-table-column prop="status" label="状态" >
+                                <template slot-scope="scope" width='200px'>
+                                    <el-switch style="display: block" v-model="value2" active-color="#13ce66"
+                                        inactive-color="#ff4949" active-text="发布" inactive-text="暂停"
+                                        @change='changeSwich(scope.row)'>
+                                    </el-switch>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="operation" label="操作" width='150px' show-overflow-tooltip>
+                                <template slot-scope="scope">
+                                    <el-button type="text" style="color: blue;" @clcik='editData()'>编辑</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                    <!-- 分页 -->
+                    <!-- 维护分页 -->
+                    <div style="text-align: center;margin-top: 20px;">
+                        <el-pagination background layout="prev, pager, next" :total="repairTotal"
+                            :page-size="repairParams.per_page" :current-page="repairParams.page"
+                            @current-change="repairChangePager">
+                        </el-pagination>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
+    <script src="../vue.js"></script>
+    <script src="../element.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                collect: false,
+                type: 'text',
+                curent: ['营销名单', '名单维护'],
+                active: '营销名单',
+                arr: [1, 2, 3, 4, 5, 6],
+                activeButton: {
+                    //    backGroundColor: 'linear-gradient(270deg, #8A68F3 0%, #0D45FE 100%)',
+                    color: '#fff',
+                    fontFamily: 'PingFangSC-Medium',
+                    fontSize: '24px'
+                },
+                value2: true,
+                tableData: [{
+                    address: '北京分行',
+                    number: '1',
+                    date: '2016-05-02',
+                    newDate: '2016-05-02',
+                    name: '王小虎王小虎王小虎王小虎王小虎王小虎',
+                    address: '上海市普陀区金沙',
+                    operation: '编辑'
+                }, {
+                    address: '北京分行',
+                    number: '2',
+                    date: '2016-05-04',
+                    newDate: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙',
+                    operation: '编辑'
+                }, {
+                    address: '北京分行',
+                    number: '3',
+                    date: '2016-05-01',
+                    newDate: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区',
+                    operation: '编辑'
+                }, {
+                    address: '北京分行',
+                    number: '4',
+                    date: '2016-05-03',
+                    newDate: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀',
+                    operation: '编辑'
+                }, {
+                    address: '北京分行',
+                    number: '3',
+                    date: '2016-05-01',
+                    newDate: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀',
+                    operation: '编辑'
+                }, {
+                    address: '北京分行',
+                    number: '3',
+                    date: '2016-05-01',
+                    newDate: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙',
+                    operation: '编辑'
+                }
+                ],
+                //名单维护数据
+                repairParams: {
+
+                    page: 1,
+                    per_page: 10
+                },
+                // 维护总数
+                repairTotal: 100,
+
+            },
+            mounted() {
+                // this.getRepairData()
+            },
+            methods: {
+                headClass() {
+                    return 'text-align: center;background:#F5F7FA;height:40px'
+                },
+                rowClass() {
+                    return 'text-align: center;'
+                },
+                handleCurent(e) {
+                    // console.log(e)
+                    // this.active = val
+                },
+                logOut() {
+                    // 退出登录
+                },
+                // 维护页分页事件
+                repairChangePager(newPage) {
+                    // this.reqParams.page = newPage
+                    this.repairParams.page = newPage
+
+                },
+                changeSwich(val){
+                    console.log(val)
+                },
+                // 名单维护查询
+                repairSearch() {
+                    // axios.get(`http://localhost:3000/brands?name_likes=${this.searchVal}`)
+                    //     .then((res)=>{
+                    //         // console.log(res)
+                    //     })
+                },
+                //名单维护数据获取
+                // getRepairData(){
+                //     axios.get('http://localhost:3000/brands')
+                //         .then((res)=>{
+                //             // console.log(res.data)
+                //             const {data}=res
+                //             // console.log(data)
+                //             this.arr=data
+                //         })
+                // },
+                // 名单维护重置
+                rebulidReset() {
+
+                },
+                editData() {
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

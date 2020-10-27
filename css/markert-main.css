@@ -1,0 +1,111 @@
+.main {
+  padding: 26px 48px 50px 48px;
+  background-color: #f8f8f8;
+}
+.main .el-input {
+  width: 360px;
+  height: 36px;
+}
+.main .reset {
+  color: #000000;
+  background-color: #eceef5;
+}
+.main .el-button {
+  font-family: PingFangSC-Semibold;
+  letter-spacing: 0;
+  text-align: center;
+  width: 100px;
+  margin: 0 8px;
+}
+.main .tbody {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.main .showlist {
+  position: relative;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 36px 36px 70px 36px;
+}
+.main .card {
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  font-family: PingFangSC-Medium;
+  font-size: 18px;
+  color: #212121;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.main .data-number {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #212121;
+  letter-spacing: 0;
+  text-align: right;
+  line-height: 24px;
+}
+.main .data,
+.main .aldown {
+  opacity: 0.72;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #212121;
+  letter-spacing: 0;
+  line-height: 14px;
+}
+.main .aldown {
+  margin-left: 20px;
+}
+.main .introduce {
+  margin-top: 24px;
+  height: 180px;
+  background: #f8f8f8;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+}
+.main .introduce div {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 16px;
+}
+.main .introduce p {
+  margin-top: 10px;
+  margin-left: 36px;
+  padding-right: 20px;
+  font-size: 12px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+}
+.main .operation {
+  position: absolute;
+  right: 40px;
+  bottom: 28px;
+}
+.main .operation .el-icon-s-data {
+  color: orange;
+}
+.main .operation .el-icon-s-comment {
+  color: hotpink;
+}
+.main .operation .el-icon-tickets {
+  color: blue;
+}
+.main .operation .el-icon-download {
+  color: green;
+}
+.main .operation span {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #212121;
+  margin-left: 10px;
+}
