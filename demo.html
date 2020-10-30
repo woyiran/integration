@@ -44,7 +44,8 @@
         }
     </style>
     <!-- <link rel="stylesheet" href="../element.css"> -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
+    <link rel="stylesheet" type="text/css" href="./lib-master/theme-chalk/index.css">
 </head>
 
 <body>
@@ -101,19 +102,37 @@
         <!-- <el-switch style="display: block" v-model="value2" active-color="#13ce66" inactive-color="#ff4949"
             active-text="发布" inactive-text="暂停" @change='changeSwich'>
         </el-switch> -->
+
         <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/"
-        :show-file-list="false"
-        :on-success="handleSuccess"
-        :before-upload="beforeUpload"
-        :auto-upload="false">
-            <el-input  size="small" type="primary" :value="fileName" slot="trigger">选取文件</el-input>
+            :show-file-list="false" :on-success="handleSuccess" :before-upload="beforeUpload" :on-change="changeFile"
+            :auto-upload="false">
+            <el-input size="small" type="primary" :value="fileName" slot="trigger">选取文件</el-input>
             <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传</el-button>
             <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
         </el-upload>
+
+        <a href="javascript:;" @click='download' id='upload'>下载</a>
+
     </div>
-    <script src="./vue.js"></script>
-    <script src="./element.js"></script>
+    <script src="../vue.js"></script>
+    <script src="./lib-master/index.js" type="text/javascript" charset="utf-8"></script>
+    <!-- <script src="./element.js"></script> -->
+    <script src="../axios.min.js"></script>
     <script>
+        // var JSONbig = require(' json-bigint '),
+        // axios.defaults.transformResponse = [
+        //         (data) => {
+        //             // data 此时是后端的原始数据
+        //             try {
+        //                 // data 此时是后端的原始数据
+        //                 // data 后台如果没有返回数据  值null
+        //                 // JSONBig.parse(null) 报错  阻止程序运行
+        //                 return JSONBig.parse(data)
+        //             } catch (e) {
+        //                 return data
+        //             }
+        //         }
+        //     ]
         var app = new Vue({
             el: '#app',
             data: {
@@ -193,9 +212,18 @@
                     },
 
                 ],
-                fileName:null
+                fileName: null
             },
             methods: {
+                download() {
+                    // let link = document.createElement('a')
+                    // link.style.display = 'none'
+                    // link.href = 'http://futest.sctsjkj.com/template/消防火警联网部件设施数据表.xlsx';
+                    // link.click();
+                    // var load=document.getElementById('upload')
+                    // console.log(load)
+                    // load.style.display='none'
+                },
                 fn() {
                     this.msg = !this.msg
                     // console.log(e)
@@ -204,25 +232,36 @@
                 // fn1() {
                 //     this.msg = false
                 // }
+                changeFile(file, fileList) {
+                    // console.log(file,fileList)
+                    this.fileName = file.name
+                },
                 changeVal(val) {
-                    console.log(val)
+                    // console.log(val)
                 },
                 changeSwich(val) {
-                    console.log(val)
+                    // console.log(val)
                 },
                 // 手动上传
                 submitUpload() {
+                    let upload = this.$refs.upload
                     this.$refs.upload.submit();
-                       
+                    // this.$refs.upload.clearFiles();
+                    // console.log(upload)
+
                 },
-                handleSuccess(res,file,filelist){
-                        // console.log(file)
-                        this.$message.success('上传成功')
+                handleSuccess(res, file, filelist) {
+                    console.log(res, file, filelist
+                    )
+                    this.$message.success('上传成功')
                 },
-                beforeUpload(file){
-                    console.log(file)
-                   this.fileName= file.name
-                }
+                beforeUpload(file) {
+                    // console.log(file)
+                    //    this.fileName= file.name
+                },
+                // uploadSectionFile(file){
+                //     console.log(file)
+                // }
 
             }
         });

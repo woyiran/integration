@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../lib-master/theme-chalk/index.css"> -->
     <!-- <link rel="stylesheet" href="../element.css"> -->
+    <link rel="stylesheet" type="text/css" href="../lib-master/theme-chalk/index.css">
+
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/markert-main.css">
@@ -31,7 +34,7 @@
                         @click="handleCurent(item)">{{ item }}</span>
                 </div>
                 <div class="user">
-                    <span class="userinfo el-icon-user-solid">用户名</span>
+                    <span class="userinfo el-icon-user-solid">{{userName}}</span>
                     <div @click='logOut' class="logout iconfont">&#xe60b;</div>
                 </div>
 
@@ -49,27 +52,27 @@
 
                             <div style="height:24px;position: relative;">
                                 <span class=" card">{{item.modelName}}</span>
-                                <span class=" data-number">数据量{{item.modelNumber}}</span>
+                                <span class=" data-number">数据量{{item.modelNumber }}</span>
                             </div>
                             <div style="margin-top: 12px;height:14px;">
-                                <span class="data">{{item.modelData | forMat}}</span>
+                                <span class="data">{{item.modelData }}</span>
                                 <span class="aldown">已下载{{item.modelDownNum}}次</span>
                             </div>
                             <div class="introduce">
                                 <div style="font-size:16px">模型简介:</div>
-                                <p>{{item.modelContent}}</p>
+                                <p>{{item.modelIntroduce}}</p>
                             </div>
                             <div class="operation">
-
-                                <span style="cursor: pointer;" @click="analy =true"> <i
+ 
+                                <span style="cursor: pointer;" @click="openAya()"> <i
                                         class="el-icon-s-data"></i>分析</span>
 
                                 <!-- <span style="cursor: pointer;"><i class="el-icon-s-comment"></i>评论</span> -->
 
-                                <span style="cursor: pointer;" @click="detail = true"><i class="el-icon-tickets">
+                                <span style="cursor: pointer;" @click="openDetail(item)"><i class="el-icon-tickets">
                                     </i>详情</span>
 
-                                <span style="cursor: pointer;"><i class="el-icon-download"></i>下载</span>
+                               <a href="" style="text-decoration: none;"> <span style="cursor: pointer;"><i class="el-icon-download"></i>下载</span></a>
                             </div>
                         </div>
                     </div>
@@ -90,7 +93,7 @@
                 <div class="repair-main-contain">
                     <div style="margin-top: 20px;">
                         <el-input></el-input>
-                        <el-button type="primary" class="search">查询</el-button>
+                        <el-button type="primary" class="search" @click='searchRepairConcetn()'>查询</el-button>
                         <el-button class="reset">重置</el-button>
                         <el-button type=primary class="rebuild" @click='rebuild=true'>新建模型</el-button>
                     </div>
@@ -110,7 +113,7 @@
                             </el-table-column>
                             <el-table-column prop="status" label="状态">
                                 <template slot-scope="scope">
-                                    <el-switch style="display: block" v-model="value2" active-color="#13ce66"
+                                    <el-switch style="display: block" v-model="releaseStatus" active-color="#13ce66"
                                         inactive-color="#ff4949" active-text="发布" inactive-text="暂停"
                                         @change='changeSwich(scope.row)'>
                                     </el-switch>
@@ -118,7 +121,7 @@
                             </el-table-column>
                             <el-table-column prop="operation" label="操作">
                                 <template slot-scope="scope">
-                                    <el-button type="text" style="color: blue;" @click='editData=true'>编辑</el-button>
+                                    <el-button type="text" style="color: #1677FF;" @click='editData=true'>编辑</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -149,11 +152,11 @@
                             <span>20,200.34</span>
                         </div>
                         <div class="detail-list-bott">模型介绍</div>
-                        <div class="detail-list-footer">介绍内容</div>
+                        <p class="detail-list-footer">介绍内容1981999999999999魔偶IM噢in莫；弄 哦inon哦i298181eg ef sfsc dcs</p>
                     </div>
                     <div class=" video right">
                         <!-- <span class="el-icon-video-camera"></span> -->
-                        <video src=""></video>
+                        <video :src="videoUrl"></video>
                     </div>
                 </div>
                 <div class="detail-table">
@@ -163,13 +166,13 @@
                     </div>
                     <div>
                         <el-scrollbar style="height:250px;">
-                            <el-table :data="tableData" style="width: 100%" :header-cell-style='headdetailClass'
+                            <el-table :data="tableDatadetail" style="width: 100%" :header-cell-style='headdetailClass'
                                 :cell-style='rowClass'>
-                                <el-table-column prop="date" label="日期">
+                                <el-table-column prop="downloadTime" label="下载日期">
                                 </el-table-column>
-                                <el-table-column prop="name" label="姓名">
+                                <el-table-column prop="userName" label="下载账户">
                                 </el-table-column>
-                                <el-table-column prop="address" label="地址">
+                                <el-table-column prop="affiliatedBranch" label="所属分行">
                                 </el-table-column>
                             </el-table>
                         </el-scrollbar>
@@ -254,7 +257,7 @@
                 <!-- 表格表单 -->
                 <el-form :model='formAna'>
                     <el-form-item>
-                        <el-select v-model="formAna.value" placeholder="请选择" @change='changeVal'>
+                        <el-select v-model="affiliatedBranch" placeholder="请选择" @change='changeVal'>
                             <el-option v-for="item in options" :key="item.value" :label="item.label"
                                 :value="item.value">
                             </el-option>
@@ -341,17 +344,19 @@
 
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <!-- <script src="../vue.js"></script>
-    <script src="../element.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <!-- <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
+    <script src="../vue.js"></script>
+    <!-- <script src="../element.js"></script> -->
+    <script src="../lib-master/index.js" type="text/javascript" charset="utf-8"></script>
     <script src="../axios.min.js"></script>
+    <script src="../store.js"></script>
+    <script src="../api.js"></script>
 
     <script>
-        Vue.filter('forMat', (val) => {
-            return val.toLocaleDateString()
-        })
-
+        // Vue.filter('forMat', (val) => {
+        //      val.toLocaleDateString()
+        // })
         // Vue.filter('forNumber',(val)=>{
         //     return val.toLocaleString()
         // })
@@ -360,15 +365,18 @@
 
             data: {
                 // 用户信息
-                userInfo: null,
+                isAdmin: null,
                 // 权限判定
-                power: false,
+                power: true,
+                // 用户名
+                userName:'张三',
                 // 营销名单开关
                 isshow: true,
-                collect: false,
+                // collect: false,
                 searchVal: '',
                 // 首页分页数据
                 reqParams: {
+                    modelName:null,
                     page: 1,
                     per_page: 6
                 },
@@ -381,10 +389,11 @@
                 arr: [
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
+                        modelNumber: '888888888',
                         modelData: new Date(),
                         modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+                        modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
+                        dataBox:''
 
                     },
                     {
@@ -392,7 +401,8 @@
                         modelNumber: '88888',
                         modelData: new Date(),
                         modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+                        modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
+                        dataBox:''
 
                     },
                     {
@@ -400,7 +410,8 @@
                         modelNumber: '88888',
                         modelData: new Date(),
                         modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+                        modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
+                        dataBox:''
 
                     },
                     {
@@ -408,7 +419,8 @@
                         modelNumber: '88888',
                         modelData: new Date(),
                         modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+                        modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
+                        dataBox:''
 
                     },
                     {
@@ -416,7 +428,8 @@
                         modelNumber: '88888',
                         modelData: new Date(),
                         modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+                        modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
+                        dataBox:''
 
                     },
                     {
@@ -424,11 +437,13 @@
                         modelNumber: '88888',
                         modelData: new Date(),
                         modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
+                        modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
+                        dataBox:''
 
                     },
 
                 ],
+                // 激活样式
                 activeButton: {
                     backgroundImage: 'linear-gradient(270deg, #8A68F3 0%, #0D45FE 100%)',
                     // background: 'red',
@@ -446,13 +461,14 @@
 
                 //名单维护数据
                 repairParams: {
-
+                    modelName:null,
                     page: 1,
                     per_page: 10
                 },
                 // 维护总数
                 repairTotal: 100,
-                value2: true,
+                // 发布状态
+                releaseStatus: true,
                 tableData: [{
                     address: '北京分行',
                     number: '1',
@@ -515,40 +531,45 @@
                 editData: false,
 
                 // 详情页数据
+                // 视频地址
+                videoUrl:null,
                 detail: false,
                 tableDatadetail: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
+                    // 下载日期
+                    downloadTime: '2016-05-02',
+                    // 下载账户
+                    userName: '王小虎',
+                    // 所属分行
+                    affiliatedBranch: '上海市普陀区金沙江路 1518 弄'
                 }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
+                    downloadTime: '2016-05-04',
+                    userName: '王小虎',
+                    affiliatedBranch: '上海市普陀区金沙江路 1517 弄'
                 }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
+                    downloadTime: '2016-05-01',
+                    userName: '王小虎',
+                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
                 }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
+                    downloadTime: '2016-05-03',
+                    userName: '王小虎',
+                    affiliatedBranch: '上海市普陀区金沙江路 1516 弄'
                 },
                 {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
+                    downloadTime: '2016-05-01',
+                    userName: '王小虎',
+                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
                 }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
+                    downloadTime: '2016-05-01',
+                    userName: '王小虎',
+                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
                 }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
+                    downloadTime: '2016-05-01',
+                    userName: '王小虎',
+                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
                 }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
+                    downloadTime: '2016-05-01',
+                    userName: '王小虎',
+                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
                 },]
                 ,
                 // 分析页数据
@@ -558,12 +579,21 @@
                     fontWeight: 900
                 },
                 formAna: {
-
+                    // 干预人数
+                    interventionNum:null,
+                    // 转化人数
+                    convertNum:null,
+                    // AUM提升
+                    aumPromote:null,
                     trouble: null,
                     trasform: null,
                     incres: null,
-                    value: '选项1',
+                    // value: '选项1',
                 },
+                // 转化率
+                conversionRate:null,
+                // 所属分行
+                affiliatedBranch:'选项1',
                 // 分析数据
                 tableDataAna: [{
                     date: '1月',
@@ -731,11 +761,12 @@
                 // 检查权限
                 this.checkPower()
                 // 分析数据计算
-                this.initData()
+               
             },
 
             mounted() {
-                // this.getData()
+                this.getData()
+                this.initData()
 
             },
             methods: {
@@ -812,15 +843,32 @@
                     // this.getData()
                 },
                 // 获得数据
-                // getData(){
-                //         axios.get('http://localhost:3000/brands')
-                //         .then((res)=>{
-                //             // console.log(res.data)
-                //             const {data}=res
-                //             // console.log(data)
-                //             this.arr=data
-                //         })
-                // }
+              async  getData(){
+                    // axios.get('brands',data)
+                    //     .then((res)=>{
+                    //         console.log(res.data)
+                    //         const {data}=res
+                    //         // console.log(data)
+                    //         this.arr=data
+                    //     })
+                    // const {data} =await axios.get('brands')
+                    //         console.log(data)
+                        // console.log(request)
+                        // console.log(store.getUser())
+                },
+                // 打开详情页
+                openDetail(val){
+                    this.detail=true 
+                    // console.log(val)
+                },
+                // 查询详情页模型
+                searchRepairConcetn(){
+
+                },
+                // 打开分析页
+                openAya(){
+                    this. analy=true
+                },
                 // 表格合计
                 // getColumns
                 // 打开表格（手风琴）
@@ -906,7 +954,8 @@
                 changeVal(val) {
                     // console.log(val)
                     // 调接口重新渲染
-                    this.formAna.value = val;
+                    this.affiliatedBranch = val;
+                    console.log(this.affiliatedBranch)
                     // console.log(this.formAna.value)
                 },
                 // 表单录入打开
@@ -939,9 +988,9 @@
                         trouble: this.formAna.trouble,
                         trasform: this.formAna.trasform,
                         incres: this.formAna.incres,
-                        value: this.formAna.value,
+                        // value: this.formAna.value,
                     }
-                    console.log(param)
+                    // console.log(param)
                     // row.num=null
                     // row.num2=null
                     // this.formAna = {

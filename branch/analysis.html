@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
   <!-- <link rel="stylesheet" href="../element.css"> -->
+  <link rel="stylesheet" type="text/css" href="../lib-master/theme-chalk/index.css">
+
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/analysis.css">
 </head>
@@ -20,7 +22,7 @@
       <!-- 表格表单 -->
       <el-form :model='formAna' ref='ayaForm' >
         <el-form-item>
-          <el-select v-model="formAna.value" placeholder="请选择" @change='changeVal'>
+          <el-select v-model="value" placeholder="请选择" @change='changeVal'>
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -105,7 +107,8 @@
     </el-dialog>
   </div>
   <script src="../vue.js"></script>
-  <script src="../element.js"></script>
+  <script src="../lib-master/index.js" type="text/javascript" charset="utf-8"></script>
+  <!-- <script src="../element.js"></script> -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
   <script>
@@ -126,8 +129,9 @@
             trouble:null,
             trasform:null,
             incres:null,
-            value:'选项1',
+           
           },
+          value:'选项1',
             // 分析数据
             tableDataAna: [{
             date: '1月',
@@ -391,12 +395,7 @@
             // console.log(item)
             if (row.date != item.date) {
               item.openfm=true
-              // console.log(row.data)
-              // console.log(item)
-              // console.log(item.caretBottom)
-              // item.caretBottom=false
-              // item.logColor=false
-              // $table.toggleRowExpansion(item, false)
+              
 
             }
           })

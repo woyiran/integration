@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="../element.css">
+    <!-- <link rel="stylesheet" href="../element.css"> -->
+    <link rel="stylesheet" type="text/css" href="../lib-master/theme-chalk/index.css">
+
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/rebuild.css">
 
@@ -22,26 +24,40 @@
                 <el-form-item label="模型名称">
                     <div v-if='false' style="width:272px;height:36px;background: #F5F5F5;
                     border-radius: 4px;margin-top: 30px;">信用卡拉新模型</div>
-                    <el-input  v-else v-model="formData.modelName" class="model-name"></el-input>
+                    <el-input v-else v-model="formData.modelName" class="model-name"></el-input>
                 </el-form-item>
                 <el-form-item label="模型介绍" style="margin-top: 55px;">
                     <el-input v-model="formData.intruduce" class="intruduce"></el-input>
                 </el-form-item>
                 <el-form-item label="视频上传" style="margin-top: 70px;">
-                    <el-input v-model="formData.uploadVideo" class="upvideo"></el-input>
-                    <el-button class="select">选择视频</el-button>
+                    <!-- <el-input v-model="formData.uploadVideo" class="upvideo"></el-input>
+                    <el-button class="select">选择视频</el-button> -->
+                    <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/"
+                        :show-file-list="false"  :on-success="handleSuccess"
+                        :on-change="changeFile"  :auto-upload="false">
+                        <el-input size="small" type="primary" :value="fileName" slot="trigger" class="upvideo" ></el-input>
+                        <el-button  size="small"  @click="submitUpload" class="select">上传
+                        </el-button>
+                    </el-upload>
                     <!-- <el-button>上传</el-button> -->
                 </el-form-item>
                 <el-form-item label="数据和关联" style="margin-top: 70px;">
-                    <el-input v-model="formData.uploadData" class="updata"></el-input>
-                    <el-button class="relation">关联</el-button> 
+                    <!-- <el-input v-model="formData.uploadData" class="updata"></el-input>
+                    <el-button class="relation">关联</el-button> -->
+                    <el-upload class="upload-demo" ref="upData" action="https://jsonplaceholder.typicode.com/posts/"
+                        :show-file-list="false"  
+                        :on-change="changeDataFile" :http-request='uploadSectionFile' :auto-upload="false">
+                        <el-input size="small" type="primary" :value="fileNumberName" slot="trigger" class="updata" ></el-input>
+                        <el-button  size="small"  @click="submitUploadData" class="relation">关联
+                        </el-button>
+                    </el-upload>
                     <!-- <el-button>上传</el-button> -->
-                </el-form-item> 
+                </el-form-item>
                 <el-form-item>
                     <div class="last">
-                        <el-button type='primary'@click='rebuild = false'>发布</el-button>
-                        <el-button  @click='rebuild = false'>保存</el-button>
-                        <el-button  @click='rebuild = false'>取消</el-button>
+                        <el-button type='primary' @click='rebuild = false'>发布</el-button>
+                        <el-button @click='rebuild = false'>保存</el-button>
+                        <el-button @click='rebuild = false'>取消</el-button>
                     </div>
                 </el-form-item>
                 <span slot="footer" class="dialog-footer">
@@ -50,12 +66,15 @@
         </el-dialog>
     </div>
     <script src="../vue.js"></script>
-    <script src="../element.js"></script>
+    <script src="../lib-master/index.js" type="text/javascript" charset="utf-8"></script>
+    <!-- <script src="../element.js"></script> -->
     <script>
         var app = new Vue({
             el: '#app',
             data: {
                 rebuild: true,
+                fileName:null,
+                fileNumberName:null,
                 formData: {
                     modelName: '信用卡拉新模型',
                     intruduce: '评论内容',
@@ -63,7 +82,42 @@
                     uploadData: ''
                 }
             },
-            methods: {}
+            methods: {
+                // 上传文件变动
+                changeFile(file,fileList){
+                        // console.log(file,fileList)
+                        this.fileName=file.name
+                },
+                changeDataFile(file,fileList){
+                    this.fileNumberName=file.name
+                },
+                // 自定义上传
+                uploadSectionFile(res){
+                        console.log(res)
+                        this.fileNumberName=null
+                },
+                 // 手动上传
+                 submitUpload() {
+                    let upload=this.$refs.upload
+                    this.$refs.upload.submit();
+                    // this.$refs.upload.clearFiles();
+                    // console.log(upload)
+                       
+                },
+                 submitUploadData() {
+                    let upData=this.$refs.upData
+                    this.$refs.upData.submit();
+                    // this.$refs.upload.clearFiles();
+                    // console.log(upload)
+                       
+                },
+                handleSuccess(res,file,filelist){
+                        // console.log(file)
+                        console.log(res,file,filelist)
+                        this.$message.success('上传成功')
+                        this.fileName=null
+                },
+            }
         });
     </script>
 </body>
