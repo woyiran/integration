@@ -27,7 +27,7 @@
                     <el-input v-else v-model="formData.modelName" class="model-name"></el-input>
                 </el-form-item>
                 <el-form-item label="模型介绍" style="margin-top: 55px;">
-                    <el-input v-model="formData.intruduce" class="intruduce"></el-input>
+                    <el-input v-model="formData.modelIntroduce" class="intruduce"></el-input>
                 </el-form-item>
                 <el-form-item label="视频上传" style="margin-top: 70px;">
                     <!-- <el-input v-model="formData.uploadVideo" class="upvideo"></el-input>
@@ -35,8 +35,8 @@
                     <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/"
                         :show-file-list="false"  :on-success="handleSuccess"
                         :on-change="changeFile"  :auto-upload="false">
-                        <el-input size="small" type="primary" :value="fileName" slot="trigger" class="upvideo" ></el-input>
-                        <el-button  size="small"  @click="submitUpload" class="select">上传
+                        <el-input size="small" type="primary" :value="fileName" class="upvideo"  slot="trigger" aria-placeholder="请选择视频"></el-input>
+                        <el-button  size="small"  @click="submitUpload" class="select"  >上传
                         </el-button>
                     </el-upload>
                     <!-- <el-button>上传</el-button> -->
@@ -44,13 +44,13 @@
                 <el-form-item label="数据和关联" style="margin-top: 70px;">
                     <!-- <el-input v-model="formData.uploadData" class="updata"></el-input>
                     <el-button class="relation">关联</el-button> -->
-                    <el-upload class="upload-demo" ref="upData" action="https://jsonplaceholder.typicode.com/posts/"
+                    <!-- <el-upload class="upload-demo" ref="upData" action="https://jsonplaceholder.typicode.com/posts/"
                         :show-file-list="false"  
-                        :on-change="changeDataFile" :http-request='uploadSectionFile' :auto-upload="false">
-                        <el-input size="small" type="primary" :value="fileNumberName" slot="trigger" class="updata" ></el-input>
-                        <el-button  size="small"  @click="submitUploadData" class="relation">关联
+                        :on-change="changeDataFile" :http-request='uploadSectionFile' :auto-upload="false"> -->
+                        <el-input size="small" type="primary" v-model="fileNumberName"  class="updata" ></el-input>
+                        <el-button  size="small"  @click="submitUploadData" class="relation" >关联地址
                         </el-button>
-                    </el-upload>
+                    <!-- </el-upload> -->
                     <!-- <el-button>上传</el-button> -->
                 </el-form-item>
                 <el-form-item>
@@ -73,11 +73,15 @@
             el: '#app',
             data: {
                 rebuild: true,
+                // 上传视频名称
                 fileName:null,
+                // 关联地址
                 fileNumberName:null,
                 formData: {
                     modelName: '信用卡拉新模型',
-                    intruduce: '评论内容',
+                    modelIntroduce: '评论内容',
+                    // 视频地址
+                    videoUrl:null,
                     uploadVideo: '',
                     uploadData: ''
                 }
@@ -105,10 +109,11 @@
                        
                 },
                  submitUploadData() {
-                    let upData=this.$refs.upData
-                    this.$refs.upData.submit();
+                    // let upData=this.$refs.upData
+                    // this.$refs.upData.submit();
                     // this.$refs.upload.clearFiles();
                     // console.log(upload)
+                    console.log(this.fileNumberName)
                        
                 },
                 handleSuccess(res,file,filelist){

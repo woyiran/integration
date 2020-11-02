@@ -103,17 +103,17 @@
                             style="width: 100%" fit>
                             <el-table-column prop="number" label="序号">
                             </el-table-column>
-                            <el-table-column prop="name" label="模型名称">
+                            <el-table-column prop="modelName" label="模型名称">
                             </el-table-column>
                             <el-table-column prop="address" label="作者">
                             </el-table-column>
-                            <el-table-column prop="date" label="投产日期">
+                            <el-table-column prop="createTime" label="投产日期">
                             </el-table-column>
-                            <el-table-column prop="newDate" label="最近更新日期">
+                            <el-table-column prop="updateTime" label="最近更新日期">
                             </el-table-column>
                             <el-table-column prop="status" label="状态">
                                 <template slot-scope="scope">
-                                    <el-switch style="display: block" v-model="releaseStatus" active-color="#13ce66"
+                                    <el-switch style="display: block" v-model="status" active-color="#13ce66"
                                         inactive-color="#ff4949" active-text="发布" inactive-text="暂停"
                                         @change='changeSwich(scope.row)'>
                                     </el-switch>
@@ -147,16 +147,24 @@
                             <span>数据量</span>
                         </div>
                         <div class="detail-list-body">
-                            <span>单卡(信用卡)模型</span>
+                            <span>{{detailParams.modelName}}</span>
                             <span>2020/08/28</span>
                             <span>20,200.34</span>
                         </div>
                         <div class="detail-list-bott">模型介绍</div>
-                        <p class="detail-list-footer">介绍内容1981999999999999魔偶IM噢in莫；弄 哦inon哦i298181eg ef sfsc dcs</p>
+                        <div class="detail-list-footer">
+                            <p>
+                                介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
+                                <!-- 介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
+                                介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
+                                介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容 -->
+                            </p>
+                           
+                        </div>
                     </div>
                     <div class=" video right">
                         <!-- <span class="el-icon-video-camera"></span> -->
-                        <video :src="videoUrl"></video>
+                        <video :src="detailParams.videoUrl"></video>
                     </div>
                 </div>
                 <div class="detail-table">
@@ -273,7 +281,7 @@
                                 <template slot-scope="scope">
                                     <div v-show='scope.row.openfm'>{{scope.row.num2}}</div>
                                     <el-form-item v-show="!scope.row.openfm">
-                                        <el-input v-model='formAna.trouble'></el-input>
+                                        <el-input v-model='formAna.interventionNum'></el-input>
                                     </el-form-item>
                                 </template>
                             </el-table-column>
@@ -281,7 +289,7 @@
                                 <template slot-scope="scope">
                                     <div v-show='scope.row.openfm'>{{scope.row.num}}</div>
                                     <el-form-item v-show="!scope.row.openfm">
-                                        <el-input v-model='formAna.trasform'></el-input>
+                                        <el-input v-model='formAna.convertNum'></el-input>
                                     </el-form-item>
                                 </template>
                             </el-table-column>
@@ -289,7 +297,7 @@
                                 <template slot-scope="scope">
                                     <div v-show='scope.row.openfm'>{{scope.row.num}}</div>
                                     <el-form-item v-show="!scope.row.openfm">
-                                        <el-input v-model='formAna.incres'></el-input>
+                                        <el-input v-model='formAna.aumPromote'></el-input>
                                     </el-form-item>
                                 </template>
                             </el-table-column>
@@ -326,10 +334,10 @@
                                 <template slot-scope="scope">
                                     <el-table :data='scope.row.log' style="width:100%"
                                         :header-cell-style='ayaLogheadClass' :cell-style='ayarowClass' class="hide">
-                                        <el-table-column prop='linktime' label='录入时间'></el-table-column>
-                                        <el-table-column prop='name' label='录入姓名'></el-table-column>
-                                        <el-table-column prop='machine' label='录入机构'></el-table-column>
-                                        <el-table-column prop='moon' label='月份'></el-table-column>
+                                        <el-table-column prop='insertDate' label='录入时间'></el-table-column>
+                                        <el-table-column prop='userName' label='录入姓名'></el-table-column>
+                                        <el-table-column prop='affiliatedBranch' label='录入机构'></el-table-column>
+                                        <el-table-column prop='insertMonth' label='月份'></el-table-column>
                                     </el-table>
                                 </template>
                             </el-table-column>
@@ -351,7 +359,11 @@
     <script src="../lib-master/index.js" type="text/javascript" charset="utf-8"></script>
     <script src="../axios.min.js"></script>
     <script src="../store.js"></script>
+    <!-- axios添加默认地址，请求头 -->
     <script src="../api.js"></script>
+    <!-- aes加解密 -->
+    <script src='../crypto-js.js'></script>
+    <script src="../bindcrypto-js.js"></script>
 
     <script>
         // Vue.filter('forMat', (val) => {
@@ -468,54 +480,48 @@
                 // 维护总数
                 repairTotal: 100,
                 // 发布状态
-                releaseStatus: true,
+                status: true,
                 tableData: [{
                     address: '北京分行',
                     number: '1',
-                    date: '2016-05-02',
-                    newDate: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙',
+                    createTime: '2016-05-02',
+                    updateTime : '2016-05-02',
+                    modelName: '王小虎',
                     operation: '编辑'
                 }, {
                     address: '北京分行',
                     number: '2',
-                    date: '2016-05-04',
-                    newDate: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙',
+                    createTime: '2016-05-04',
+                    updateTime: '2016-05-02',
+                    modelName: '王小虎',
                     operation: '编辑'
                 }, {
                     address: '北京分行',
                     number: '3',
-                    date: '2016-05-01',
-                    newDate: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区',
+                    createTime: '2016-05-01',
+                    updateTime: '2016-05-02',
+                    modelName: '王小虎',
                     operation: '编辑'
                 }, {
                     address: '北京分行',
                     number: '4',
-                    date: '2016-05-03',
-                    newDate: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀',
+                    createTime: '2016-05-03',
+                    updateTime: '2016-05-02',
+                    modelName: '王小虎',
                     operation: '编辑'
                 }, {
                     address: '北京分行',
                     number: '3',
-                    date: '2016-05-01',
-                    newDate: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀',
+                    createTime: '2016-05-01',
+                    updateTime: '2016-05-02',
+                    modelName: '王小虎',
                     operation: '编辑'
                 }, {
                     address: '北京分行',
                     number: '3',
-                    date: '2016-05-01',
-                    newDate: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙',
+                    createTime: '2016-05-01',
+                    updateTime: '2016-05-02',
+                    modelName: '王小虎',
                     operation: '编辑'
                 }
                 ],
@@ -531,9 +537,13 @@
                 editData: false,
 
                 // 详情页数据
-                // 视频地址
-                videoUrl:null,
+                
                 detail: false,
+                detailParams:{
+                    // 视频地址
+                videoUrl:null,
+                modelName:null,
+                },
                 tableDatadetail: [{
                     // 下载日期
                     downloadTime: '2016-05-02',
@@ -606,31 +616,31 @@
                     trans: 'kk',
                     log: [{
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }, {
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }, {
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }
                     ]
                 }, {
@@ -643,22 +653,22 @@
                     trans: 'kk',
                     log: [{
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }, {
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }
                     ]
                 }, {
@@ -671,22 +681,22 @@
                     trans: 'kk',
                     log: [{
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }, {
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }
                     ]
                 }, {
@@ -699,31 +709,31 @@
                     trans: 'kk',
                     log: [{
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }, {
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }, {
                         // 录入时间
-                        linktime: '2020',
+                        insertDate: '2020',
                         // 录入姓名
-                        name: '王小虎',
+                        userName: '王小虎',
                         // 录入机构
-                        machine: '北京银行',
+                        affiliatedBranch: '北京银行',
                         // 月份
-                        moon: '09'
+                        insertMonth: '09'
                     }
                     ]
                 }],
@@ -770,6 +780,10 @@
 
             },
             methods: {
+                // 加密方法
+                // encrypted()
+                // 解密方法
+                // decrypted()
                 // 详情页表格样式操作
                 // 名单维护表格样式操作
                 headdetailClass() {
@@ -860,6 +874,7 @@
                 openDetail(val){
                     this.detail=true 
                     // console.log(val)
+                  this.detailParams.modelName= val.modelName
                 },
                 // 查询详情页模型
                 searchRepairConcetn(){
@@ -976,18 +991,18 @@
                     //   incres: row.num,
                     //   value: '选项1',
                     // }
-                    this.formAna.trouble = row.num2,
-                        this.formAna.trasform = row.num,
-                        this.formAna.incres = row.num
+                    this.formAna.interventionNum = row.num2,
+                    this.formAna.convertNum = row.num,
+                    this.formAna.aumPromote = row.num
                     // console.log(row)
                     // console.log(this.tableDataAna)
                 },
                 // 录入完成
                 onsubmit(row) {
                     let param = {
-                        trouble: this.formAna.trouble,
-                        trasform: this.formAna.trasform,
-                        incres: this.formAna.incres,
+                        interventionNum: this.formAna.interventionNum,
+                        convertNum: this.formAna.convertNum,
+                        aumPromote: this.formAna.aumPromote,
                         // value: this.formAna.value,
                     }
                     // console.log(param)
@@ -1002,25 +1017,25 @@
 
 
 
-                    if (param.trouble == "" || isNaN(param.trouble)) {//进行数字校验，如果不是数字填出对话框进行提示
+                    if (param.interventionNum == "" || isNaN(param.interventionNum)) {//进行数字校验，如果不是数字填出对话框进行提示
                         alert("请填写数字");
                         return
-                    } else {
-                        this.formAna.trouble = null
-                    }
-                    if (param.trasform == "" || isNaN(param.trasform)) {//进行数字校验，如果不是数字填出对话框进行提示
+                    } 
+                    
+                    if (param.convertNum == "" || isNaN(param.convertNum)) {//进行数字校验，如果不是数字填出对话框进行提示
                         alert("请填写数字");
                         return
-                    } else {
-                        this.formAna.trasform = null
-                    }
-                    if (param.incres == "" || isNaN(param.incres)) {//进行数字校验，如果不是数字填出对话框进行提示
+                    } 
+                      
+                    if (param.aumPromote == "" || isNaN(param.aumPromote)) {//进行数字校验，如果不是数字填出对话框进行提示
                         alert("请填写数字");
                         return
-                    } else {
-                        this.formAna.incres = null
-                    }
-
+                    } 
+                        
+                    
+                    this.formAna.interventionNum = null
+                    this.formAna.convertNum = null
+                    this.formAna.aumPromote = null
 
                     row.openfm = true
                     // 调用接口
@@ -1033,9 +1048,9 @@
                     //   incres: null,
                     //   value: '选项1',
                     // }
-                    this.formAna.trouble = null,
-                        this.formAna.trasform = null,
-                        this.formAna.incres = null
+                    this.formAna.interventionNum = null,
+                    this.formAna.convertNum = null,
+                    this.formAna.aumPromote = null,
                     row.openfm = true
                 },
                 // 分页事件
