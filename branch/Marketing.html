@@ -47,7 +47,7 @@
                     <el-button class="reset" @cilck='resetContent()'>重置</el-button>
                 </div>
                 <div class="tbody">
-                    <div style="margin-top: 26px;width: 33.3%;height: 360px;" v-for="(item, index) in arr" :key="index">
+                    <div style="margin-top: 26px;width: 33.3%;height: 360px;" v-for="(item, index) in indexData" :key="index">
                         <div class="showlist" :style="{ marginRight: ((index + 1) % 3 === 0) ? 0 : 27 + 'px'}">
 
                             <div style="height:24px;position: relative;">
@@ -63,7 +63,7 @@
                                 <p>{{item.modelIntroduce}}</p>
                             </div>
                             <div class="operation">
- 
+
                                 <span style="cursor: pointer;" @click="openAya()"> <i
                                         class="el-icon-s-data"></i>分析</span>
 
@@ -72,7 +72,8 @@
                                 <span style="cursor: pointer;" @click="openDetail(item)"><i class="el-icon-tickets">
                                     </i>详情</span>
 
-                               <a href="" style="text-decoration: none;"> <span style="cursor: pointer;"><i class="el-icon-download"></i>下载</span></a>
+                                <a href="" style="text-decoration: none;"> <span style="cursor: pointer;"><i
+                                            class="el-icon-download"></i>下载</span></a>
                             </div>
                         </div>
                     </div>
@@ -80,8 +81,8 @@
 
                 <!-- 分页 -->
                 <div style="text-align: center;margin-top: 20px;">
-                    <el-pagination v-if="indexTotal > reqParams.per_page" background layout="prev, pager, next"
-                        :total="indexTotal" :page-size="reqParams.per_page" :current-page="reqParams.page"
+                    <el-pagination v-if="indexTotal > reqParams.size" background layout="prev, pager, next"
+                        :total="indexTotal" :page-size="reqParams.size" :current-page="reqParams.page"
                         @current-change="changePager">
                     </el-pagination>
                 </div>
@@ -129,7 +130,7 @@
                     <!-- 维护分页 -->
                     <div style="text-align: center;margin-top: 20px;">
                         <el-pagination background layout="prev, pager, next" :total="repairTotal"
-                            :page-size="repairParams.per_page" :current-page="repairParams.page"
+                            :page-size="repairParams.size" :current-page="repairParams.page"
                             @current-change="repairChangePager">
                         </el-pagination>
                     </div>
@@ -159,7 +160,7 @@
                                 介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
                                 介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容 -->
                             </p>
-                           
+
                         </div>
                     </div>
                     <div class=" video right">
@@ -358,7 +359,7 @@
     <!-- <script src="../element.js"></script> -->
     <script src="../lib-master/index.js" type="text/javascript" charset="utf-8"></script>
     <script src="../axios.min.js"></script>
-    <script src="../store.js"></script>
+    <!-- <script src="../store.js"></script> -->
     <!-- axios添加默认地址，请求头 -->
     <script src="../api.js"></script>
     <!-- aes加解密 -->
@@ -371,41 +372,57 @@
         // })
         // Vue.filter('forNumber',(val)=>{
         //     return val.toLocaleString()
+
         // })
+        const url = window.location.href;
+        const parm = decodeURI(url);
+        const userparm = parm.split('?user=')[0];
+        var str = decrypted("qwf+6SAWmJ8gvk7gkJetwYRLxSL28IZRZQD4t/hG+gP/amqOtEXiCCcYLgPr9cYeOGQK+12yrZl+PuwcNqsTSQ4qfO/CYA/KHZ+rNmT69FkZ0v4pxRt47ggIUQ1h77Dxen+NLcQ8iH50+tWbJ5DjnmshuLCx0n/JCIEjUjF/WqdREFDHd+zhzHm/29RKIELpSs+oXbOBZks75fj78A/eoerTirJNkyviJsWjU6bDxOOpbmDlPoB7oCjHmPD064rObixbnvISbK6JzJiEnm9Ik7dbueb+YPEw4Bja3JRfE6wLAFbai0mXyJ8OrbG1zVpSWljOCaAPi/WHyJgkhhn0SYKv8X/HvqEwYr6p3RnI/nLpAFNfeaxzQHuXpKkMM5qAKmX7zWrUCr7wyPk65SARgSt37kXTUMjggujsX2lERdadGMtNwNc4M8eA+Zd7IMdeRHmrMYg8vvlBCcC8JbsbPuRol/cuWxr7sIiw1pMDVGiUagEhPSOEO5RjTUwHtzIQ")
+        // var str = decrypted(userparm)
+        // var userinfo=JSON.parse(str)
+        const {data:adminData} = JSON.parse(str)
+        console.log(adminData)
+
+        // console.log(userparm);
+        // 加密方法
+        // encrypted()
+        // 解密方法
+        // decrypted()
+        
         var app = new Vue({
             el: '#app',
 
             data: {
                 // 用户信息
-                isAdmin: null,
+                // isAdmin: userinfo,
                 // 权限判定
-                power: true,
+                power: adminData.isAdmin,
                 // 用户名
-                userName:'张三',
+                userName: adminData.name,
                 // 营销名单开关
                 isshow: true,
                 // collect: false,
                 searchVal: '',
                 // 首页分页数据
                 reqParams: {
-                    modelName:null,
+                    modelName: "",
                     page: 1,
-                    per_page: 6
+                    size: 6
                 },
                 // 首页总数
                 indexTotal: 100,
 
-                type: 'text',
+                // type: 'text',
                 curent: ['营销名单', '名单维护'],
                 active: '营销名单',
-                arr: [
+                indexData: [
                     {
                         modelName: '单卡(信用卡)拉新模型',
                         modelNumber: '888888888',
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox:''
+                        dataBox: ''
 
                     },
                     {
@@ -414,7 +431,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox:''
+                        dataBox: ''
 
                     },
                     {
@@ -423,7 +440,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox:''
+                        dataBox: ''
 
                     },
                     {
@@ -432,7 +449,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox:''
+                        dataBox: ''
 
                     },
                     {
@@ -441,7 +458,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox:''
+                        dataBox: ''
 
                     },
                     {
@@ -450,7 +467,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox:''
+                        dataBox: ''
 
                     },
 
@@ -473,9 +490,9 @@
 
                 //名单维护数据
                 repairParams: {
-                    modelName:null,
+                    modelName: "",
                     page: 1,
-                    per_page: 10
+                    size: 10
                 },
                 // 维护总数
                 repairTotal: 100,
@@ -485,7 +502,7 @@
                     address: '北京分行',
                     number: '1',
                     createTime: '2016-05-02',
-                    updateTime : '2016-05-02',
+                    updateTime: '2016-05-02',
                     modelName: '王小虎',
                     operation: '编辑'
                 }, {
@@ -537,12 +554,12 @@
                 editData: false,
 
                 // 详情页数据
-                
+
                 detail: false,
-                detailParams:{
+                detailParams: {
                     // 视频地址
-                videoUrl:null,
-                modelName:null,
+                    videoUrl: null,
+                    modelName: null,
                 },
                 tableDatadetail: [{
                     // 下载日期
@@ -590,20 +607,20 @@
                 },
                 formAna: {
                     // 干预人数
-                    interventionNum:null,
+                    interventionNum: null,
                     // 转化人数
-                    convertNum:null,
+                    convertNum: null,
                     // AUM提升
-                    aumPromote:null,
+                    aumPromote: null,
                     trouble: null,
                     trasform: null,
                     incres: null,
                     // value: '选项1',
                 },
                 // 转化率
-                conversionRate:null,
+                conversionRate: null,
                 // 所属分行
-                affiliatedBranch:'选项1',
+                affiliatedBranch: '选项1',
                 // 分析数据
                 tableDataAna: [{
                     date: '1月',
@@ -771,7 +788,7 @@
                 // 检查权限
                 this.checkPower()
                 // 分析数据计算
-               
+
             },
 
             mounted() {
@@ -780,10 +797,7 @@
 
             },
             methods: {
-                // 加密方法
-                // encrypted()
-                // 解密方法
-                // decrypted()
+
                 // 详情页表格样式操作
                 // 名单维护表格样式操作
                 headdetailClass() {
@@ -844,45 +858,39 @@
                 },
                 // 查询营销名单内容
                 searchContent() {
-                    // axios.get(`http://localhost:3000/brands?name_likes=${this.searchVal}`)
-                    //     .then((res)=>{
-                    //         // console.log(res)
-                    //     })
-                    // console.log(this.searchVal)
-                    // this.searchVal=''
+                    // this.reqParams.modelName=this.searchVal
                     // this.reqParams.page = 1
+                    // this.getData()
+
                 },
                 // 重置营销名单内容
                 resetContent() {
+                    // this.reqParams.modelName="",
+                    // this.reqParams.page=1,
+                    // this.reqParams.size=6
                     // this.getData()
                 },
                 // 获得数据
-              async  getData(){
-                    // axios.get('brands',data)
-                    //     .then((res)=>{
-                    //         console.log(res.data)
-                    //         const {data}=res
-                    //         // console.log(data)
-                    //         this.arr=data
-                    //     })
-                    // const {data} =await axios.get('brands')
-                    //         console.log(data)
-                        // console.log(request)
-                        // console.log(store.getUser())
+                async getData() {
+                   
+                    // const {data} =await axios.post('getModelList',this.reqParams)
+                    // console.log(data)
+                    // this.indexData=data.data.list
+                    // this.indexTotal=data.data.total
                 },
                 // 打开详情页
-                openDetail(val){
-                    this.detail=true 
+                openDetail(val) {
+                    this.detail = true
                     // console.log(val)
-                  this.detailParams.modelName= val.modelName
+                    this.detailParams.modelName = val.modelName
                 },
                 // 查询详情页模型
-                searchRepairConcetn(){
+                searchRepairConcetn() {
 
                 },
                 // 打开分析页
-                openAya(){
-                    this. analy=true
+                openAya() {
+                    this.analy = true
                 },
                 // 表格合计
                 // getColumns
@@ -992,8 +1000,8 @@
                     //   value: '选项1',
                     // }
                     this.formAna.interventionNum = row.num2,
-                    this.formAna.convertNum = row.num,
-                    this.formAna.aumPromote = row.num
+                        this.formAna.convertNum = row.num,
+                        this.formAna.aumPromote = row.num
                     // console.log(row)
                     // console.log(this.tableDataAna)
                 },
@@ -1020,19 +1028,19 @@
                     if (param.interventionNum == "" || isNaN(param.interventionNum)) {//进行数字校验，如果不是数字填出对话框进行提示
                         alert("请填写数字");
                         return
-                    } 
-                    
+                    }
+
                     if (param.convertNum == "" || isNaN(param.convertNum)) {//进行数字校验，如果不是数字填出对话框进行提示
                         alert("请填写数字");
                         return
-                    } 
-                      
+                    }
+
                     if (param.aumPromote == "" || isNaN(param.aumPromote)) {//进行数字校验，如果不是数字填出对话框进行提示
                         alert("请填写数字");
                         return
-                    } 
-                        
-                    
+                    }
+
+
                     this.formAna.interventionNum = null
                     this.formAna.convertNum = null
                     this.formAna.aumPromote = null
@@ -1049,19 +1057,19 @@
                     //   value: '选项1',
                     // }
                     this.formAna.interventionNum = null,
-                    this.formAna.convertNum = null,
-                    this.formAna.aumPromote = null,
-                    row.openfm = true
+                        this.formAna.convertNum = null,
+                        this.formAna.aumPromote = null,
+                        row.openfm = true
                 },
                 // 分页事件
                 changePager(newPage) {
                     // console.log(newPage)
                     this.reqParams.page = newPage
-                    // this.getArticles()
+                    // this.getData()
                 },
                 // 维护页分页事件
                 repairChangePager(newPage) {
-                    this.reqParams.page = newPage
+                    this.repairParams.page = newPage
                 },
                 // 滑块开关事件
                 changeSwich(val, row) {

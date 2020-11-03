@@ -5,7 +5,9 @@
 //   });
 // const JSONBig=require('')
 // const store =require('./store.js')
-axios.defaults.baseURL = 'http://22.5.241.7/dacp/model/'
+// axios.defaults.baseURL = 'http://22.5.241.7/dacp/model/'
+// axios.defaults.baseURL = 'http://localhost:3000//'
+
 // axios.defaults.transformResponse = [
 //   (data) => {
 //     // data 此时是后端的原始数据
@@ -29,10 +31,10 @@ axios.interceptors.request.use((config) => {
 //     // 请求拦截器：在每次请求前 做某一些事情
 //     Authorization: `Bearer ${store.getUser().token}`
 //   }
-    config.headers={
-        Cookie: "",
-        Host: "22.5.241.7"
-    }
+    // config.headers={
+    //     // Cookie: "",
+    //     // Host: "22.5.241.7"
+    // }
   return config
 }, (error) => {
   return Promise.reject(error)
