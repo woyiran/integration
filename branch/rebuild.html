@@ -33,31 +33,32 @@
                     <!-- <el-input v-model="formData.uploadVideo" class="upvideo"></el-input>
                     <el-button class="select">选择视频</el-button> -->
                     <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/"
-                        :show-file-list="false"  :on-success="handleSuccess"
-                        :on-change="changeFile"  :auto-upload="false">
-                        <el-input size="small" type="primary" :value="fileName" class="upvideo"  slot="trigger" aria-placeholder="请选择视频"></el-input>
-                        <el-button  size="small"  @click="submitUpload" class="select"  >上传
+                        :show-file-list="false" :on-success="handleSuccess" :on-change="changeFile"
+                        :auto-upload="false">
+                        <el-input size="small" type="primary" :value="fileName" class="upvideo" slot="trigger"
+                            aria-placeholder="请选择视频"></el-input>
+                        <el-button size="small" @click="submitUpload" class="select">上传
                         </el-button>
                     </el-upload>
                     <!-- <el-button>上传</el-button> -->
                 </el-form-item>
-                <el-form-item label="数据和关联" style="margin-top: 70px;">
+                <el-form-item label="数据盒关联" style="margin-top: 70px;">
                     <!-- <el-input v-model="formData.uploadData" class="updata"></el-input>
                     <el-button class="relation">关联</el-button> -->
                     <!-- <el-upload class="upload-demo" ref="upData" action="https://jsonplaceholder.typicode.com/posts/"
                         :show-file-list="false"  
                         :on-change="changeDataFile" :http-request='uploadSectionFile' :auto-upload="false"> -->
-                        <el-input size="small" type="primary" v-model="fileNumberName"  class="updata" ></el-input>
-                        <el-button  size="small"  @click="submitUploadData" class="relation" >关联地址
-                        </el-button>
+                    <el-input size="small" type="primary" v-model="formData.dataBoxId" class="updata"></el-input>
+                    <el-button size="small" @click="relation" class="relation">关联地址
+                    </el-button>
                     <!-- </el-upload> -->
                     <!-- <el-button>上传</el-button> -->
                 </el-form-item>
                 <el-form-item>
                     <div class="last">
-                        <el-button type='primary' @click='rebuild = false'>发布</el-button>
-                        <el-button @click='rebuild = false'>保存</el-button>
-                        <el-button @click='rebuild = false'>取消</el-button>
+                        <el-button type='primary' @click='publish()' size="small">发布</el-button>
+                        <el-button @click='save()' size="small">保存</el-button>
+                        <el-button @click='rebuild = false' size="small">取消</el-button>
                     </div>
                 </el-form-item>
                 <span slot="footer" class="dialog-footer">
@@ -74,54 +75,93 @@
             data: {
                 rebuild: true,
                 // 上传视频名称
-                fileName:null,
-                // 关联地址
-                fileNumberName:null,
+                fileName: null,
+                
                 formData: {
                     modelName: '信用卡拉新模型',
+                    // 关联地址
+                    dataBoxId: '',
                     modelIntroduce: '评论内容',
                     // 视频地址
-                    videoUrl:null,
-                    uploadVideo: '',
-                    uploadData: ''
+                    videoUrl: '',
+                    // 发布状态 0保存 1发布
+                    status: null,
+                    // 创建人
+                    // userName:adminData.name
+                    userName: '张三',
+                    // // 创建时间
+                    // createTime:'',
+                    // // 更新时间
+                    // updateTime:''
+
+
                 }
             },
             methods: {
                 // 上传文件变动
-                changeFile(file,fileList){
-                        // console.log(file,fileList)
-                        this.fileName=file.name
+                changeFile(file, fileList) {
+                    // console.log(file,fileList)
+                    this.fileName = file.name
+                    // let selectFile=this.$refs.selectFile
+                    // console.log(selectFile)
                 },
-                changeDataFile(file,fileList){
-                    this.fileNumberName=file.name
-                },
+                // changeDataFile(file,fileList){
+                //     // this.fileNumberName=file.name
+                // },
                 // 自定义上传
-                uploadSectionFile(res){
-                        console.log(res)
-                        this.fileNumberName=null
+                uploadSectionFile(res) {
+                    // console.log(res)
+                    // this.fileNumberName=null
                 },
-                 // 手动上传
-                 submitUpload() {
-                    let upload=this.$refs.upload
-                    this.$refs.upload.submit();
+                // 手动上传
+                submitUpload() {
+                    let upload = this.$refs.upload
+                    // this.$refs.upload.submit();
                     // this.$refs.upload.clearFiles();
                     // console.log(upload)
-                       
+
                 },
-                 submitUploadData() {
+                // 关联地址
+                relation() {
                     // let upData=this.$refs.upData
                     // this.$refs.upData.submit();
                     // this.$refs.upload.clearFiles();
                     // console.log(upload)
-                    console.log(this.fileNumberName)
-                       
+                    if (this.formData.dataBoxId == '') {
+                        this.$message.error('内容不能为空')
+                        return
+                    }
+
+                    console.log(this.formData.dataBoxId)
+                  
+                    setTimeout(() => {
+                        this.$message.success('关联成功')
+                    }, 2000);
+
                 },
-                handleSuccess(res,file,filelist){
-                        // console.log(file)
-                        console.log(res,file,filelist)
-                        this.$message.success('上传成功')
-                        this.fileName=null
+                handleSuccess(res, file, filelist) {
+                    // console.log(file)
+                    console.log(res, file, filelist)
+                    this.$message.success('上传成功')
+                    this.fileName = null
                 },
+                // 发布
+                publish() {
+                    this.formData.status = 1
+                    // const { data } = aixos.post('saveModel', this.formData)
+                    // console.log(data)
+                    // this.formData.modelName='',
+                    // this.formData.modelIntroduce='',
+                    // this.formData.videoUrl='',
+                    // this.formData.dataBoxId=''
+                    // this.fileName=''
+                },
+                // 保存
+                save() {
+                    this.formData.status=0
+                    // const { data } = aixos.post('saveModel', this.formData)
+                    // console.log(data)
+                }
             }
         });
     </script>

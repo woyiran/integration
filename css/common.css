@@ -30,6 +30,8 @@ html {
   height: 39px;
   margin-left: 24px;
   color: #ffffff;
+  margin-top: -8px;
+  vertical-align: middle;
 }
 .contain .header .market {
   display: inline-table;

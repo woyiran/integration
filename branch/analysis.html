@@ -420,7 +420,7 @@
             incres: this.formAna.incres,
             value: this.formAna.value,
           }
-          console.log(param)
+          // console.log(param)
           // row.num=null
           // row.num2=null
           // this.formAna = {
@@ -429,24 +429,27 @@
           //   incres: null,
           //   value: '选项1',
           // }
-          this.formAna.trouble=null,
-          this.formAna.trasform=null,
-          this.formAna.incres=null
+         
           if(param.trouble==""|| isNaN(param.trouble)){//进行数字校验，如果不是数字填出对话框进行提示
-		   	alert("请填写数字");
+         // alert("请填写数字"); 
+         this.$message.error('请填写数字，！亲')
          return
-		   }else{
+		   }
 
-       }
+       
        if(param.trasform==""|| isNaN(param.trasform)){//进行数字校验，如果不是数字填出对话框进行提示
-		   	alert("请填写数字");
+         // alert("请填写数字");
+         this.$message.error('请填写数字，！亲')
          return
 		   }
        if(param.incres==""|| isNaN(param.incres)){//进行数字校验，如果不是数字填出对话框进行提示
-		   	alert("请填写数字");
+         // alert("请填写数字");
+         this.$message.error('请填写数字，！亲')
          return
 		   }
-
+       this.formAna.trouble=null,
+          this.formAna.trasform=null,
+          this.formAna.incres=null
 
           row.openfm = true
           // 调用接口
