@@ -53,6 +53,7 @@
 
 <body>
     <div id="app">
+        <!-- <div v-model='msg'> 双向绑定</div> -->
         <p>
             介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
             介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
@@ -121,10 +122,10 @@
         <a href="javascript:;" @click='download' id='upload'>下载</a> -->
 
     </div>
-    <script src="../vue.js"></script>
+    <script src="./vue.js"></script>
     <script src="./lib-master/index.js" type="text/javascript" charset="utf-8"></script>
     <!-- <script src="./element.js"></script> -->
-    <script src="../axios.min.js"></script>
+    <script src="./axios.min.js"></script>
     <script>
         // var JSONbig = require(' json-bigint '),
         // axios.defaults.transformResponse = [
@@ -143,6 +144,7 @@
         var app = new Vue({
             el: '#app',
             data: {
+                msg:'9999',
                 options: [{
                     value: '选项1',
                     label: '黄金糕'

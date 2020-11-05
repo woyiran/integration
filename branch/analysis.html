@@ -58,7 +58,10 @@
             </el-table-column>
             <el-table-column  label="转化率">
               <template slot-scope='scope'>
-                {{scope.row.trans+'%'}}
+                <div v-show='scope.row.openfm'>{{scope.row.trans+'%'}}</div>
+                <el-form-item v-show="!scope.row.openfm" >
+                  <el-input :value='trans' placeholder="请输入数字" ></el-input>
+                </el-form-item>
               </template>
             </el-table-column>
             <el-table-column label="操作" label-width='100px'>
@@ -131,6 +134,7 @@
             incres:null,
            
           },
+          // trans:null,
           value:'选项1',
             // 分析数据
             tableDataAna: [{
@@ -295,6 +299,11 @@
        
 
       },
+      computed:{
+          trans(){
+            return   ((this.formAna.trasform / this.formAna.trouble) * 100).toFixed(2)+'%'
+          }
+      },
       created() {
         this.initData()
         // this.getDataAna()
@@ -329,7 +338,6 @@
         // 表格转化率计算
         initData() {
           this.tableDataAna.forEach(item => {
-            item.trans = ((item.num / item.num2) * 100).toFixed(2)
             // 录入打开
             item.openfm=true
             // 日志下拉
@@ -409,6 +417,9 @@
           this.formAna.trouble=row.num2,
           this.formAna.trasform=row.num,
           this.formAna.incres=row.num
+         
+
+          // this.trans=row.trans
             // console.log(row)
             // console.log(this.tableDataAna)
         },
@@ -420,6 +431,7 @@
             incres: this.formAna.incres,
             value: this.formAna.value,
           }
+          
           // console.log(param)
           // row.num=null
           // row.num2=null
@@ -429,6 +441,7 @@
           //   incres: null,
           //   value: '选项1',
           // }
+        
          
           if(param.trouble==""|| isNaN(param.trouble)){//进行数字校验，如果不是数字填出对话框进行提示
          // alert("请填写数字"); 
@@ -448,8 +461,9 @@
          return
 		   }
        this.formAna.trouble=null,
-          this.formAna.trasform=null,
-          this.formAna.incres=null
+      this.formAna.trasform=null,
+      this.formAna.incres=null
+
 
           row.openfm = true
           // 调用接口
