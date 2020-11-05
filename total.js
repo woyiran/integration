@@ -30,8 +30,8 @@
                 // 用户信息
                 // isAdmin: userinfo,
                 // 权限判定
-                // power: adminData.isAdmin,
-                power: false,
+                power: adminData.isAdmin,
+                // power: false,
                 // 用户名
                 userName: adminData.name,
                 // 营销名单开关
@@ -526,11 +526,12 @@
                 },
                 // 判断权限
                 checkPower() {
-                    let flag = this.power === 'false' ? false : true
+                    this.power = this.power === 'false' ? false : true
 
                     // ?false:true
                     // console.log(flag)
-                    if (!flag) {
+                    
+                    if (!this.power) {
                         // console.log(this.curent)
                         this.curent = ['营销名单']
                         // this.active='营销名单'
