@@ -30,8 +30,8 @@
                 // 用户信息
                 // isAdmin: userinfo,
                 // 权限判定
-                power: adminData.isAdmin,
-                // power: false,
+                // power: adminData.isAdmin,
+                power: false,
                 // 用户名
                 userName: adminData.name,
                 // 营销名单开关
@@ -57,7 +57,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox: ''
+                        dataBoxId: ''
 
                     },
                     {
@@ -66,7 +66,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox: ''
+                        dataBoxId: ''
 
                     },
                     {
@@ -75,7 +75,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox: ''
+                        dataBoxId: ''
 
                     },
                     {
@@ -84,7 +84,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox: ''
+                        dataBoxId: ''
 
                     },
                     {
@@ -93,7 +93,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox: ''
+                        dataBoxId: ''
 
                     },
                     {
@@ -102,7 +102,7 @@
                         modelData: new Date(),
                         modelDownNum: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
-                        dataBox: ''
+                        dataBoxId: ''
 
                     },
 
@@ -134,56 +134,65 @@
                 // 维护总数
                 repairTotal: 100,
                 // 发布状态
-                status: true,
+                // status: true,
                 tableData: [{
                     address: '北京分行',
                     number: '1',
                     createTime: '2016-05-02',
                     updateTime: '2016-05-02',
                     modelName: '王小虎',
-                    operation: '编辑'
+                    operation: '编辑',
+                    status:false
                 }, {
                     address: '北京分行',
                     number: '2',
                     createTime: '2016-05-04',
                     updateTime: '2016-05-02',
                     modelName: '王小虎',
-                    operation: '编辑'
+                    operation: '编辑',
+                    status:true
                 }, {
                     address: '北京分行',
                     number: '3',
                     createTime: '2016-05-01',
                     updateTime: '2016-05-02',
                     modelName: '王小虎',
-                    operation: '编辑'
+                    operation: '编辑',
+                    status:true
                 }, {
                     address: '北京分行',
                     number: '4',
                     createTime: '2016-05-03',
                     updateTime: '2016-05-02',
                     modelName: '王小虎',
-                    operation: '编辑'
+                    operation: '编辑',
+                    status:false
                 }, {
                     address: '北京分行',
                     number: '3',
                     createTime: '2016-05-01',
                     updateTime: '2016-05-02',
                     modelName: '王小虎',
-                    operation: '编辑'
+                    operation: '编辑',
+                    statsu:false
                 }, {
                     address: '北京分行',
                     number: '3',
                     createTime: '2016-05-01',
                     updateTime: '2016-05-02',
                     modelName: '王小虎',
-                    operation: '编辑'
+                    operation: '编辑',
+                    status:true
                 }
                 ],
                 // 重建页数据
                 rebuild: false,
                 // 上传视频名称
                 fileName: null,
-              
+               // 进度条
+               videoUploadPercent:0,
+               //是否显示进度条
+               videoFlag: true,
                 formData: {
                     modelName: '信用卡拉新模型',
                     // 关联地址
@@ -207,8 +216,13 @@
                 editData: false,
                   // 上传视频名称
                 editFileName: null,
-              
+              // 进度条
+              videoEditPercent:0,
+              //是否显示进度条
+              videoEditFlag: true,
                 editFormData: {
+                    // 模型ID
+                    modelId:'',
                     modelName: '信用卡拉新模型',
                     // 关联地址
                     dataBoxId: '',
@@ -230,11 +244,15 @@
                 // 详情页数据
 
                 detail: false,
+                detailInfo:null,
                 detailParams: {
                     // 视频地址
                     videoUrl: null,
-                    modelName: null,
-                },
+                    // modelName: null,
+                    modelId:'',
+                    dataBoxId:'',
+                    orgNo:''
+                }, 
                 tableDatadetail: [{
                     // 下载日期
                     downloadTime: '2016-05-02',
@@ -294,7 +312,7 @@
                 // 转化率
                 conversionRate: null,
                 // 所属分行
-                affiliatedBranch: '选项1',
+                affiliatedBranch: 758000,
                 // 分析数据
                 tableDataAna: [{
                     date: '1月',
@@ -428,22 +446,28 @@
                     }
                     ]
                 }],
+                // 352100 中信银行国际(中国)有限公司上海
+                // 733600 中信银行宁波分行
+                // 758000 中信银行银川分行
+                // 722100 中信银行沈阳分行
+                // 728100 中信银行南昌分行
+                
 
                 options: [{
-                    value: '选项1',
-                    label: '北京分行'
+                    value: 352100,
+                    label: '中信银行国际(中国)有限公司上海'
                 }, {
-                    value: '选项2',
-                    label: '上海分行'
+                    value: 733600 ,
+                    label: '中信银行宁波分行'
                 }, {
-                    value: '选项3',
-                    label: '广东分行'
+                    value: 758000,
+                    label: '中信银行银川分行'
                 }, {
-                    value: '选项4',
-                    label: '龙须面'
+                    value: 722100,
+                    label: '中信银行沈阳分行'
                 }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
+                    value:  728100,
+                    label: '中信银行南昌分行'
                 }],
 
             },
@@ -453,14 +477,7 @@
                 }
             },
             watch: {
-                // searchVal(newVal,oldVal){
-                //     // console.log(newVal,oldVal)
-                //     //     axios.get(`http://localhost:3000/brands?like_name=${newVal}`)
-                //     //     .then((res)=>{
-                //     //         // console.log(res)
-                //     //     })
-                // this.searchVal=newVal
-                // }
+              
 
             },
             created() {
@@ -472,6 +489,7 @@
 
             mounted() {
                 this.getData()
+                this.getRepairData()
                 this.initData()
 
             },
@@ -556,7 +574,7 @@
                 // 获得数据
                 async getData() {
 
-                    // const {data:{data}} =await axios.post('getModelList',this.reqParams)
+                    // const {data:{data}} =await axios.post('model/getModelList',this.reqParams)
                     // console.log(data)
                     // this.indexData=data.list
                     // this.indexTotal=data.total
@@ -564,23 +582,49 @@
                 // 打开详情页
                 openDetail(val) {
                     this.detail = true
-                    // console.log(val)
-                    this.detailParams.modelName = val.modelName
+                    console.log(val)
+                    // this.detailParams.modelName = val.modelName
+                    // this.detailParams.modelId=val.modelId
+                    // this.detailParams.dataBoxId=val.dataBoxId
+                    // this.detailParams.orgNo=val.orgNo
+                    //coant{data} axios.post('model/getDetail',this.detailParams)
+                    // this.detailInfo =data.detail
+                    // this.tableDatadetail=data.log
+
+
+                },
+                // 获取维护页数据
+                getRepairData(){
+                      // const {data:{data}} =await axios.post('model/getList',this.repairParams) 
+                      // console.log(data)
+                    // this.tableData=data.list
+                    // this.repairTotal=data.total 
                 },
                 // 查询维护页模型
                 searchRepairConcetn() {
-                    // this.repairParams.modelName=this.searchVal
+                    // this.repairParams.modelName=this.repairSearchVal
                     // this.repairParams.page = 1
-                    // this.getData()
+                    // this.getRepairData()
+                    
                 },
                 // 维护页重置
                 resetRepairContent() {
                     // this.repairParams.modelName="",
                     // this.repairParams.page=1,
                     // this.repairParams.size=10
-                    // this.getData()
+                //    this.getRepairData()
                 },
                 // 重建与编辑页方法
+                // 打开编辑页
+                openEdit(row){
+                        this.editData=true
+                        // console.log(row)
+                        // this.editFormData.modelId=row.modelId
+                        this.editFormData.modelName=row.modelName
+                        // this.editFormData.modelIntroduce=row.modelIntroduce
+                        // this.editFormData.dataBoxId=row.dataBoxId
+
+                },
                 // 上传文件变动
                 changeFile(file, fileList) {
                     // console.log(file,fileList)
@@ -596,25 +640,61 @@
                 },
                
                 // 自定义上传
-                uploadSectionFile(res) {
+                uploadSectionFile(parm) {
+                    // console.log(parm)
+                    let fileObj = parm.file;
+                    console.log(fileObj)
+                    // FormData 对象
+                    let form = new FormData();
+                    // 文件对象
+                    form.append("video", fileObj);
+                    console.log(form)
+                    //  axios({
+                    //     method: 'post',
+                    //     url: 'http://22.5.241.7/dacp/upload',
+                    //      headers: { 'Content-Type': 'multipart/form-data'
+                    //      },
+                    //      data:form
+                    //  }).then((res)=>{
+                    //         console.log(res)
+
+                    //  }),
                     // console.log(res)
                     // this.fileNumberName=null
                 },
-                editUploadSectionFile(res) {
+                editUploadSectionFile(parm) {
+                    // console.log(parm)
+                    let fileObj = parm.file;
+                    console.log(fileObj)
+                    // FormData 对象
+                    let form = new FormData();
+                    // 文件对象
+                    form.append("video", fileObj);
+                    console.log(form)
+                    //  axios({
+                    //     method: 'post',
+                    //     url: 'http://22.5.241.7/dacp/upload',
+                    //      headers: { 'Content-Type': 'multipart/form-data'
+                    //      },
+                    //      data:form
+                    //  }).then((res)=>{
+                    //         console.log(res)
+
+                    //  }),
                     // console.log(res)
                     // this.fileNumberName=null
                 },
                 // 手动上传
                 submitUpload() {
                     let upload = this.$refs.upload
-                    // this.$refs.upload.submit();
+                    this.$refs.upload.submit();
                     // this.$refs.upload.clearFiles();
                     // console.log(upload)
 
                 },
                 editSubmitUpload() {
                     let editUpload = this.$refs.editUpload
-                    // this.$refs.editUpload.submit();
+                    this.$refs.editUpload.submit();
                     // this.$refs.upload.clearFiles();
                     // console.log(upload)
 
@@ -654,23 +734,22 @@
                     }, 2000);
 
                 },
-                handleSuccess(res, file, filelist) {
-                    // console.log(file)
-                    console.log(res, file, filelist)
-                    this.$message.success('上传成功')
-                    this.fileName = null
+                handleSuccess(event, file, filelist) {
+                    // this.videoFlag=true
+                    console.log(event,file,filelist)
+                    // this.videoFlag = true;
+                    // this.videoUploadPercent = file.percentage.toFixed(0) * 1;
                 },
-                editHandleSuccess(res, file, filelist) {
-                    // console.log(file)
-                    console.log(res, file, filelist)
-                    this.$message.success('上传成功')
-                    this.editFileName = null
+                editHandleSuccess(event, file, filelist) {
+                    //  this.videoEditFlag=true
+                     console.log(event,file,filelist)
+                    //  this.videoEditPercent = file.percentage.toFixed(0) * 1;
                 },
                 // 发布
                 publish() {
                     
                     this.formData.status = 1
-                    // const { data } = aixos.post('saveModel', this.formData)
+                    // const { data } = aixos.post('model/saveModel', this.formData)
                     // console.log(data)
                     // this.formData.modelName='',
                     // this.formData.modelIntroduce='',
@@ -680,7 +759,7 @@
                 },
                 editPublish() {
                     this.editFormData.status = 1
-                    // const { data } = aixos.post('updateModel', this.editFormData)
+                    // const { data } = aixos.post('model/updateModel', this.editFormData)
                     // console.log(data)
                     // this.formData.modelName='',
                     // this.formData.modelIntroduce='',
@@ -691,12 +770,12 @@
                 // 保存
                 save() {
                     this.formData.status = 0
-                    // const { data } = aixos.post('saveModel', this.formData)
+                    // const { data } = aixos.post('model/saveModel', this.formData)
                     // console.log(data)
                 },
                 editSave() {
                     this.editFormData.status = 0
-                    // const { data } = aixos.post('updateModel', this.editFormData)
+                    // const { data } = aixos.post('model/updateModel', this.editFormData)
                     // console.log(data)
                 },
                 // 打开分析页

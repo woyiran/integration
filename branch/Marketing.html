@@ -116,7 +116,7 @@
                             </el-table-column>
                             <el-table-column prop="status" label="状态">
                                 <template slot-scope="scope">
-                                    <el-switch style="display: block" v-model="status" active-color="#13ce66"
+                                    <el-switch style="display: block" v-model="scope.row.status" active-color="#13ce66"
                                         inactive-color="#ff4949" active-text="发布" inactive-text="暂停"
                                         @change='changeSwich(scope.row)'>
                                     </el-switch>
@@ -124,7 +124,7 @@
                             </el-table-column>
                             <el-table-column prop="operation" label="操作">
                                 <template slot-scope="scope">
-                                    <el-button type="text" style="color: #1677FF;" @click='editData=true'>编辑</el-button>
+                                    <el-button type="text" style="color: #1677FF;" @click='openEdit(scope.row)'>编辑</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -150,7 +150,7 @@
                             <span>数据量</span>
                         </div>
                         <div class="detail-list-body">
-                            <span>{{detailParams.modelName}}</span>
+                            <span>{{}}</span>
                             <span>2020/08/28</span>
                             <span>20,200.34</span>
                         </div>
@@ -167,7 +167,9 @@
                     </div>
                     <div class=" video right">
                         <!-- <span class="el-icon-video-camera"></span> -->
-                        <video :src="detailParams.videoUrl"></video>
+                        <video id="mse" autoplay="false"  controls="controls">
+                            <source :src="detailInfo" type="video/mp4">
+                         </video>
                     </div>
                 </div>
                 <div class="detail-table">
@@ -210,13 +212,19 @@
                     <el-form-item label="视频上传" style="margin-top: 70px;">
                         <!-- <el-input v-model="formData.uploadVideo" class="upvideo"></el-input>
                         <el-button class="select">选择视频</el-button> -->
-                        <el-upload class="upload-demo" ref="upload" action="http://22.5.241.7/dacp/download/uploadVideo"
-                            :show-file-list="false" :on-success="handleSuccess" :on-change="changeFile"
+                        <el-upload class="upload-demo" ref="upload" action="http://22.5.241.7/dacp/upload"
+                            :show-file-list="false" :on-progress="handleSuccess" :on-change="changeFile"
+                            :http-request='uploadSectionFile'
                             :auto-upload="false">
                             <el-input size="small" type="primary" :value="fileName" class="upvideo" slot="trigger"
                                 aria-placeholder="请选择视频"></el-input>
                             <el-button size="small" @click="submitUpload" class="select">上传
                             </el-button>
+                             <!-- 进度条 -->
+                            <!-- <el-progress v-show="videoFlag" 
+                            :percentage="videoUploadPercent"
+                            style="margin-top:7px;width: 400px;">
+                            </el-progress> -->
                         </el-upload>
                         <!-- <el-button>上传</el-button> -->
                     </el-form-item>
@@ -260,12 +268,17 @@
                         <!-- <el-input v-model="formData.uploadVideo" class="upvideo"></el-input>
                         <el-button class="select">选择视频</el-button> -->
                         <el-upload class="upload-demo" ref="editUpload" action="http://22.5.241.7/dacp/download/uploadVideo"
-                            :show-file-list="false" :on-success="editHandleSuccess" :on-change="editChangeFile"
+                            :show-file-list="false" :on-progress="editHandleSuccess" :on-change="editChangeFile"
+                            :http-request='editUploadSectionFile'
                             :auto-upload="false">
                             <el-input size="small" type="primary" :value="editFileName" class="upvideo" slot="trigger"
                                 aria-placeholder="请选择视频"></el-input>
                             <el-button size="small" @click="editSubmitUpload" class="select">上传
                             </el-button>
+                            <!-- <el-progress v-show="videoEditFlag" 
+                            :percentage="videoEditPercent"
+                            style="margin-top:7px;width: 400px;">
+                            </el-progress> -->
                         </el-upload>
                         <!-- <el-button>上传</el-button> -->
                     </el-form-item>
@@ -385,7 +398,7 @@
             </el-dialog>
 
         </div>
-
+ 
 
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->

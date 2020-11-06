@@ -5,7 +5,7 @@
 //   });
 // const JSONBig=require('')
 // const store =require('./store.js')
-// axios.defaults.baseURL = 'http://22.5.241.7/dacp/model/'
+// axios.defaults.baseURL = 'http://22.5.241.7/dacp/'
 // axios.defaults.baseURL = 'http://localhost:3000//'
 
 // axios.defaults.transformResponse = [
