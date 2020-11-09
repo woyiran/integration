@@ -93,7 +93,7 @@
             <!-- 名单维护主体 -->
             <div class=" repair-main" v-show='!isshow'>
                 <div class="repair-main-contain">
-                    <div style="margin-top: 20px;">
+                    <div style="background-color:#f8f8f8;padding-bottom: 26px;">
                         <el-input v-model='repairSearchVal' size="small"></el-input>
                         <el-button type="primary" class="search" @click='searchRepairConcetn()' size="small">查询
                         </el-button>
@@ -124,7 +124,8 @@
                             </el-table-column>
                             <el-table-column prop="operation" label="操作">
                                 <template slot-scope="scope">
-                                    <el-button type="text" style="color: #1677FF;" @click='openEdit(scope.row)'>编辑</el-button>
+                                    <el-button type="text" style="color: #1677FF;" @click='openEdit(scope.row)'>编辑
+                                    </el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -150,9 +151,15 @@
                             <span>数据量</span>
                         </div>
                         <div class="detail-list-body">
-                            <span>{{}}</span>
-                            <span>2020/08/28</span>
-                            <span>20,200.34</span>
+                            <span class="detailname">{{}}</span>
+                            <!-- 选择日期 -->
+                            
+                            <el-select v-model="detailDate" placeholder="请选择日期" @change='changeDetailDate'>
+                                <el-option v-for="item in detailOption" :key="item.value"  :value="item.value">
+                                </el-option>
+                              </el-select>
+                            
+                            <span class="detailnumber">20,200.34</span>
                         </div>
                         <div class="detail-list-bott">模型介绍</div>
                         <div class="detail-list-footer">
@@ -167,9 +174,10 @@
                     </div>
                     <div class=" video right">
                         <!-- <span class="el-icon-video-camera"></span> -->
-                        <video id="mse" autoplay="false"  controls="controls">
-                            <source :src="detailInfo.videoUrl" type="video/mp4">
-                         </video>
+                        <!-- <video id="mse" autoplay="false" controls="controls">
+                            <source :src="../assets/404.png" type="video/mp4">
+                        </video> -->
+                        <img src="../assets/404.png" alt="" width="445px" height="254px">
                     </div>
                 </div>
                 <div class="detail-table">
@@ -180,7 +188,7 @@
                             累计下载n次
                         </span>
                     </div>
-                    <div class="totalBank" >{{totalBank}}个分行下载</div>
+                    <div class="totalBank">{{totalBank}}个分行下载</div>
                     <div>
                         <el-scrollbar style="height:250px;">
                             <el-table :data="tableDatadetail" style="width: 100%" :header-cell-style='headdetailClass'
@@ -218,13 +226,12 @@
                         <el-button class="select">选择视频</el-button> -->
                         <el-upload class="upload-demo" ref="upload" action="http://22.5.241.7/dacp/upload"
                             :show-file-list="false" :on-progress="handleSuccess" :on-change="changeFile"
-                            :http-request='uploadSectionFile'
-                            :auto-upload="false">
+                            :http-request='uploadSectionFile' :auto-upload="false">
                             <el-input size="small" type="primary" :value="fileName" class="upvideo" slot="trigger"
                                 aria-placeholder="请选择视频"></el-input>
                             <el-button size="small" @click="submitUpload" class="select">上传
                             </el-button>
-                             <!-- 进度条 -->
+                            <!-- 进度条 -->
                             <!-- <el-progress v-show="videoFlag" 
                             :percentage="videoUploadPercent"
                             style="margin-top:7px;width: 400px;">
@@ -271,10 +278,10 @@
                     <el-form-item label="视频上传" style="margin-top: 70px;">
                         <!-- <el-input v-model="formData.uploadVideo" class="upvideo"></el-input>
                         <el-button class="select">选择视频</el-button> -->
-                        <el-upload class="upload-demo" ref="editUpload" action="http://22.5.241.7/dacp/download/uploadVideo"
-                            :show-file-list="false" :on-progress="editHandleSuccess" :on-change="editChangeFile"
-                            :http-request='editUploadSectionFile'
-                            :auto-upload="false">
+                        <el-upload class="upload-demo" ref="editUpload"
+                            action="http://22.5.241.7/dacp/download/uploadVideo" :show-file-list="false"
+                            :on-progress="editHandleSuccess" :on-change="editChangeFile"
+                            :http-request='editUploadSectionFile' :auto-upload="false">
                             <el-input size="small" type="primary" :value="editFileName" class="upvideo" slot="trigger"
                                 aria-placeholder="请选择视频"></el-input>
                             <el-button size="small" @click="editSubmitUpload" class="select">上传
@@ -292,7 +299,8 @@
                         <!-- <el-upload class="upload-demo" ref="upData" action="https://jsonplaceholder.typicode.com/posts/"
                             :show-file-list="false"  
                             :on-change="changeDataFile" :http-request='uploadSectionFile' :auto-upload="false"> -->
-                        <el-input size="small" type="primary" v-model="editFormData.dataBoxId" class="updata"></el-input>
+                        <el-input size="small" type="primary" v-model="editFormData.dataBoxId" class="updata">
+                        </el-input>
                         <el-button size="small" @click="editRelation" class="relation">关联地址
                         </el-button>
                         <!-- </el-upload> -->
@@ -354,10 +362,10 @@
                             <el-table-column label="转化率">
                                 <template slot-scope='scope'>
                                     <div v-show='scope.row.openfm'>{{scope.row.conversionRate+'%'}}</div>
-                                    <el-form-item v-show="!scope.row.openfm" >
-                                      <el-input :value='trans' placeholder="请输入数字" ></el-input>
+                                    <el-form-item v-show="!scope.row.openfm">
+                                        <el-input :value='trans' placeholder="请输入数字"></el-input>
                                     </el-form-item>
-                                  </template>
+                                </template>
                             </el-table-column>
                             <el-table-column label="操作" label-width='100px'>
                                 <template slot-scope="scope">
@@ -402,7 +410,7 @@
             </el-dialog>
 
         </div>
- 
+
 
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
@@ -419,7 +427,7 @@
     <script src="../bindcrypto-js.js"></script>
     <script src="../total.js"></script>
 
-    
+
 </body>
 
 </html>

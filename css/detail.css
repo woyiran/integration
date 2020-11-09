@@ -60,7 +60,18 @@
   height: 36px;
   margin-top: 16px;
 }
-.deta .el-dialog .detail-show .detail-list .detail-list-body span {
+.deta .el-dialog .detail-show .detail-list .detail-list-body .detailname {
+  background: #f5f5f5;
+  border-radius: 4px;
+  display: inline-block;
+  font-family: PingFangSC-Medium;
+  font-size: 18px;
+  color: #010101;
+  line-height: 36px;
+  height: 36px;
+  width: 272px;
+}
+.deta .el-dialog .detail-show .detail-list .detail-list-body .detailnumber {
   background: #f5f5f5;
   border-radius: 4px;
   display: inline-block;
@@ -70,12 +81,9 @@
   line-height: 36px;
   height: 36px;
 }
-.deta .el-dialog .detail-show .detail-list .detail-list-body span:nth-child(1) {
-  width: 272px;
-}
-.deta .el-dialog .detail-show .detail-list .detail-list-body span:nth-child(2) {
-  width: 132px;
-  margin: 0 28px;
+.deta .el-dialog .detail-show .detail-list .detail-list-body .el-select {
+  width: 150px;
+  margin: 0 12px 0 24px;
 }
 .deta .el-dialog .detail-show .detail-list .detail-list-bott {
   margin-top: 32px;

@@ -6,7 +6,7 @@
 .repair-main .repair-main-contain {
   background-color: #fff;
   border-radius: 10px;
-  padding: 30px;
+  padding-bottom: 30px;
 }
 .repair-main .repair-main-contain .el-input {
   width: 360px;
@@ -36,9 +36,6 @@
 }
 .repair-main .repair-main-contain .rebuild span {
   display: inline-block;
-}
-.repair-main .repair-main-contain .repair-table {
-  margin-top: 40px;
 }
 .repair-main .repair-main-contain .repair-table .el-switch {
   height: 23px;

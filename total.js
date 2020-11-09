@@ -199,7 +199,7 @@
                     dataBoxId: '',
                     modelIntroduce: '评论内容',
                     // 视频地址
-                    videoUrl: '',
+                    videoUrl: 'localhost:8080',
                     // 发布状态 0保存 1发布
                     status: null,
                     // 创建人
@@ -228,7 +228,7 @@
                     dataBoxId: '',
                     modelIntroduce: '评论内容',
                     // 视频地址
-                    videoUrl: '',
+                    videoUrl: 'localhost:8080',
                     // 发布状态 0保存 1发布
                     status: null,
                     // 创建人
@@ -244,9 +244,18 @@
                 // 详情页数据
 
                 detail: false,
+                // 详情页日期
+                detailDate:'2020/08/28',
                 detailInfo:{},
                 // 视频地址
+                // 详情页日期选择
+
+                detailOption:[{value:'2020/08/28'},{value:'2020/08/29'},{value:'2020/08/18'},{value:'2020/08/16'}
+
                 
+
+                ],
+
                 detailParams: {
                     
                     // modelName: null,
@@ -612,7 +621,7 @@
                 // 打开详情页
                async openDetail(val) {
                     this.detail = true
-                    console.log(val)
+                    // console.log(val)
                     // this.detailParams.modelName = val.modelName
                     // this.detailParams.modelId=val.modelId
                     // this.detailParams.dataBoxId=val.dataBoxId
@@ -622,6 +631,11 @@
                     // this.tableDatadetail=data.log
 
 
+                },
+                changeDetailDate(val){
+                    // console.log(val)
+                    // this.detailDate=val
+                    // console.log(this.detailDate)
                 },
                 // 获取维护页数据
               async  getRepairData(){
@@ -648,7 +662,7 @@
                 // 打开编辑页
                 openEdit(row){
                         this.editData=true
-                        console.log(row)
+                        // console.log(row)
                         // this.editFormData.modelId=row.modelId
                         this.editFormData.modelName=row.modelName
                         // this.editFormData.modelIntroduce=row.modelIntroduce
@@ -779,7 +793,7 @@
                 // 发布
                async publish() {
                     
-                    this.formData.status = 1
+                    this.formData.status = true
                     // const { data } = aixos.post('model/saveModel', this.formData)
                     // console.log(data)
                     // this.formData.modelName='',
@@ -790,7 +804,7 @@
                     // this.getRepairData()
                 },
               async  editPublish() {
-                    this.editFormData.status = 1
+                    this.editFormData.status = true
                     // const { data } = aixos.post('model/updateModel', this.editFormData)
                     // console.log(data)
                     // this.formData.modelName='',
@@ -802,13 +816,13 @@
                 },
                 // 保存
               async  save() {
-                    this.formData.status = 0
+                    this.formData.status = false
                     // const { data } = aixos.post('model/saveModel', this.formData)
                     // console.log(data)
                     // this.getRepairData()
                 },
                async editSave() {
-                    this.editFormData.status = 0
+                    this.editFormData.status = false
                     // const { data } = aixos.post('model/updateModel', this.editFormData)
                     // console.log(data)
                     // this.getRepairData()
