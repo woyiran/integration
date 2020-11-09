@@ -35,7 +35,7 @@
                 </div>
                 <div class="user">
                     <span class="userinfo el-icon-user-solid">{{userName}}</span>
-                    <div @click='logOut' class="logout iconfont">&#xe60b;</div>
+                    <div @click='logOut' class="logout iconfont" style="cursor: pointer;">&#xe60b;</div>
                 </div>
 
             </div>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="operation">
 
-                                <span style="cursor: pointer;" @click="openAya()"> <i
+                                <span style="cursor: pointer;" @click="openAya(item)"> <i
                                         class="el-icon-s-data"></i>分析</span>
 
                                 <!-- <span style="cursor: pointer;"><i class="el-icon-s-comment"></i>评论</span> -->
@@ -168,15 +168,19 @@
                     <div class=" video right">
                         <!-- <span class="el-icon-video-camera"></span> -->
                         <video id="mse" autoplay="false"  controls="controls">
-                            <source :src="detailInfo" type="video/mp4">
+                            <source :src="detailInfo.videoUrl" type="video/mp4">
                          </video>
                     </div>
                 </div>
                 <div class="detail-table">
-                    <div>
+                    <div style="height: 16px;">
+
                         <span class="left">下载日志</span>
-                        <span class="right">累计下载N次</span>
+                        <span class="right">
+                            累计下载n次
+                        </span>
                     </div>
+                    <div class="totalBank" >{{totalBank}}个分行下载</div>
                     <div>
                         <el-scrollbar style="height:250px;">
                             <el-table :data="tableDatadetail" style="width: 100%" :header-cell-style='headdetailClass'
@@ -325,7 +329,7 @@
                             </el-table-column>
                             <el-table-column label="干预人数" width="180">
                                 <template slot-scope="scope">
-                                    <div v-show='scope.row.openfm'>{{scope.row.num2}}</div>
+                                    <div v-show='scope.row.openfm'>{{scope.row.interventionNum}}</div>
                                     <el-form-item v-show="!scope.row.openfm">
                                         <el-input v-model='formAna.interventionNum'></el-input>
                                     </el-form-item>
@@ -333,7 +337,7 @@
                             </el-table-column>
                             <el-table-column label="转化人数">
                                 <template slot-scope="scope">
-                                    <div v-show='scope.row.openfm'>{{scope.row.num}}</div>
+                                    <div v-show='scope.row.openfm'>{{scope.row.convertNum}}</div>
                                     <el-form-item v-show="!scope.row.openfm">
                                         <el-input v-model='formAna.convertNum'></el-input>
                                     </el-form-item>
@@ -341,7 +345,7 @@
                             </el-table-column>
                             <el-table-column label="AUM提升">
                                 <template slot-scope="scope">
-                                    <div v-show='scope.row.openfm'>{{scope.row.num}}</div>
+                                    <div v-show='scope.row.openfm'>{{scope.row.aumPromote}}</div>
                                     <el-form-item v-show="!scope.row.openfm">
                                         <el-input v-model='formAna.aumPromote'></el-input>
                                     </el-form-item>
@@ -349,7 +353,7 @@
                             </el-table-column>
                             <el-table-column label="转化率">
                                 <template slot-scope='scope'>
-                                    <div v-show='scope.row.openfm'>{{scope.row.trans+'%'}}</div>
+                                    <div v-show='scope.row.openfm'>{{scope.row.conversionRate+'%'}}</div>
                                     <el-form-item v-show="!scope.row.openfm" >
                                       <el-input :value='trans' placeholder="请输入数字" ></el-input>
                                     </el-form-item>
@@ -358,7 +362,7 @@
                             <el-table-column label="操作" label-width='100px'>
                                 <template slot-scope="scope">
                                     <div v-show='scope.row.openfm'>
-                                        <el-button type="text" @click='openform(scope.row)' v-show='!power'>录入
+                                        <el-button type="text" @click='openform(scope.row)' v-if='!power'>录入
                                         </el-button>
                                         <el-button type="text" @click="toogleExpand(scope.row)"
                                             style="position: relative;" :style='scope.row.logColor? fontwe:""'>日志

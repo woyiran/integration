@@ -244,10 +244,11 @@
                 // 详情页数据
 
                 detail: false,
-                detailInfo:null,
+                detailInfo:{},
+                // 视频地址
+                
                 detailParams: {
-                    // 视频地址
-                    videoUrl: null,
+                    
                     // modelName: null,
                     modelId:'',
                     dataBoxId:'',
@@ -297,20 +298,36 @@
                 fontwe: {
                     fontWeight: 900
                 },
+                // 获取分析数据
+                getFormAna:{
+                    modelName:'',
+                    dataBoxId:'',
+                    orgNo:''
+                },
+                // 录入需要数据
                 formAna: {
+                    modelId:'',
+                    dataBoxId:'',
+                    // 分行id
+                    orgNo:'',
+
                     // 干预人数
                     interventionNum: null,
                     // 转化人数
                     convertNum: null,
                     // AUM提升
                     aumPromote: null,
+                    // 转化率
+                    conversionRate:null,
+                    // 数据上传日期
+                    insertMonth:''
                     // trouble: null,
                     // trasform: null,
                     // incres: null,
                     // value: '选项1',
                 },
                 // 转化率
-                conversionRate: null,
+                // conversionRate: null,
                 // 所属分行
                 affiliatedBranch: 758000,
                 // 分析数据
@@ -319,10 +336,10 @@
 
                     // 日志下拉
                     // caretBottom: true,
-                    address: '上海市普陀区金沙江路 1518 弄',
-                    num: '1',
-                    num2: '300',
-                    trans: 'kk',
+                    convertNum: '1',
+                    interventionNum: '300',
+                    aumPromote:1,
+                    conversionRate: 'kk',
                     log: [{
                         // 录入时间
                         insertDate: '2020',
@@ -354,12 +371,12 @@
                     ]
                 }, {
                     date: '2月',
-                    address: '上海市普陀区金沙江路 1517 弄',
-                    num: '1',
+                    convertNum: '1',
                     // openfm: true,
                     // caretBottom: true,
-                    num2: '300',
-                    trans: 'kk',
+                    interventionNum: '300',
+                    aumPromote:1,
+                    conversionRate: 'kk',
                     log: [{
                         // 录入时间
                         insertDate: '2020',
@@ -382,12 +399,12 @@
                     ]
                 }, {
                     date: '3月',
-                    address: '上海市普陀区金沙江路 1519 弄',
-                    num: '1',
-                    num2: '300',
+                    convertNum: '1',
+                    interventionNum: '300',
+                    aumPromote:1,
                     // openfm: true,
                     // caretBottom: true,
-                    trans: 'kk',
+                    conversionRate: 'kk',
                     log: [{
                         // 录入时间
                         insertDate: '2020',
@@ -410,12 +427,12 @@
                     ]
                 }, {
                     date: '4月',
-                    address: '上海市普陀区金沙江路 1516 弄',
-                    num: '1',
-                    num2: '300',
+                    convertNum: '1',
+                    interventionNum: '300',
+                    aumPromote:1,
                     // openfm: true,
                     // caretBottom: true,
-                    trans: 'kk',
+                    conversionRate: 'kk',
                     log: [{
                         // 录入时间
                         insertDate: '2020',
@@ -472,8 +489,24 @@
 
             },
             computed:{
+                // 计算转化率
                 trans(){
                   return   ((this.formAna.convertNum / this.formAna.interventionNum) * 100).toFixed(2)+'%'
+                },
+                // 计算详情分行数
+                totalBank(){
+                    var  detailArr=this.tableDatadetail.concat()
+                    for(var i=0;i<detailArr.length;i++){
+                               for(j=i+1;j<detailArr.length;j++){
+                                   if(detailArr[i].affiliatedBranch===detailArr[j].affiliatedBranch){
+                                       detailArr.splice(j,1)
+                                       j--
+                                   }
+                               }
+                           }
+                        //    console.log(detailArr)   
+                    return detailArr.length
+
                 }
             },
             watch: {
@@ -538,10 +571,7 @@
 
 
                 },
-                // 获得用户信息
-                geruserInfo() {
-                    // JSON.pares(window.sessionStorage.getItem('key') || '{}')
-                },
+               
                 // 判断权限
                 checkPower() {
                     this.power = this.power === 'false' ? false : true
@@ -580,21 +610,21 @@
                     // this.indexTotal=data.total
                 },
                 // 打开详情页
-                openDetail(val) {
+               async openDetail(val) {
                     this.detail = true
                     console.log(val)
                     // this.detailParams.modelName = val.modelName
                     // this.detailParams.modelId=val.modelId
                     // this.detailParams.dataBoxId=val.dataBoxId
                     // this.detailParams.orgNo=val.orgNo
-                    //coant{data} axios.post('model/getDetail',this.detailParams)
+                    //coant{data} = await axios.post('model/getDetail',this.detailParams)
                     // this.detailInfo =data.detail
                     // this.tableDatadetail=data.log
 
 
                 },
                 // 获取维护页数据
-                getRepairData(){
+              async  getRepairData(){
                       // const {data:{data}} =await axios.post('model/getList',this.repairParams) 
                       // console.log(data)
                     // this.tableData=data.list
@@ -618,7 +648,7 @@
                 // 打开编辑页
                 openEdit(row){
                         this.editData=true
-                        // console.log(row)
+                        console.log(row)
                         // this.editFormData.modelId=row.modelId
                         this.editFormData.modelName=row.modelName
                         // this.editFormData.modelIntroduce=row.modelIntroduce
@@ -657,6 +687,7 @@
                     //      data:form
                     //  }).then((res)=>{
                     //         console.log(res)
+                        // this.formData.videoUrl=res.videoPath
 
                     //  }),
                     // console.log(res)
@@ -664,36 +695,36 @@
                 },
                 editUploadSectionFile(parm) {
                     // console.log(parm)
-                    let fileObj = parm.file;
-                    console.log(fileObj)
+                    let editFileObj = parm.file;
+                    console.log(editFileObj)
                     // FormData 对象
-                    let form = new FormData();
+                    let editForm = new FormData();
                     // 文件对象
-                    form.append("video", fileObj);
-                    console.log(form)
+                    editForm.append("video", editFileObj);
+                    console.log(editForm)
                     //  axios({
                     //     method: 'post',
                     //     url: 'http://22.5.241.7/dacp/upload',
                     //      headers: { 'Content-Type': 'multipart/form-data'
                     //      },
-                    //      data:form
+                    //      data:editForm
                     //  }).then((res)=>{
                     //         console.log(res)
-
+                        // this.editFormData.videoUrl=res.videoPath
                     //  }),
                     // console.log(res)
                     // this.fileNumberName=null
                 },
                 // 手动上传
                 submitUpload() {
-                    let upload = this.$refs.upload
+                    // let upload = this.$refs.upload
                     this.$refs.upload.submit();
                     // this.$refs.upload.clearFiles();
                     // console.log(upload)
 
                 },
                 editSubmitUpload() {
-                    let editUpload = this.$refs.editUpload
+                    // let editUpload = this.$refs.editUpload
                     this.$refs.editUpload.submit();
                     // this.$refs.upload.clearFiles();
                     // console.log(upload)
@@ -746,7 +777,7 @@
                     //  this.videoEditPercent = file.percentage.toFixed(0) * 1;
                 },
                 // 发布
-                publish() {
+               async publish() {
                     
                     this.formData.status = 1
                     // const { data } = aixos.post('model/saveModel', this.formData)
@@ -756,8 +787,9 @@
                     // this.formData.videoUrl='',
                     // this.formData.dataBoxId=''
                     // this.fileName=''
+                    // this.getRepairData()
                 },
-                editPublish() {
+              async  editPublish() {
                     this.editFormData.status = 1
                     // const { data } = aixos.post('model/updateModel', this.editFormData)
                     // console.log(data)
@@ -766,21 +798,30 @@
                     // this.formData.videoUrl='',
                     // this.formData.dataBoxId=''
                     // this.fileName=''
+                    // this.getRepairData()
                 },
                 // 保存
-                save() {
+              async  save() {
                     this.formData.status = 0
                     // const { data } = aixos.post('model/saveModel', this.formData)
                     // console.log(data)
+                    // this.getRepairData()
                 },
-                editSave() {
+               async editSave() {
                     this.editFormData.status = 0
                     // const { data } = aixos.post('model/updateModel', this.editFormData)
                     // console.log(data)
+                    // this.getRepairData()
                 },
                 // 打开分析页
-                openAya() {
+                openAya(val) {
+                    // console.log(val)
                     this.analy = true
+                    this.getFormAna.modelName=val.modelName
+                    this.getFormAna.dataBoxId=val.dataBoxId
+                    this.getFormAna.orgNo=val.orgNo
+                    this.getDataAna()
+
                 },
                 // 表格合计
                 // getColumns
@@ -821,16 +862,9 @@
                     // console.log(this.tableDataAna)
                 },
                 // 接口获取对表格处理
-                getDataAna() {
-                    // axios.get().then((res)=>{
-                    //   const {data}=res.data
-                    // this.tableDataAna=data
-                    // })
-                    // this.tableDataAna.forEach((item)=>{
-                    //     item.openfm=true
-                    // })
-                    // console.log(this.tableDataAna.openfm)
-                    // console.log(this.tableDataAna)
+               async getDataAna() {
+                //   const{data} =await axios.post('analys/getAnalyse',this.getFormAna)
+                //   console.log(data)
                 },
                 // 表格总计
                 handleSummary({ columns, data }) {
@@ -839,8 +873,8 @@
                     var totalnum = 0;
                     var totalnum2 = 0;
                     data.forEach((item, index) => {
-                        totalnum += Number(item.num)
-                        totalnum2 += Number(item.num2)
+                        totalnum += Number(item.convertNum)
+                        totalnum2 += Number(item.interventionNum)
                     })
                     columns.forEach((item, index) => {
 
@@ -889,18 +923,30 @@
                     //   incres: row.num,
                     //   value: '选项1',
                     // }
-                    this.formAna.interventionNum = row.num2,
-                    this.formAna.convertNum = row.num,
-                    this.formAna.aumPromote = row.num
+                    this.formAna.modelId=row.modelId,
+                    this.formAna.dataBoxId=row.dataBoxId,
+                    this.formAna.orgNo=row.orgNo,
+
+                    this.formAna.interventionNum = row.interventionNum,
+                    this.formAna.convertNum = row.convertNum,
+                    this.formAna.aumPromote = row.aumPromote,
+                    this.formAna.insertMonth=row.insertMonth
+                    // this.formAna.conversionRate
                     // console.log(row)
                     // console.log(this.tableDataAna)
                 },
                 // 录入完成
-                onsubmit(row) {
+              async  onsubmit(row) {
                     let param = {
+                        modelId:this.formAna.modelId,
+                        dataBoxId:this.formAna.dataBoxId,
+                        orgNo:this.formAna.orgNo,
+
                         interventionNum: this.formAna.interventionNum,
                         convertNum: this.formAna.convertNum,
                         aumPromote: this.formAna.aumPromote,
+                        conversionRate: this.trans,
+                        insertMonth:this.formAna.insertMonth
                         // value: this.formAna.value,
                     }
                     // console.log(param)
@@ -915,28 +961,32 @@
 
 
 
-                    if (param.interventionNum == "" || isNaN(param.interventionNum)) {//进行数字校验，如果不是数字填出对话框进行提示
-                        this.$message.error('请填写数字，！亲')
+                    if (param.interventionNum == "" || isNaN(param.interventionNum) ) {//进行数字校验，如果不是数字填出对话框进行提示
+                        this.$message.error('请填写数字')
                         return
                     }
 
                     if (param.convertNum == "" || isNaN(param.convertNum)) {//进行数字校验，如果不是数字填出对话框进行提示
-                        this.$message.error('请填写数字，！亲')
+                        this.$message.error('请填写数字')
                         return
                     }
 
                     if (param.aumPromote == "" || isNaN(param.aumPromote)) {//进行数字校验，如果不是数字填出对话框进行提示
-                        this.$message.error('请填写数字，！亲')
+                        this.$message.error('请填写数字')
                         return
                     }
 
 
+                    // const{data}=axios.post('analys/insert',param)
+                    // console.log(data)
+                    // 调用接口重新渲染
+                    // this.getDataAna()
+
                     this.formAna.interventionNum = null
                     this.formAna.convertNum = null
                     this.formAna.aumPromote = null
-
                     row.openfm = true
-                    // 调用接口
+
                 },
                 // 退出录入
                 signOut(row) {
@@ -947,9 +997,9 @@
                     //   value: '选项1',
                     // }
                     this.formAna.interventionNum = null,
-                        this.formAna.convertNum = null,
-                        this.formAna.aumPromote = null,
-                        row.openfm = true
+                    this.formAna.convertNum = null,
+                    this.formAna.aumPromote = null,
+                    row.openfm = true
                 },
                 // 分页事件
                 changePager(newPage) {
@@ -960,6 +1010,7 @@
                 // 维护页分页事件
                 repairChangePager(newPage) {
                     this.repairParams.page = newPage
+                    // this.getRepairData()
                 },
                 // 滑块开关事件
                 changeSwich(val, row) {

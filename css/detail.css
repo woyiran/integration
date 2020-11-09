@@ -125,7 +125,7 @@
   font-size: 32px;
 }
 .deta .el-dialog .detail-table {
-  margin-top: 40px;
+  margin-top: 30px;
   width: 100%;
 }
 .deta .el-dialog .detail-table .el-scrollbar {
@@ -139,10 +139,17 @@
 }
 .deta .el-dialog .detail-table span {
   font-family: PingFangSC-Regular;
-  font-size: 18px;
+  font-size: 14px;
   color: #010101;
-  line-height: 18px;
-  margin-bottom: 15px;
+  line-height: 14px;
+}
+.deta .el-dialog .detail-table .totalBank {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #010101;
+  line-height: 14px;
+  text-align: right;
+  margin: 4px 0px 10px 0px;
 }
 .deta .el-dialog .detail-table button {
   position: absolute;
