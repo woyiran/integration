@@ -40,11 +40,11 @@
                         <el-button size="small" @click="submitUpload" class="select">上传
                         </el-button>
                         <!-- 进度条 -->
-                        <el-progress v-show="videoFlag" 
+                        <!-- <el-progress v-show="videoFlag" 
                         :percentage="videoUploadPercent"
                             style="margin-top:7px;width: 400px;">
                         </el-progress>
-                    </el-upload>
+                    </el-upload> -->
                    
                     <!-- <el-button>上传</el-button> -->
                 </el-form-item>
@@ -62,9 +62,9 @@
                 </el-form-item>
                 <el-form-item>
                     <div class="last">
-                        <el-button type='primary' @click='publish()' size="small">发布</el-button>
-                        <el-button @click='save()' size="small">保存</el-button>
-                        <el-button @click='rebuild = false' size="small">取消</el-button>
+                        <el-button type='primary' @click='publish()' size="small">保存</el-button>
+                        <!-- <el-button @click='save()' size="small">保存</el-button>
+                        <el-button @click='rebuild = false' size="small">取消</el-button> -->
                     </div>
                 </el-form-item>
                 <span slot="footer" class="dialog-footer">

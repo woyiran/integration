@@ -632,6 +632,7 @@
 
 
                 },
+                // 选择日期
                 changeDetailDate(val){
                     // console.log(val)
                     // this.detailDate=val
@@ -667,6 +668,8 @@
                         this.editFormData.modelName=row.modelName
                         // this.editFormData.modelIntroduce=row.modelIntroduce
                         // this.editFormData.dataBoxId=row.dataBoxId
+                        this.editFormData.status=row.status
+                        // console.log(this.editFormData.status)
 
                 },
                 // 上传文件变动
@@ -804,7 +807,7 @@
                     // this.getRepairData()
                 },
               async  editPublish() {
-                    this.editFormData.status = true
+                    // this.editFormData.status = true
                     // const { data } = aixos.post('model/updateModel', this.editFormData)
                     // console.log(data)
                     // this.formData.modelName='',
@@ -822,7 +825,7 @@
                     // this.getRepairData()
                 },
                async editSave() {
-                    this.editFormData.status = false
+                    // this.editFormData.status = false
                     // const { data } = aixos.post('model/updateModel', this.editFormData)
                     // console.log(data)
                     // this.getRepairData()
@@ -1027,8 +1030,8 @@
                     // this.getRepairData()
                 },
                 // 滑块开关事件
-                changeSwich(val, row) {
-                    console.log(val, row)
+                changeSwich(val) {
+                    // console.log(val)
                 },
                 // 分析页表头表格样式
                 ayaheadClass() {

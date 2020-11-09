@@ -118,7 +118,7 @@
                                 <template slot-scope="scope">
                                     <el-switch style="display: block" v-model="scope.row.status" active-color="#13ce66"
                                         inactive-color="#ff4949" active-text="发布" inactive-text="暂停"
-                                        @change='changeSwich(scope.row)'>
+                                        @change='changeSwich'>
                                     </el-switch>
                                 </template>
                             </el-table-column>
@@ -308,9 +308,9 @@
                     </el-form-item>
                     <el-form-item>
                         <div class="last">
-                            <el-button type='primary' @click='editPublish()'>发布</el-button>
-                            <el-button @click='editSave()'>保存</el-button>
-                            <el-button @click='editData = false'>取消</el-button>
+                            <el-button type='primary' @click='editPublish()'>保存</el-button>
+                            <!-- <el-button @click='editSave()'>保存</el-button>
+                            <el-button @click='editData = false'>取消</el-button> -->
                         </div>
                     </el-form-item>
                     <span slot="footer" class="dialog-footer">
