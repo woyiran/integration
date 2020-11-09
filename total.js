@@ -249,7 +249,7 @@
                 detailInfo:{},
                 // 视频地址
                 // 详情页日期选择
-
+                // xiangqing
                 detailOption:[{value:'2020/08/28'},{value:'2020/08/29'},{value:'2020/08/18'},{value:'2020/08/16'}
 
                 
