@@ -23,6 +23,7 @@
         //     console.log(obj)
         //     // console.log(JSON。parse())
         //     var formData =new FormData()
+
         var data=  [{
                     date: '2016-05-02',
                     name: '王小虎',
@@ -73,9 +74,9 @@
         console.log(time)
         var ftime=time+24*60*60*1000*3;
         var filter=new Date()
+        filter.setTime(ftime)
        
-       
-       console.log(filter.getDay(),filter.setTime(ftime))
+       console.log(filter.getDay(),)
        
     
 

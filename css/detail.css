@@ -42,7 +42,7 @@
 .deta .el-dialog .detail-show .detail-list .detail-list-top span {
   display: inline-block;
   font-family: PingFangSC-Regular;
-  font-size: 18px;
+  font-size: 16px;
   color: #010101;
   margin-top: -4px;
 }
@@ -85,11 +85,15 @@
   width: 150px;
   margin: 0 12px 0 24px;
 }
+.deta .el-dialog .detail-show .detail-list .detail-list-body .el-input__inner {
+  height: 36px;
+  line-height: 36px;
+}
 .deta .el-dialog .detail-show .detail-list .detail-list-bott {
   margin-top: 32px;
   width: 180px;
   font-family: PingFangSC-Regular;
-  font-size: 18px;
+  font-size: 16px;
   color: #010101;
   line-height: 18px;
 }
@@ -103,7 +107,7 @@
   border-radius: 4px;
   padding: 14px 0px;
   font-family: PingFangSC-Regular;
-  font-size: 18px;
+  font-size: 12px;
   color: #010101;
 }
 .deta .el-dialog .detail-show .detail-list .detail-list-footer p {

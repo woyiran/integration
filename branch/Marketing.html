@@ -48,7 +48,7 @@
                 <div>
                     <el-input v-model='searchVal' size="small"></el-input>
                     <el-button type="primary" class="search" @click='searchContent()' size="small">查询</el-button>
-                    <el-button class="reset" @cilck='resetContent()' size="small">重置</el-button>
+                    <el-button class="reset" @click='resetContent()' size="small">重置</el-button>
                 </div>
                 <div class="tbody">
                     <div style="margin-top: 26px;width: 33.3%;height: 360px;" v-for="(item, index) in indexData"
@@ -57,11 +57,11 @@
 
                             <div style="height:24px;position: relative;">
                                 <span class=" card">{{item.modelName}}</span>
-                                <span class=" data-number">数据量{{item.modelNumber }}</span>
+                                <span class=" data-number">数据量{{item.modelNumber?item.modelNumber:0 }}</span>
                             </div>
                             <div style="margin-top: 12px;height:14px;">
                                 <span class="data">{{item.modelData }}</span>
-                                <span class="aldown">已下载{{item.modelDownNum}}次</span>
+                                <span class="aldown">已下载{{item.modelDownNum?item.modelDownNum:0}}次</span>
                             </div>
                             <div class="introduce">
                                 <div style="font-size:16px">模型简介:</div>
@@ -108,11 +108,11 @@
                     <div class="repair-table">
                         <el-table :data="tableData" :header-cell-style='headrepairClass' :cell-style='rowClass'
                             style="width: 100%" fit>
-                            <el-table-column prop="number" label="序号">
+                            <el-table-column type='index' label="序号" width='100px'>
                             </el-table-column>
                             <el-table-column prop="modelName" label="模型名称">
                             </el-table-column>
-                            <el-table-column prop="address" label="作者">
+                            <el-table-column prop="userName" label="作者">
                             </el-table-column>
                             <el-table-column prop="createTime" label="投产日期">
                             </el-table-column>
@@ -272,7 +272,7 @@
                 <!-- 表单 -->
                 <el-form :model="editFormData">
                     <el-form-item label="模型名称">
-                        <div v-if='true' style="width:272px;height:36px;background: #F5F5F5;
+                        <div v-if='true' class="" style="width:272px;height:36px;background: #F5F5F5;
                         border-radius: 4px;margin-top: 30px;">{{editFormData.modelName}}</div>
                         <el-input v-else v-model="editFormData.modelName" class="model-name"></el-input>
                     </el-form-item>
@@ -337,7 +337,7 @@
                         <el-table ref="table" :data="tableDataAna" show-summary :summary-method="handleSummary"
                             style="width: 100%" :header-cell-style='ayaheadClass' :cell-style='rowClass'
                             highlight-current-row>
-                            <el-table-column prop="date" label="月份" width="180">
+                            <el-table-column prop="date" label="日期" width="180">
                             </el-table-column>
                             <el-table-column label="干预人数" width="180">
                                 <template slot-scope="scope">

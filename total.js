@@ -10,13 +10,12 @@
         const parm = decodeURI(url);
         const userparm = parm.split('?user=')[1];
         var userInfo = decrypted("qwf+6SAWmJ8gvk7gkJetwYRLxSL28IZRZQD4t/hG+gP/amqOtEXiCCcYLgPr9cYeOGQK+12yrZl+PuwcNqsTSQ4qfO/CYA/KHZ+rNmT69FkZ0v4pxRt47ggIUQ1h77Dxen+NLcQ8iH50+tWbJ5DjnmshuLCx0n/JCIEjUjF/WqdREFDHd+zhzHm/29RKIELpSs+oXbOBZks75fj78A/eoerTirJNkyviJsWjU6bDxOOpbmDlPoB7oCjHmPD064rObixbnvISbK6JzJiEnm9Ik7dbueb+YPEw4Bja3JRfE6wLAFbai0mXyJ8OrbG1zVpSWljOCaAPi/WHyJgkhhn0SYKv8X/HvqEwYr6p3RnI/nLpAFNfeaxzQHuXpKkMM5qAKmX7zWrUCr7wyPk65SARgSt37kXTUMjggujsX2lERdadGMtNwNc4M8eA+Zd7IMdeRHmrMYg8vvlBCcC8JbsbPuRol/cuWxr7sIiw1pMDVGiUagEhPSOEO5RjTUwHtzIQ")
-        // var str = decrypted(userparm)
-        // console.log(str)
+        // var userInfo = decrypted(userparm)
 
-        // var userinfo=JSON.parse(str)
         const { data: adminData } = JSON.parse(userInfo)
         console.log(adminData)
-
+        console.log(adminData.org.orgNo)
+        const orgNo =adminData.org.orgNo
         // console.log(userparm);
         // 加密方法
         // encrypted()
@@ -53,9 +52,9 @@
                 indexData: [
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '888888888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
+                        modelNumber: 1,
+                        modelData: new Date('yy-mm-dd'),
+                        modelDownNum: 2,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
                         dataBoxId: ''
 
@@ -136,7 +135,7 @@
                 // 发布状态
                 // status: true,
                 tableData: [{
-                    address: '北京分行',
+                    userName: '北京分行',
                     number: '1',
                     createTime: '2016-05-02',
                     updateTime: '2016-05-02',
@@ -144,7 +143,7 @@
                     operation: '编辑',
                     status:false
                 }, {
-                    address: '北京分行',
+                    userName: '北京分行',
                     number: '2',
                     createTime: '2016-05-04',
                     updateTime: '2016-05-02',
@@ -152,7 +151,7 @@
                     operation: '编辑',
                     status:true
                 }, {
-                    address: '北京分行',
+                    userName: '北京分行',
                     number: '3',
                     createTime: '2016-05-01',
                     updateTime: '2016-05-02',
@@ -160,7 +159,7 @@
                     operation: '编辑',
                     status:true
                 }, {
-                    address: '北京分行',
+                    userName: '北京分行',
                     number: '4',
                     createTime: '2016-05-03',
                     updateTime: '2016-05-02',
@@ -168,7 +167,7 @@
                     operation: '编辑',
                     status:false
                 }, {
-                    address: '北京分行',
+                    userName: '北京分行',
                     number: '3',
                     createTime: '2016-05-01',
                     updateTime: '2016-05-02',
@@ -176,7 +175,7 @@
                     operation: '编辑',
                     statsu:false
                 }, {
-                    address: '北京分行',
+                    userName: '北京分行',
                     number: '3',
                     createTime: '2016-05-01',
                     updateTime: '2016-05-02',
@@ -258,7 +257,6 @@
 
                 detailParams: {
                     
-                    // modelName: null,
                     modelId:'',
                     dataBoxId:'',
                     orgNo:''
@@ -269,7 +267,7 @@
                     // 下载账户
                     userName: '王小虎',
                     // 所属分行
-                    affiliatedBranch: '上海市普陀区金沙江路 1518 弄'
+                    affiliatedBranch: '上海市普陀区金沙江路 1517 弄'
                 }, {
                     downloadTime: '2016-05-04',
                     userName: '王小虎',
@@ -290,7 +288,7 @@
                 }, {
                     downloadTime: '2016-05-01',
                     userName: '王小虎',
-                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
+                    affiliatedBranch: '上海市普陀区金沙江路 1518 弄'
                 }, {
                     downloadTime: '2016-05-01',
                     userName: '王小虎',
@@ -504,7 +502,7 @@
                 },
                 // 计算详情分行数
                 totalBank(){
-                    var  detailArr=this.tableDatadetail.concat()
+                    let  detailArr=this.tableDatadetail
                     for(var i=0;i<detailArr.length;i++){
                                for(j=i+1;j<detailArr.length;j++){
                                    if(detailArr[i].affiliatedBranch===detailArr[j].affiliatedBranch){
@@ -622,14 +620,13 @@
                async openDetail(val) {
                     this.detail = true
                     // console.log(val)
-                    // this.detailParams.modelName = val.modelName
                     // this.detailParams.modelId=val.modelId
                     // this.detailParams.dataBoxId=val.dataBoxId
-                    // this.detailParams.orgNo=val.orgNo
-                    //coant{data} = await axios.post('model/getDetail',this.detailParams)
+                    // this.detailParams.orgNo=orgNo
+                    // const{data:{data}} = await axios.post('model/getDetail',this.detailParams)
                     // this.detailInfo =data.detail
                     // this.tableDatadetail=data.log
-
+                        // 1611611616161616if
 
                 },
                 // 选择日期
@@ -650,6 +647,7 @@
                     // this.repairParams.modelName=this.repairSearchVal
                     // this.repairParams.page = 1
                     // this.getRepairData()
+                    // this.repairSearchVal=''
                     
                 },
                 // 维护页重置
@@ -663,7 +661,7 @@
                 // 打开编辑页
                 openEdit(row){
                         this.editData=true
-                        // console.log(row)
+                        console.log(row)
                         // this.editFormData.modelId=row.modelId
                         this.editFormData.modelName=row.modelName
                         // this.editFormData.modelIntroduce=row.modelIntroduce
@@ -797,7 +795,12 @@
                async publish() {
                     
                     this.formData.status = true
-                    // const { data } = aixos.post('model/saveModel', this.formData)
+                    // const { data } = axios.post('model/saveModel', this.formData)
+                    // if(data.code==200){
+                    //     this.$message.success('发布成功')
+                    // }else{
+                    //     this.$message.error('发布失败')
+                    // }
                     // console.log(data)
                     // this.formData.modelName='',
                     // this.formData.modelIntroduce='',
@@ -805,10 +808,16 @@
                     // this.formData.dataBoxId=''
                     // this.fileName=''
                     // this.getRepairData()
+                    this.rebuild=false
                 },
               async  editPublish() {
                     // this.editFormData.status = true
-                    // const { data } = aixos.post('model/updateModel', this.editFormData)
+                    // const { data } = axios.post('model/updateModel', this.editFormData)
+                    // if(data.code==200){
+                    //     this.$message.success('保存成功')
+                    // }else{
+                    //     this.$message.error('保存失败')
+                    // }
                     // console.log(data)
                     // this.formData.modelName='',
                     // this.formData.modelIntroduce='',
@@ -820,13 +829,18 @@
                 // 保存
               async  save() {
                     this.formData.status = false
-                    // const { data } = aixos.post('model/saveModel', this.formData)
+                    // const { data } = axios.post('model/saveModel', this.formData)
                     // console.log(data)
+                    // if(data.code==200){
+                    //     this.$message.success('保存成功')
+                    // }else{
+                    //     this.$message.error('保存失败')
+                    // }
                     // this.getRepairData()
                 },
                async editSave() {
                     // this.editFormData.status = false
-                    // const { data } = aixos.post('model/updateModel', this.editFormData)
+                    // const { data } = axios.post('model/updateModel', this.editFormData)
                     // console.log(data)
                     // this.getRepairData()
                 },
@@ -836,7 +850,7 @@
                     this.analy = true
                     this.getFormAna.modelName=val.modelName
                     this.getFormAna.dataBoxId=val.dataBoxId
-                    this.getFormAna.orgNo=val.orgNo
+                    this.getFormAna.orgNo=orgNo
                     this.getDataAna()
 
                 },
@@ -868,7 +882,7 @@
                 // 表格转化率计算
                 initData() {
                     this.tableDataAna.forEach(item => {
-                        item.trans = ((item.num / item.num2) * 100).toFixed(2)
+                        // item.trans = ((item.num / item.num2) * 100).toFixed(2)
                         // 录入打开
                         item.openfm = true
                         // 日志下拉
@@ -942,7 +956,7 @@
                     // }
                     this.formAna.modelId=row.modelId,
                     this.formAna.dataBoxId=row.dataBoxId,
-                    this.formAna.orgNo=row.orgNo,
+                    // this.formAna.orgNo=row.orgNo,
 
                     this.formAna.interventionNum = row.interventionNum,
                     this.formAna.convertNum = row.convertNum,
@@ -957,7 +971,7 @@
                     let param = {
                         modelId:this.formAna.modelId,
                         dataBoxId:this.formAna.dataBoxId,
-                        orgNo:this.formAna.orgNo,
+                        orgNo:orgNo,
 
                         interventionNum: this.formAna.interventionNum,
                         convertNum: this.formAna.convertNum,
@@ -995,6 +1009,11 @@
 
 
                     // const{data}=axios.post('analys/insert',param)
+                    // if(data.code==200){
+                    //     this.$message.success('录入成功')
+                    // }else{
+                    //     this.$message.error('录入失败')
+                    // }
                     // console.log(data)
                     // 调用接口重新渲染
                     // this.getDataAna()
