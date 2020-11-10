@@ -244,7 +244,7 @@
                 detail: false,
                 // 详情页日期
                 detailDate:'2020/08/28',
-                detailInfo:null,
+                detailInfo:{},
                 // 视频地址
                 // 详情页日期选择
                 // xiangqing
