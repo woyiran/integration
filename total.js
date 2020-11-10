@@ -13,9 +13,8 @@
         // var userInfo = decrypted(userparm)
 
         const { data: adminData } = JSON.parse(userInfo)
-        console.log(adminData)
-        console.log(adminData.org.orgNo)
-        const orgNo =adminData.org.orgNo
+        const orgNo =Number(adminData.org.orgNo)
+        console.log(orgNo)
         // console.log(userparm);
         // 加密方法
         // encrypted()
@@ -29,8 +28,8 @@
                 // 用户信息
                 // isAdmin: userinfo,
                 // 权限判定
-                // power: adminData.isAdmin,
-                power: false,
+                power: adminData.isAdmin,
+                // power: false,
                 // 用户名
                 userName: adminData.name,
                 // 营销名单开关
@@ -622,7 +621,7 @@
                     // console.log(val)
                     // this.detailParams.modelId=val.modelId
                     // this.detailParams.dataBoxId=val.dataBoxId
-                    // this.detailParams.orgNo=orgNo
+                    this.detailParams.orgNo=orgNo
                     // const{data:{data}} = await axios.post('model/getDetail',this.detailParams)
                     // this.detailInfo =data.detail
                     // this.tableDatadetail=data.log
@@ -631,7 +630,7 @@
                 },
                 // 选择日期
                 changeDetailDate(val){
-                    // console.log(val)
+                    console.log(val)
                     // this.detailDate=val
                     // console.log(this.detailDate)
                 },
@@ -956,7 +955,6 @@
                     // }
                     this.formAna.modelId=row.modelId,
                     this.formAna.dataBoxId=row.dataBoxId,
-                    // this.formAna.orgNo=row.orgNo,
 
                     this.formAna.interventionNum = row.interventionNum,
                     this.formAna.convertNum = row.convertNum,
@@ -980,7 +978,6 @@
                         insertMonth:this.formAna.insertMonth
                         // value: this.formAna.value,
                     }
-                    // console.log(param)
                     // row.num=null
                     // row.num2=null
                     // this.formAna = {
