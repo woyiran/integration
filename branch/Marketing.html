@@ -155,7 +155,7 @@
                             <span>数据量</span>
                         </div>
                         <div class="detail-list-body">
-                            <span class="detailname">{{}}</span>
+                            <span class="detailname">{{detailInfo.modelName}}模型</span>
                             <!-- 选择日期 -->
                             
                             <el-select v-model="detailDate" placeholder="请选择日期" @change='changeDetailDate'>
@@ -168,6 +168,7 @@
                         <div class="detail-list-bott">模型介绍</div>
                         <div class="detail-list-footer">
                             <p>
+                                {{detailInfo.modelIntroduce}}
                                 介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
                                 <!-- 介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
                                 介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容

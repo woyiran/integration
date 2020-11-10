@@ -70,6 +70,7 @@
   line-height: 36px;
   height: 36px;
   width: 272px;
+  vertical-align: middle;
 }
 .deta .el-dialog .detail-show .detail-list .detail-list-body .detailnumber {
   background: #f5f5f5;
@@ -80,10 +81,12 @@
   color: #010101;
   line-height: 36px;
   height: 36px;
+  vertical-align: middle;
 }
 .deta .el-dialog .detail-show .detail-list .detail-list-body .el-select {
   width: 150px;
   margin: 0 12px 0 24px;
+  vertical-align: middle;
 }
 .deta .el-dialog .detail-show .detail-list .detail-list-body .el-input__inner {
   height: 36px;
