@@ -20,6 +20,7 @@ html {
   margin: 0 auto;
 }
 .contain .header {
+  position: relative;
   height: 68px;
   background: #364151;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
@@ -28,9 +29,8 @@ html {
   display: inline-block;
   width: 144px;
   height: 39px;
-  margin-left: 24px;
+  margin-left: 50px;
   color: #ffffff;
-  margin-top: -8px;
   vertical-align: middle;
 }
 .contain .header .market {
@@ -48,7 +48,7 @@ html {
   background: #929292;
   width: 1px;
   height: 48px;
-  left: 472px;
+  left: 500px;
   top: 10px;
 }
 .contain .header .button-group {
@@ -63,17 +63,19 @@ html {
   color: #ffffff;
 }
 .contain .header .user {
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .contain .header .user .userinfo {
   display: inline-block;
   font-family: PingFangSC-Regular;
   font-size: 21px;
   color: #ffffff;
-  margin: 26px 80px;
+  margin: 26px 50px;
 }
 .contain .header .user .logout {
-  margin-right: 64px;
+  margin-right: 44px;
   margin-top: 24px;
   vertical-align: top;
   display: inline-block;

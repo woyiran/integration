@@ -24,7 +24,7 @@
       }
     </style>
 </head>
-
+ 
 <body>
     <div id="app" v-cloak>
         <div class="contain">
@@ -51,16 +51,18 @@
                     <el-button class="reset" @click='resetContent()' size="small">重置</el-button>
                 </div>
                 <div class="tbody">
+                    
                     <div style="margin-top: 26px;width: 33.3%;height: 360px;" v-for="(item, index) in indexData"
-                        :key="index">
-                        <div class="showlist" :style="{ marginRight: ((index + 1) % 3 === 0) ? 0 : 27 + 'px'}">
+                        :key="index" >
+                        <!-- :style="{ marginRight: ((index + 1) % 3 === 0) ? 0 : 27 + 'px'}" -->
+                        <div class="showlist" style="margin-right: 13px;margin-left: 13px;">
 
                             <div style="height:24px;position: relative;">
                                 <span class=" card">{{item.modelName}}</span>
                                 <span class=" data-number">数据量{{item.modelNumber?item.modelNumber:0 }}</span>
                             </div>
-                            <div style="margin-top: 12px;height:14px;">
-                                <span class="data">{{item.modelData }}</span>
+                            <div style="margin-top: 12px;height:14px;position: relative;">
+                                <span class="data">{{item.modelData  }}</span>
                                 <span class="aldown">已下载{{item.modelDownNum?item.modelDownNum:0}}次</span>
                             </div>
                             <div class="introduce">
@@ -77,8 +79,7 @@
                                 <span style="cursor: pointer;" @click="openDetail(item)"><i class="el-icon-tickets">
                                     </i>详情</span>
 
-                                <a href="" style="text-decoration: none;"> <span style="cursor: pointer;"><i
-                                            class="el-icon-download"></i>下载</span></a>
+                                    <span style="cursor: pointer;" @click='downloadAll(item)'><i class="el-icon-download"></i>下载</span>
                             </div>
                         </div>
                     </div>
@@ -96,14 +97,15 @@
             </div>
             <!-- 名单维护主体 -->
             <div class=" repair-main" v-show='!isshow'>
+                <div style="background-color:#f8f8f8;padding-bottom: 26px;">
+                    <el-input v-model='repairSearchVal' size="small"></el-input>
+                    <el-button type="primary" class="search" @click='searchRepairConcetn()' size="small">查询
+                    </el-button>
+                    <el-button class="reset" @click=resetRepairContent() size="small">重置</el-button>
+                    <el-button type=primary class="rebuild" @click='rebuild=true' size="small">新建模型</el-button>
+                </div>
                 <div class="repair-main-contain">
-                    <div style="background-color:#f8f8f8;padding-bottom: 26px;">
-                        <el-input v-model='repairSearchVal' size="small"></el-input>
-                        <el-button type="primary" class="search" @click='searchRepairConcetn()' size="small">查询
-                        </el-button>
-                        <el-button class="reset" @click=resetRepairContent() size="small">重置</el-button>
-                        <el-button type=primary class="rebuild" @click='rebuild=true' size="small">新建模型</el-button>
-                    </div>
+                    
                     <!-- 表格 -->
                     <div class="repair-table">
                         <el-table :data="tableData" :header-cell-style='headrepairClass' :cell-style='rowClass'
@@ -128,7 +130,7 @@
                             </el-table-column>
                             <el-table-column prop="operation" label="操作">
                                 <template slot-scope="scope">
-                                    <el-button type="text" style="color: #1677FF;" @click='openEdit(scope.row)'>编辑
+                                    <el-button type="text" style="color: #409EFF;" @click='openEdit(scope.row)'>编辑
                                     </el-button>
                                 </template>
                             </el-table-column>
@@ -159,11 +161,11 @@
                             <!-- 选择日期 -->
                             
                             <el-select v-model="detailDate" placeholder="请选择日期" @change='changeDetailDate'>
-                                <el-option v-for="item in detailOption" :key="item.value"  :value="item.value">
+                                <el-option v-for="(item,index) in detailOption" :key="index"  :value="item.value">
                                 </el-option>
-                              </el-select>
+                            </el-select>
+                            <span class="detailnumber">20,200.345245245244</span>
                             
-                            <span class="detailnumber">20,200.34</span>
                         </div>
                         <div class="detail-list-bott">模型介绍</div>
                         <div class="detail-list-footer">
@@ -178,22 +180,22 @@
                         </div>
                     </div>
                     <div class=" video right">
-                        <!-- <span class="el-icon-video-camera"></span> -->
+                        <span class="el-icon-video-camera"></span>
                         <!-- <video id="mse" autoplay="false" controls="controls">
                             <source :src="../assets/404.png" type="video/mp4">
                         </video> -->
-                        <img src="../assets/404.png" alt="" width="445px" height="254px">
+                        <!-- <img src="../assets/404.png" alt="" width="445px" height="254px"> -->
                     </div>
                 </div>
                 <div class="detail-table">
-                    <div style="height: 16px;">
+                    <div style="height: 16px;color: #010101;">
 
                         <span class="left">下载日志</span>
                         <span class="right">
                             累计下载n次
                         </span>
                     </div>
-                    <div class="totalBank">{{totalBank}}个分行下载</div>
+                    <div class="totalBank">{{totalBank?totalBank:0}}个分行下载</div>
                     <div>
                         <el-scrollbar style="height:250px;">
                             <el-table :data="tableDatadetail" style="width: 100%" :header-cell-style='headdetailClass'
@@ -208,7 +210,8 @@
                         </el-scrollbar>
                     </div>
                     <div>总记录 30 条</div>
-                    <button>立即下载</button>
+                    <!-- <button>立即下载</button> -->
+                    <el-button size='small' type='primary' @click='detailDown()'>立即下载</el-button>
                 </div>
                 <span slot="footer" class="dialog-footer">
                 </span>
@@ -258,9 +261,9 @@
                     </el-form-item>
                     <el-form-item>
                         <div class="last">
-                            <el-button type='primary' @click='publish()'>发布</el-button>
-                            <el-button @click='save()'>保存</el-button>
-                            <el-button @click='rebuild = false'>取消</el-button>
+                            <el-button type='primary' @click='publish()' size="small">发布</el-button>
+                            <el-button @click='save()' size="small">保存</el-button>
+                            <el-button @click='rebuild = false' size="small">取消</el-button>
                         </div>
                     </el-form-item>
                     <span slot="footer" class="dialog-footer">
@@ -313,7 +316,7 @@
                     </el-form-item>
                     <el-form-item>
                         <div class="last">
-                            <el-button type='primary' @click='editPublish()'>保存</el-button>
+                            <el-button  type='primary' @click='editPublish()' size="small">保存</el-button>
                             <!-- <el-button @click='editSave()'>保存</el-button>
                             <el-button @click='editData = false'>取消</el-button> -->
                         </div>
@@ -334,81 +337,83 @@
                             </el-option>
                         </el-select>
                     </el-form-item>
-                    <el-scrollbar style="height: 350px;">
-                        <el-table ref="table" :data="tableDataAna" show-summary :summary-method="handleSummary"
-                            style="width: 100%" :header-cell-style='ayaheadClass' :cell-style='rowClass'
-                            highlight-current-row>
-                            <el-table-column prop="date" label="日期" width="180">
-                            </el-table-column>
-                            <el-table-column label="干预人数" width="180">
-                                <template slot-scope="scope">
-                                    <div v-show='scope.row.openfm'>{{scope.row.interventionNum}}</div>
-                                    <el-form-item v-show="!scope.row.openfm">
-                                        <el-input v-model='formAna.interventionNum'></el-input>
-                                    </el-form-item>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="转化人数">
-                                <template slot-scope="scope">
-                                    <div v-show='scope.row.openfm'>{{scope.row.convertNum}}</div>
-                                    <el-form-item v-show="!scope.row.openfm">
-                                        <el-input v-model='formAna.convertNum'></el-input>
-                                    </el-form-item>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="AUM提升">
-                                <template slot-scope="scope">
-                                    <div v-show='scope.row.openfm'>{{scope.row.aumPromote}}</div>
-                                    <el-form-item v-show="!scope.row.openfm">
-                                        <el-input v-model='formAna.aumPromote'></el-input>
-                                    </el-form-item>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="转化率">
-                                <template slot-scope='scope'>
-                                    <div v-show='scope.row.openfm'>{{scope.row.conversionRate+'%'}}</div>
-                                    <el-form-item v-show="!scope.row.openfm">
-                                        <el-input :value='trans' placeholder="请输入数字"></el-input>
-                                    </el-form-item>
-                                </template>
-                            </el-table-column>
-                            <el-table-column label="操作" label-width='100px'>
-                                <template slot-scope="scope">
-                                    <div v-show='scope.row.openfm'>
-                                        <el-button type="text" @click='openform(scope.row)' v-if='!power'>录入
-                                        </el-button>
-                                        <el-button type="text" @click="toogleExpand(scope.row)"
-                                            style="position: relative;" :style='scope.row.logColor? fontwe:""'>日志
-
-                                            <i class="el-icon-caret-bottom" aria-hidden="false"
-                                                v-show='scope.row.caretBottom'></i>
-                                        </el-button>
-                                    </div>
-                                    <el-form-item v-show='!scope.row.openfm'>
-                                        <!-- 录入成功 -->
-                                        <el-button class="icon-buttons" type='text' @click='onsubmit(scope.row)'>
-                                            <i class="el-icon-success" aria-hidden="true"></i>
-                                        </el-button>
-                                        <!-- 退出录入 -->
-                                        <el-button type='text' class="icon-buttonc" @click='signOut(scope.row)'>
-                                            <i class="el-icon-error" aria-hidden="true"></i>
-                                        </el-button>
-                                    </el-form-item>
-                                </template>
-                            </el-table-column>
-                            <el-table-column type="expand" width="1">
-                                <template slot-scope="scope">
-                                    <el-table :data='scope.row.log' style="width:100%"
-                                        :header-cell-style='ayaLogheadClass' :cell-style='ayarowClass' class="hide">
-                                        <el-table-column prop='insertDate' label='录入时间'></el-table-column>
-                                        <el-table-column prop='userName' label='录入姓名'></el-table-column>
-                                        <el-table-column prop='affiliatedBranch' label='录入机构'></el-table-column>
-                                        <el-table-column prop='insertMonth' label='月份'></el-table-column>
-                                    </el-table>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                    </el-scrollbar>
+                    <div>
+                        <el-scrollbar style="height: 350px;">
+                            <el-table ref="table" :data="tableDataAna" show-summary :summary-method="handleSummary"
+                                style="width: 100%" :header-cell-style='ayaheadClass' :cell-style='rowClass'
+                                highlight-current-row>
+                                <el-table-column prop="dataTime" label="日期" width="180">
+                                </el-table-column>
+                                <el-table-column label="干预人数" width="180">
+                                    <template slot-scope="scope">
+                                        <div v-show='scope.row.openfm'>{{scope.row.interventionNum?scope.row.interventionNum:0}}</div>
+                                        <el-form-item v-show="!scope.row.openfm">
+                                            <el-input v-model='formAna.interventionNum'></el-input>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="转化人数">
+                                    <template slot-scope="scope">
+                                        <div v-show='scope.row.openfm'>{{scope.row.convertNum?scope.row.convertNum:0}}</div>
+                                        <el-form-item v-show="!scope.row.openfm">
+                                            <el-input v-model='formAna.convertNum'></el-input>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="AUM提升">
+                                    <template slot-scope="scope">
+                                        <div v-show='scope.row.openfm'>{{scope.row.aumPromote?scope.row.aumPromote:0}}</div>
+                                        <el-form-item v-show="!scope.row.openfm">
+                                            <el-input v-model='formAna.aumPromote'></el-input>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="转化率">
+                                    <template slot-scope='scope'>
+                                        <div v-show='scope.row.openfm'>{{scope.row.conversionRate?scope.row.conversionRate+'%':0}}</div>
+                                        <el-form-item v-show="!scope.row.openfm">
+                                            <el-input :value='trans' placeholder="请输入数字"></el-input>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="操作" label-width='100px'>
+                                    <template slot-scope="scope">
+                                        <div v-show='scope.row.openfm'>
+                                            <el-button type="text" @click='openform(scope.row)' v-if='!power'>录入
+                                            </el-button>
+                                            <el-button type="text" @click="toogleExpand(scope.row)"
+                                                style="position: relative;" :style='scope.row.logColor? fontwe:""'>日志
+    
+                                                <i class="el-icon-caret-bottom" aria-hidden="false"
+                                                    v-show='scope.row.caretBottom'></i>
+                                            </el-button>
+                                        </div>
+                                        <el-form-item v-show='!scope.row.openfm'>
+                                            <!-- 录入成功 -->
+                                            <el-button class="icon-buttons" type='text' @click='onsubmit(scope.row)'>
+                                                <i class="el-icon-success" aria-hidden="true"></i>
+                                            </el-button>
+                                            <!-- 退出录入 -->
+                                            <el-button type='text' class="icon-buttonc" @click='signOut(scope.row)'>
+                                                <i class="el-icon-error" aria-hidden="true"></i>
+                                            </el-button>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column type="expand" width="1">
+                                    <template slot-scope="scope">
+                                        <el-table :data='scope.row.logs' style="width:100%"
+                                            :header-cell-style='ayaLogheadClass' :cell-style='ayarowClass' class="hide">
+                                            <el-table-column prop='insertDate' label='录入时间'></el-table-column>
+                                            <el-table-column prop='userName' label='录入姓名'></el-table-column>
+                                            <el-table-column prop='affiliatedBranch' label='录入机构'></el-table-column>
+                                            <el-table-column prop='insertMonth' label='月份'></el-table-column>
+                                        </el-table>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                        </el-scrollbar>
+                    </div>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
                 </span>
@@ -431,7 +436,7 @@
     <script src='../crypto-js.js'></script>
     <script src="../bindcrypto-js.js"></script>
     <script src="../total.js"></script>
-
+    
 
 </body>
 

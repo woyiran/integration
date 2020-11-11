@@ -65,7 +65,7 @@
   border-radius: 4px;
   display: inline-block;
   font-family: PingFangSC-Medium;
-  font-size: 18px;
+  font-size: 14px;
   color: #010101;
   line-height: 36px;
   height: 36px;
@@ -77,11 +77,15 @@
   border-radius: 4px;
   display: inline-block;
   font-family: PingFangSC-Medium;
-  font-size: 18px;
+  font-size: 14px;
   color: #010101;
   line-height: 36px;
   height: 36px;
+  width: 100px;
   vertical-align: middle;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .deta .el-dialog .detail-show .detail-list .detail-list-body .el-select {
   width: 150px;
@@ -127,7 +131,7 @@
   line-height: 254px;
   background: #fafafa;
   border: 1px solid #a4a4a4;
-  border-radius: 4px;
+  border-radius: 3px;
   text-align: center;
   margin-left: 28px;
 }
@@ -152,12 +156,6 @@
 .deta .el-dialog .detail-table .el-scrollbar .el-scrollbar__bar {
   top: 50px;
 }
-.deta .el-dialog .detail-table span {
-  font-family: PingFangSC-Regular;
-  font-size: 14px;
-  color: #010101;
-  line-height: 14px;
-}
 .deta .el-dialog .detail-table .totalBank {
   font-family: PingFangSC-Regular;
   font-size: 14px;
@@ -166,22 +164,11 @@
   text-align: right;
   margin: 4px 0px 10px 0px;
 }
-.deta .el-dialog .detail-table button {
+.deta .el-dialog .detail-table .el-button {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 8px;
-  border: none;
-  background-color: #3a71fa;
-  font-family: PingFangSC-Semibold;
-  font-size: 18px;
-  color: #ffffff;
-  letter-spacing: 0;
-  line-height: 24px;
   margin: 0 auto;
-  width: 136px;
-  height: 36px;
-  text-align: center;
-  line-height: 36px;
-  border-radius: 4px;
+  width: 100px;
 }

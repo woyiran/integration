@@ -30,6 +30,7 @@ body,html{
   margin: 0 auto;
   //头部
   .header {
+    position: relative;
     height: 68px;
     background: #364151;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
@@ -37,8 +38,9 @@ body,html{
       display: inline-block;
       width: 144px;
       height: 39px;
-      margin-left: 24px;
+      margin-left: 50px;
       color: #ffffff;
+      vertical-align: middle;
     }
     .market {
       display: inline-table;
@@ -55,7 +57,7 @@ body,html{
       background: #929292;
       width: 1px;
       height: 48px;
-      left: 472px;
+      left: 500px;
       top: 10px;
     }
     .button-group {
@@ -71,16 +73,19 @@ body,html{
       }
     }
     .user {
-      float: right;
+      // float: right;
+      position: absolute;
+      top: 0;
+      right: 0;
       .userinfo {
         display: inline-block;
         font-family: PingFangSC-Regular;
         font-size: 21px;
         color: #ffffff;
-        margin: 26px 80px;
+        margin: 26px 50px;
       }
       .logout {
-        margin-right: 64px;
+        margin-right: 44px;
         margin-top: 24px;
         vertical-align: top;
         display: inline-block;

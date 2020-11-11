@@ -8,6 +8,7 @@
   .el-input {
     width: 360px;
     height: 36px;
+     margin-right: 12px;
   }
   .reset {
     color: #000000;
@@ -21,12 +22,13 @@
     text-align: center;
     width: 100px;
     // height: 36px;
-    margin: 0 8px;
+    // margin: 0 8px;
     vertical-align: middle;
   }
   // 展示主体
   .tbody {
-    width: 100%;
+    margin-left: -13px;
+    width: 102%;
     display: flex;
     // justify-content: space-between;
     flex-wrap: wrap;
@@ -39,9 +41,9 @@
     padding: 36px 36px 70px 36px;
   }
   .card {
+    position: absolute;
     left: 0px;
     top: 0px;
-    position: absolute;
     font-family: PingFangSC-Medium;
     font-size: 18px;
     color: #212121;
@@ -53,14 +55,24 @@
     right: 0px;
     top: 0px;
     font-family: PingFangSC-Regular;
-    font-size: 14px;
+    opacity: 0.72;
+    font-size: 12px;
     color: #212121;
     letter-spacing: 0;
     text-align: right;
-    line-height: 24px;
+    width: 80px;
+    height: 14px;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
   .data,
   .aldown {
+    
     opacity: 0.72;
     font-family: PingFangSC-Regular;
     font-size: 12px;
@@ -69,6 +81,9 @@
     line-height: 14px;
   }
   .aldown {
+    position: absolute;
+    top: 5px;
+    right: 0;
     margin-left: 20px;
   }
   .introduce {
@@ -118,5 +133,8 @@
       color: #212121;
       margin-left: 10px;
     }
+  }
+  .el-pagination{
+    font-weight: normal
   }
 }

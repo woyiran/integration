@@ -2,45 +2,51 @@
   padding: 26px 48px 50px 48px;
   background-color: #f8f8f8;
   height: 100%;
+  .el-input {
+    width: 360px;
+    height: 36px; 
+    margin-right: 12px;
+  }
+  .el-button {
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #ffffff;
+    // letter-spacing: 0;
+    text-align: center;
+    width: 100px;
+    // height: 32px;
+    // line-height: 1px;
+    // margin: 0 8px;
+    vertical-align: middle;
+    // background-color: #ECEEF5;
+  }
+  .reset {
+    opacity: 0.72;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #000000;
+    background-color: #ECEEF5;
+  }
+  .rebuild {
+    float: right;
+    width: 136px;
+    span {
+      display: inline-block;
+      // margin-top: 3px;
+    }
+  }
   .repair-main-contain { 
     background-color: #fff;
-    border-radius: 10px;
+    // border-radius: 10px;
+    padding: 30px 20px 30px;
     padding-bottom: 30px;
-    .el-input {
-      width: 360px;
-      height: 36px;
-    }
-    .el-button {
-      font-family: PingFangSC-Semibold;
-      font-size: 12px;
-      color: #ffffff;
-      // letter-spacing: 0;
-      text-align: center;
-      width: 100px;
-      height: 32px;
-      line-height: 1px;
-      margin: 0 8px;
-      vertical-align: middle;
-      // background-color: #ECEEF5;
-    }
-    .reset {
-      opacity: 0.72;
-      font-family: PingFangSC-Regular;
-      font-size: 12px;
-      color: #000000;
-      background-color: #ECEEF5;
-    }
-    .rebuild {
-      float: right;
-      width: 136px;
-      span {
-        display: inline-block;
-        // margin-top: 3px;
-      }
-    }
+   
     //   表格
     .repair-table {
       // margin-top: 40px;
+      .el-table__header{
+        border-right: 3px solid rgb(245, 247, 250);
+      }
       .el-switch{
         height: 23px;
         line-height: none;
@@ -49,5 +55,8 @@
         line-height: none;
       }
     }
+  }
+  .el-pagination{
+    font-weight: normal
   }
 }

@@ -7,45 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        /* p {
-            width: 200px; */
-            /* height: 300px; */
-            /* word-break: break-all;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            background-color: pink;
-            padding: 14px;
-        } */
-
-        /* div {
-            position: relative;
-            width: 1000px;
-            margin: 0 auto; */
-            /* background-color: pink; */
-        /* } */
-
-        /* .box { */
-            /* width: 500px; */
-            /* position: absolute; */
-            /* width: 100%; */
-            /* left: 50%;
-            transform: translate(-50%);
-            top: 0; */
-            /* margin: 0 auto; */
-            /* background-color: red;
-        } */
-
-        /* .psps {
-            color: red;
-        } */
-
-        /* .psps {
-            color: blue; */
-            /* font-weight: ; */
-        /* } */
+      
+       
     </style>
     <!-- <link rel="stylesheet" href="../element.css"> -->
     <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
@@ -54,228 +17,46 @@
 
 <body>
     <div id="app">
-        <!-- <div v-model='msg'> 双向绑定</div> -->
-        <!-- <p>
-            介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
-            介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
-            介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容
-        </p> -->
-        <el-date-picker v-model="value1" type="date" placeholder="选择日期">
-        </el-date-picker>
-        <div>498196161</div>
-        <!-- <div>
-            468949
-            <div class="box">894</div>
-            <el-pagination background layout="prev, pager, next" :total="1000">
-            </el-pagination>
-        </div> -->
-        <!-- <div class="psps" @click='fn()' :style={fontwe}>
-            49861
-        </div> -->
-        <!-- <div v-for='item in app2' :key='item'>
-            <el-row :gutter='20'>
-                <div v-for='item in app3' :key='item'>
-                    <el-col :span='8'>
-                        <el-card class="box-card">
-                            <div slot="header" class="clearfix">
-                                <span>单卡信用卡模型</span>
-                                <el-button style="float:right;padding:3px 0px" type='text'>操作按键</el-button>
-                            </div>
-                            <div>
-                                <p v-for='item in app3' :key='item' class="text item">
-
-                                </p>
-                            </div>
-                        </el-card>
-                    </el-col>
-                </div>
-            </el-row>
-
-       </div> -->
-        <!-- <el-upload
-        class="upload-demo"
-        ref="upload"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        
-        
-        
-        :auto-upload="false">
-       <el-input slot="trigger" size="small" type="primary">选取文件</el-input>
-       <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-        </el-upload> -->
-        <!-- <el-select v-model="value" placeholder="请选择" @change='changeVal'>
-            <el-option v-for="item in options"
-                :key="item.value" 
-                :label="item.label" 
-                :value="item.value"
-                >
-            </el-option>
-        </el-select> -->
-        <!-- <el-switch style="display: block" v-model="value2" active-color="#13ce66" inactive-color="#ff4949"
-            active-text="发布" inactive-text="暂停" @change='changeSwich'>
-        </el-switch> -->
-
-        <!-- <el-upload class="upload-demo" ref="upload" action="https://jsonplaceholder.typicode.com/posts/"
-            :show-file-list="false" :on-success="handleSuccess" :before-upload="beforeUpload" :on-change="changeFile"
-            :auto-upload="false">
-            <el-input size="small" type="primary" :value="fileName" slot="trigger">选取文件</el-input>
-            <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传</el-button>
-        </el-upload>
-
-        <a href="javascript:;" @click='download' id='upload'>下载</a> -->
-
+       
+     
     </div>
     <script src="./vue.js"></script>
     <script src="./lib-master/index.js" type="text/javascript" charset="utf-8"></script>
     <!-- <script src="./element.js"></script> -->
     <script src="./axios.min.js"></script>
     <script>
-        // var JSONbig = require(' json-bigint '),
-        // axios.defaults.transformResponse = [
-        //         (data) => {
-        //             // data 此时是后端的原始数据
-        //             try {
-        //                 // data 此时是后端的原始数据
-        //                 // data 后台如果没有返回数据  值null
-        //                 // JSONBig.parse(null) 报错  阻止程序运行
-        //                 return JSONBig.parse(data)
-        //             } catch (e) {
-        //                 return data
-        //             }
-        //         }
-        //     ]
+       const formate= function(time) {
+        var date =new Date(parseInt(time))
+        var year =date.getFullYear()
+        var mon=date.getMonth()+1
+        var day =date.getDate()
+        return year+'/'+mon+'/'+day
+       }
+       const detai=function(){
+           
+       }
         var app = new Vue({
             el: '#app',
-            data: {
-                msg: '9999',
-                options: [{
-                    value: '选项1',
-                    label: '黄金糕'
-                }, {
-                    value: '选项2',
-                    label: '双皮奶'
-                }, {
-                    value: '选项3',
-                    label: '蚵仔煎'
-                }, {
-                    value: '选项4',
-                    label: '龙须面'
-                }, {
-                    value: '选项5',
-                    label: '北京烤鸭'
-                }],
-                value: '',
-                value2: true,
-                fontwe: {
-                    fontWeight: 900
-                },
-                app2: [0, 1],
-                app3: [0, 1, 2],
-                msg: 900,
-                arr: ['营销名单', '名单维护'],
-                arr1: [
-                    {
-                        modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
-
-                    },
-                    {
-                        modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
-
-                    },
-                    {
-                        modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
-
-                    },
-                    {
-                        modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
-
-                    },
-                    {
-                        modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
-
-                    },
-                    {
-                        modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
-                        modelContent: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介'
-
-                    },
-
-                ],
-                fileName: null
+            data:{
+                 time:Date.now()
             },
+            computed:{
+                selectDate(){
+
+                }
+            },
+            
             methods: {
-                download() {
-                    // let link = document.createElement('a')
-                    // link.style.display = 'none'
-                    // link.href = 'http://futest.sctsjkj.com/template/消防火警联网部件设施数据表.xlsx';
-                    // link.click();
-                    // var load=document.getElementById('upload')
-                    // console.log(load)
-                    // load.style.display='none'
-                },
-                fn() {
-                    this.msg = !this.msg
-                    // console.log(e)
-                    // console.log(JSON.stringify(this.arr1))
-                },
-                // fn1() {
-                //     this.msg = false
-                // }
-                changeFile(file, fileList) {
-                    // console.log(file,fileList)
-                    this.fileName = file.name
-                },
-                changeVal(val) {
-                    // console.log(val)
-                },
-                changeSwich(val) {
-                    // console.log(val)
-                },
-                // 手动上传
-                submitUpload() {
-                    let upload = this.$refs.upload
-                    this.$refs.upload.submit();
-                    // this.$refs.upload.clearFiles();
-                    // console.log(upload)
+               fn(){
+                //    let 
+                   
+                 var date = formate(this.time)
+                 console.log(date)
+               }
 
-                },
-                handleSuccess(res, file, filelist) {
-                    console.log(res, file, filelist
-                    )
-                    this.$message.success('上传成功')
-                },
-                beforeUpload(file) {
-                    // console.log(file)
-                    //    this.fileName= file.name
-                },
-                // uploadSectionFile(file){
-                //     console.log(file)
-                // }
-
+            },
+            created(){
+               this.fn()
             }
         });
     </script>

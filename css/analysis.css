@@ -67,6 +67,9 @@
   top: 11px;
   right: -18px;
 }
+.anay .el-dialog .el-scrollbar {
+  margin-top: 20px;
+}
 .anay .el-dialog .el-scrollbar .el-scrollbar__wrap {
   overflow-x: hidden;
 }

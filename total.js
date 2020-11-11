@@ -2,10 +2,14 @@
         // Vue.filter('forMat', (val) => {
         //      val.toLocaleDateString()
         // })
-        // Vue.filter('forNumber',(val)=>{
-        //     return val.toLocaleString()
+       
+        Vue.filter('forMat',(val)=>{
+            return val.toLocaleDateString()
+            
 
-        // })
+        })
+        // 转换时间
+        
         const url = window.location.href;
         const parm = decodeURI(url);
         const userparm = parm.split('?user=')[1];
@@ -14,17 +18,24 @@
 
         const { data: adminData } = JSON.parse(userInfo)
         const orgNo =Number(adminData.org.orgNo)
-        console.log(orgNo)
+        // const formate=  function(time) {
+        //     var date =new Date(parseInt(time))
+        //     var year =date.getFullYear()
+        //     var mon=date.getMonth()+1
+        //     var day =date.getDate()
+        //     return year+'/'+mon+'/'+day
+        //    }
+        // console.log(orgNo)
         // console.log(userparm);
         // 加密方法
         // encrypted()
         // 解密方法
         // decrypted()
-
         var app = new Vue({
             el: '#app',
 
             data: {
+                time:Date.now(),
                 // 用户信息
                 // isAdmin: userinfo,
                 // 权限判定
@@ -51,9 +62,9 @@
                 indexData: [
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: 1,
-                        modelData: new Date('yy-mm-dd'),
-                        modelDownNum: 2,
+                        modelNumber: '8888888882516516161',
+                        modelData: new Date(),
+                        modelDownNum: '60060600',
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
                         dataBoxId: ''
 
@@ -112,13 +123,21 @@
                     color: '#fff',
                     fontFamily: 'PingFangSC-Medium',
                     fontSize: '24px',
-                    borderRadius: '4px',
+                    borderRadius: '3px',
                     // backGroudColor: 'Red',
                     // backGroundImage: 'linearGradient(270deg, #8A68F3 0%, #0D45FE 100%)',
                     width: '140px',
                     height: '44px',
                     lineHeight: ' 42px',
                     textAlign: "center"
+                },
+                // 全部下载
+                downloadAllParams:{
+                    modelId:'',
+                    modelName:'',
+                    dataBoxId:'',
+                    orgNo:orgNo,
+                    userName:adminData.name
                 },
 
                 //名单维护数据
@@ -242,13 +261,15 @@
                 // 详情页数据
 
                 detail: false,
+                // 统计分行下载
+                totalBank:'',
                 // 详情页日期
-                detailDate:'2020/08/28',
+                detailDate:'2016-05-02',
                 detailInfo:{},
                 // 视频地址
                 // 详情页日期选择
                 // xiangqing
-                detailOption:[{value:'2020/08/28'},{value:'2020/08/29'},{value:'2020/08/18'},{value:'2020/08/16'}
+                detailOption:[{value:Date.now()},{value:Date.now()},{value:Date.now()},{value:Date.now()}
 
                 
 
@@ -260,9 +281,17 @@
                     dataBoxId:'',
                     orgNo:''
                 }, 
+                detailDownParams:{
+                    modelId:'',
+                    modelName:'',
+                    dataBoxId:'',
+                    orgNo:'',
+                    userName:''
+
+                },
                 tableDatadetail: [{
                     // 下载日期
-                    downloadTime: '2016-05-02',
+                    downloadTime: '2020/11/14',
                     // 下载账户
                     userName: '王小虎',
                     // 所属分行
@@ -306,7 +335,7 @@
                 },
                 // 获取分析数据
                 getFormAna:{
-                    modelName:'',
+                    modelId:'',
                     dataBoxId:'',
                     orgNo:''
                 },
@@ -316,7 +345,8 @@
                     dataBoxId:'',
                     // 分行id
                     orgNo:'',
-
+                    id:'',
+                    userName:adminData.name,
                     // 干预人数
                     interventionNum: null,
                     // 转化人数
@@ -324,9 +354,9 @@
                     // AUM提升
                     aumPromote: null,
                     // 转化率
-                    conversionRate:null,
+                    // conversionRate:null,
                     // 数据上传日期
-                    insertMonth:''
+                    dataTime:''
                     // trouble: null,
                     // trasform: null,
                     // incres: null,
@@ -335,18 +365,18 @@
                 // 转化率
                 // conversionRate: null,
                 // 所属分行
-                affiliatedBranch: 758000,
+                affiliatedBranch: '',
                 // 分析数据
                 tableDataAna: [{
-                    date: '1月',
+                    dataTime: Date.now(),
 
                     // 日志下拉
                     // caretBottom: true,
                     convertNum: '1',
                     interventionNum: '300',
                     aumPromote:1,
-                    conversionRate: 'kk',
-                    log: [{
+                    conversionRate: '0.33',
+                    logs: [{
                         // 录入时间
                         insertDate: '2020',
                         // 录入姓名
@@ -376,14 +406,14 @@
                     }
                     ]
                 }, {
-                    date: '2月',
+                    dataTime: Date.now(),
                     convertNum: '1',
                     // openfm: true,
                     // caretBottom: true,
                     interventionNum: '300',
                     aumPromote:1,
-                    conversionRate: 'kk',
-                    log: [{
+                    conversionRate: '0.33',
+                    logs: [{
                         // 录入时间
                         insertDate: '2020',
                         // 录入姓名
@@ -404,14 +434,14 @@
                     }
                     ]
                 }, {
-                    date: '3月',
+                    dataTime: Date.now(),
                     convertNum: '1',
                     interventionNum: '300',
                     aumPromote:1,
                     // openfm: true,
                     // caretBottom: true,
-                    conversionRate: 'kk',
-                    log: [{
+                    conversionRate: '0.33',
+                    logs: [{
                         // 录入时间
                         insertDate: '2020',
                         // 录入姓名
@@ -432,14 +462,14 @@
                     }
                     ]
                 }, {
-                    date: '4月',
+                    dataTime: Date.now(),
                     convertNum: '1',
                     interventionNum: '300',
                     aumPromote:1,
                     // openfm: true,
                     // caretBottom: true,
-                    conversionRate: 'kk',
-                    log: [{
+                    conversionRate: '0.33',
+                    logs: [{
                         // 录入时间
                         insertDate: '2020',
                         // 录入姓名
@@ -500,20 +530,31 @@
                   return   ((this.formAna.convertNum / this.formAna.interventionNum) * 100).toFixed(2)+'%'
                 },
                 // 计算详情分行数
-                totalBank(){
-                    let  detailArr=this.tableDatadetail
-                    for(var i=0;i<detailArr.length;i++){
-                               for(j=i+1;j<detailArr.length;j++){
-                                   if(detailArr[i].affiliatedBranch===detailArr[j].affiliatedBranch){
-                                       detailArr.splice(j,1)
-                                       j--
-                                   }
-                               }
-                           }
-                        //    console.log(detailArr)   
-                    return detailArr.length
+                // totalBank(){
+                //     let  detailArr=this.tableDatadetail.concat()
+                //     for(var i=0;i<detailArr.length;i++){
+                //                for(j=i+1;j<detailArr.length;j++){
+                //                    if(detailArr[i].affiliatedBranch===detailArr[j].affiliatedBranch){
+                //                        detailArr.splice(j,1)
+                //                        j--
+                //                    }
+                //                }
+                //            }
+                //         //    console.log(detailArr)   
+                //     return detailArr.length
 
-                }
+                // },
+                // 详情日期选择
+                // 详情转换日期格式
+                // selectDate(){
+
+                //   let data=this.detailOption.forEach((item,index)=>{
+                //     formate(item.value)
+                //     })
+                //     console.log(this.data)
+
+                //     return data
+                // }
             },
             watch: {
               
@@ -533,6 +574,7 @@
 
             },
             methods: {
+              
 
                 // 详情页表格样式操作
                 // 名单维护表格样式操作
@@ -615,6 +657,29 @@
                     // this.indexData=data.list
                     // this.indexTotal=data.total
                 },
+                // 首页全部下载
+                downloadAll(val){
+                   console.log(val)
+                    this.downloadAllParams.modelId=val.modelId,
+                    this.downloadAllParams.modelName=val.modelName,
+                     this.downloadAllParams.dataBoxId=val.dataBoxId,
+                    this.downloadAllParams.userName=this.userName,
+                    this.downloadAllParams.orgNo=orgNo
+                // console.log(this.downloadAllParams)
+                    this.$confirm('老铁，此操作将退出登录, 是否继续?', '温馨提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(async() => {
+                //    const{data} =axios.post('download/getData',this.downloadAllParams)
+                //    if(data.code==200){
+                //        this.$message.success('上传成功')
+                //    }else{
+                //         this.$message.error('上传失败')
+                //    }
+                })
+                        
+                },
                 // 打开详情页
                async openDetail(val) {
                     this.detail = true
@@ -622,17 +687,67 @@
                     // this.detailParams.modelId=val.modelId
                     // this.detailParams.dataBoxId=val.dataBoxId
                     this.detailParams.orgNo=orgNo
-                    // const{data:{data}} = await axios.post('model/getDetail',this.detailParams)
-                    // this.detailInfo =data.detail
-                    // this.tableDatadetail=data.log
+                        this.getDetailDate()
+                        this.totaldetailBank()
                         // 1611611616161616if
 
+
+                },
+                // 获取详情页数据
+                getDetailDate(){
+                    // const {data:{data}} = await axios.post('model/getDetail',this.detailParams)
+                    // this.detailInfo =data.detail
+                    // this.tableDatadetail=data.log
+                    
+                       
+    
+                    
+
+                },
+                // 统计分行下载
+                totaldetailBank(){
+                    let  detailArr=this.tableDatadetail.concat()
+                    
+                    for(var i=0;i<detailArr.length;i++){
+                               for(j=i+1;j<detailArr.length;j++){
+                                   if(detailArr[i].affiliatedBranch===detailArr[j].affiliatedBranch){
+                                       detailArr.splice(j,1)
+                                       j--
+                                       
+                                   }
+                               }
+                           }
+                        //    console.log(detailArr)  
+                    this.totalBank= detailArr.length
+                    // console.log(this.totalBank,this.tableDatadetail,this.time)
                 },
                 // 选择日期
                 changeDetailDate(val){
                     console.log(val)
                     // this.detailDate=val
                     // console.log(this.detailDate)
+                },
+                
+                // 详情页下载
+                detailDown(){
+                        this.detailDownParams.modelId=this.detailInfo.modelId,
+                        this.detailDownParams.modelName=this.detailInfo.modelName,
+                        this.detailDownParams.dataBoxId=this.detailInfo.dataBoxId,
+                        this.detailDownParams.userName=this.userName,
+                        this.detailDownParams.orgNo=orgNo
+                        // console.log(this.detailDownParams)
+                        this.$confirm('老铁，此操作将退出登录, 是否继续?', '温馨提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(async() => {
+                        //    const{data} =axios.post('download/getData',this.detailDownParams)
+                        //    if(data.code==200){
+                        //        this.$message.success('上传成功')
+                        //    }else{
+                        //         this.$message.error('上传失败')
+                        //    }
+                        })
                 },
                 // 获取维护页数据
               async  getRepairData(){
@@ -847,7 +962,7 @@
                 openAya(val) {
                     // console.log(val)
                     this.analy = true
-                    this.getFormAna.modelName=val.modelName
+                    this.getFormAna.modelId=val.modelName
                     this.getFormAna.dataBoxId=val.dataBoxId
                     this.getFormAna.orgNo=orgNo
                     this.getDataAna()
@@ -880,21 +995,36 @@
                 },
                 // 表格转化率计算
                 initData() {
+                    // this.tableDataAna.forEach(item => {
+                    //     // item.trans = ((item.num / item.num2) * 100).toFixed(2)
+                    //     // 录入打开
+                    //     item.openfm = true
+                    //     // 日志下拉
+                    //     item.caretBottom = false
+                    //     // 日志颜色加粗
+                    //     item.logColor = false
+                    // })
+                    // console.log(this.tableDataAna)
+                },
+                // 接口获取对表格处理
+               async getDataAna() {
+                //   const{data:{data}} =await axios.post('analys/getAnalyse',this.getFormAna)
+                //   console.log(data)
+                    // this.tableDataAna=data
                     this.tableDataAna.forEach(item => {
                         // item.trans = ((item.num / item.num2) * 100).toFixed(2)
                         // 录入打开
+                        var date =new Date(parseInt(item.dataTime))
+                        var year =date.getFullYear()
+                        var mon=date.getMonth()+1
+                        var day =date.getDate()
+                        item.dataTime=year+'/'+mon+'/'+day
                         item.openfm = true
                         // 日志下拉
                         item.caretBottom = false
                         // 日志颜色加粗
                         item.logColor = false
                     })
-                    // console.log(this.tableDataAna)
-                },
-                // 接口获取对表格处理
-               async getDataAna() {
-                //   const{data} =await axios.post('analys/getAnalyse',this.getFormAna)
-                //   console.log(data)
                 },
                 // 表格总计
                 handleSummary({ columns, data }) {
@@ -955,11 +1085,13 @@
                     // }
                     this.formAna.modelId=row.modelId,
                     this.formAna.dataBoxId=row.dataBoxId,
-
+                    this.formAna.id=row.id,
+                    this.formAna.userName=adminData.name,
+                    this.formAna.orgNo=orgNo,
                     this.formAna.interventionNum = row.interventionNum,
                     this.formAna.convertNum = row.convertNum,
                     this.formAna.aumPromote = row.aumPromote,
-                    this.formAna.insertMonth=row.insertMonth
+                    this.formAna.dataTime=row.dataTime
                     // this.formAna.conversionRate
                     // console.log(row)
                     // console.log(this.tableDataAna)
@@ -970,12 +1102,14 @@
                         modelId:this.formAna.modelId,
                         dataBoxId:this.formAna.dataBoxId,
                         orgNo:orgNo,
-
+                        id:this.formAna.id,
+                        userName:this.formAna.userName,
                         interventionNum: this.formAna.interventionNum,
                         convertNum: this.formAna.convertNum,
                         aumPromote: this.formAna.aumPromote,
-                        conversionRate: this.trans,
-                        insertMonth:this.formAna.insertMonth
+                        dataTime:this.formAna.dataTime
+                        // conversionRate: this.trans,
+                        // insertMonth:Date.now()
                         // value: this.formAna.value,
                     }
                     // row.num=null
@@ -986,7 +1120,7 @@
                     //   incres: null,
                     //   value: '选项1',
                     // }
-
+                        console.log(param)
 
 
                     if (param.interventionNum == "" || isNaN(param.interventionNum) ) {//进行数字校验，如果不是数字填出对话框进行提示
@@ -1005,15 +1139,16 @@
                     }
 
 
-                    // const{data}=axios.post('analys/insert',param)
+                    // const{data}=axios.post('analys/update',param)
                     // if(data.code==200){
                     //     this.$message.success('录入成功')
+                     // 调用接口重新渲染
+                    // this.getDataAna()
                     // }else{
                     //     this.$message.error('录入失败')
                     // }
                     // console.log(data)
-                    // 调用接口重新渲染
-                    // this.getDataAna()
+                   
 
                     this.formAna.interventionNum = null
                     this.formAna.convertNum = null

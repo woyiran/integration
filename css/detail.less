@@ -62,43 +62,49 @@
         .detail-list-body {
           height: 36px;
           margin-top: 16px;
-          .detailname{
+          .detailname {
             background: #f5f5f5;
             border-radius: 4px;
             display: inline-block;
             font-family: PingFangSC-Medium;
-            font-size: 18px;
+            font-size: 14px;
             color: #010101;
             line-height: 36px;
             height: 36px;
             width: 272px;
             vertical-align: middle;
           }
-          .detailnumber{
+          .detailnumber {
             background: #f5f5f5;
             border-radius: 4px;
             display: inline-block;
             font-family: PingFangSC-Medium;
-            font-size: 18px;
+            font-size: 14px;
             color: #010101;
             line-height: 36px;
             height: 36px;
+            width: 100px;
             vertical-align: middle;
-
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            // // word-break: break-all;
+            overflow: hidden;
+            // display: -webkit-box;
+            // -webkit-line-clamp: 1;
           }
-          .el-select{
+          .el-select {
             width: 150px;
             margin: 0 12px 0 24px;
             vertical-align: middle;
           }
-          .el-input__inner{
+          .el-input__inner {
             height: 36px;
             line-height: 36px;
           }
           // span {
-           
+
           //   &:nth-child(1) {
-             
+
           //   }
           //   &:nth-child(2) {
           //     width: 132px;
@@ -126,7 +132,7 @@
           font-family: PingFangSC-Regular;
           font-size: 12px;
           color: #010101;
-          p{
+          p {
             word-break: break-all;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -134,8 +140,6 @@
             -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
           }
-
-         
         }
       }
       .video {
@@ -144,7 +148,7 @@
         line-height: 254px;
         background: #fafafa;
         border: 1px solid #a4a4a4;
-        border-radius: 4px;
+        border-radius: 3px;
         text-align: center;
         margin-left: 28px;
         // margin-right: -22px;
@@ -170,47 +174,47 @@
         .el-scrollbar__wrap {
           overflow-x: hidden;
         }
-        .el-scrollbar__bar  {
+        .el-scrollbar__bar {
           top: 50px;
           // bottom: 50px;
+        }
       }
-      }
-      span {
-        font-family: PingFangSC-Regular;
-        font-size: 14px;
-        color: #010101;
-        line-height: 14px;
-        // margin-bottom: 15px;
-      
-      }
-      .totalBank{
+      // span {
+      //   // font-family: PingFangSC-Regular;
+      //   // font-size: 14px;
+      //   // color: #010101;
+      //   // line-height: 14px;
+      //   // margin-bottom: 15px;
+
+      // }
+      .totalBank {
         font-family: PingFangSC-Regular;
         font-size: 14px;
         color: #010101;
         line-height: 14px;
         text-align: right;
-        margin: 4px 0px 10px 0px
+        margin: 4px 0px 10px 0px;
       }
-      button {
+      .el-button {
         position: absolute;
         left: 0;
         right: 0;
         bottom: 8px;
-        border: none;
-        background-color: #3a71fa;
-        font-family: PingFangSC-Semibold;
-        font-size: 18px;
-        color: #ffffff;
-        letter-spacing: 0;
-        text-align: center;
-        line-height: 24px;
+        // // border: none;
+        // background-color: #66b1ff;
+        // font-family: PingFangSC-Semibold;
+        // font-size: 12px;
+        // color: #ffffff;
+        // letter-spacing: 0;
+        // text-align: center;
+        // // line-height: 24px;
         margin: 0 auto;
-        width: 136px;
-        height: 36px;
-        line-height: 36px;
-        text-align: center;
-        line-height: 36px;
-        border-radius: 4px;
+        width: 100px;
+        // height: 36px;
+        // line-height: 36px;
+        // text-align: center;
+        // line-height: 36px;
+        // border-radius: 3px;
       }
     }
   }

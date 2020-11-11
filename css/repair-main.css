@@ -3,39 +3,40 @@
   background-color: #f8f8f8;
   height: 100%;
 }
-.repair-main .repair-main-contain {
-  background-color: #fff;
-  border-radius: 10px;
-  padding-bottom: 30px;
-}
-.repair-main .repair-main-contain .el-input {
+.repair-main .el-input {
   width: 360px;
   height: 36px;
+  margin-right: 12px;
 }
-.repair-main .repair-main-contain .el-button {
+.repair-main .el-button {
   font-family: PingFangSC-Semibold;
   font-size: 12px;
   color: #ffffff;
   text-align: center;
   width: 100px;
-  height: 32px;
-  line-height: 1px;
-  margin: 0 8px;
   vertical-align: middle;
 }
-.repair-main .repair-main-contain .reset {
+.repair-main .reset {
   opacity: 0.72;
   font-family: PingFangSC-Regular;
   font-size: 12px;
   color: #000000;
   background-color: #ECEEF5;
 }
-.repair-main .repair-main-contain .rebuild {
+.repair-main .rebuild {
   float: right;
   width: 136px;
 }
-.repair-main .repair-main-contain .rebuild span {
+.repair-main .rebuild span {
   display: inline-block;
+}
+.repair-main .repair-main-contain {
+  background-color: #fff;
+  padding: 30px 20px 30px;
+  padding-bottom: 30px;
+}
+.repair-main .repair-main-contain .repair-table .el-table__header {
+  border-right: 3px solid #f5f7fa;
 }
 .repair-main .repair-main-contain .repair-table .el-switch {
   height: 23px;
@@ -43,4 +44,7 @@
 }
 .repair-main .repair-main-contain .repair-table .el-table .cell {
   line-height: none;
+}
+.repair-main .el-pagination {
+  font-weight: normal;
 }
