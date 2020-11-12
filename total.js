@@ -1,13 +1,19 @@
 
         // Vue.filter('forMat', (val) => {
-        //      val.toLocaleDateString()
+        //    val= val.toDateString()
+        //    return val
         // })
        
-        Vue.filter('forMat',(val)=>{
-            return val.toLocaleDateString()
+        // Vue.filter('forMat',(val)=>{
+        //     let date =new Date(parseInt(val))
+        //     let year =date.getFullYear()
+        //     let mon=date.getMonth()+1
+        //     let day =date.getDate()
+        //      val= year+'-'+mon+'-'+day
+        //      return val
             
 
-        })
+        // })
         // 转换时间
         
         const url = window.location.href;
@@ -27,6 +33,7 @@
         //    }
         // console.log(orgNo)
         // console.log(userparm);
+        console.log(adminData)
         // 加密方法
         // encrypted()
         // 解密方法
@@ -62,54 +69,54 @@
                 indexData: [
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '8888888882516516161',
-                        modelData: new Date(),
-                        modelDownNum: '60060600',
+                        counts: '8888888882516516161',
+                        createTime: new Date(),
+                        downloads: '60060600',
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
                         dataBoxId: ''
 
                     },
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
+                        counts: '88888',
+                        createTime: new Date(),
+                        downloads: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
                         dataBoxId: ''
 
                     },
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
+                        counts: '88888',
+                        createTime: new Date(),
+                        downloads: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
                         dataBoxId: ''
 
                     },
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
+                        counts: '88888',
+                        createTime: new Date(),
+                        downloads: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
                         dataBoxId: ''
 
                     },
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
+                        counts: '88888',
+                        createTime: new Date(),
+                        downloads: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
                         dataBoxId: ''
 
                     },
                     {
                         modelName: '单卡(信用卡)拉新模型',
-                        modelNumber: '88888',
-                        modelData: new Date(),
-                        modelDownNum: 20,
+                        counts: '88888',
+                        createTime: new Date(),
+                        downloads: 20,
                         modelIntroduce: '简介内容简介内容简介内容简介简介内容简介内容简介内容简介',
                         dataBoxId: ''
 
@@ -264,16 +271,11 @@
                 // 统计分行下载
                 totalBank:'',
                 // 详情页日期
-                detailDate:'2016-05-02',
+                detailDate:'',
                 detailInfo:{},
                 // 视频地址
                 // 详情页日期选择
-                // xiangqing
-                detailOption:[{value:Date.now()},{value:Date.now()},{value:Date.now()},{value:Date.now()}
-
-                
-
-                ],
+               
 
                 detailParams: {
                     
@@ -281,51 +283,107 @@
                     dataBoxId:'',
                     orgNo:''
                 }, 
+                // 详情下载
                 detailDownParams:{
                     modelId:'',
                     modelName:'',
                     dataBoxId:'',
                     orgNo:'',
-                    userName:''
+                    userName:'',
+                    dataTime:''
 
                 },
-                tableDatadetail: [{
-                    // 下载日期
-                    downloadTime: '2020/11/14',
-                    // 下载账户
-                    userName: '王小虎',
-                    // 所属分行
-                    affiliatedBranch: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    downloadTime: '2016-05-04',
-                    userName: '王小虎',
-                    affiliatedBranch: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    downloadTime: '2016-05-01',
-                    userName: '王小虎',
-                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    downloadTime: '2016-05-03',
-                    userName: '王小虎',
-                    affiliatedBranch: '上海市普陀区金沙江路 1516 弄'
-                },
-                {
-                    downloadTime: '2016-05-01',
-                    userName: '王小虎',
-                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    downloadTime: '2016-05-01',
-                    userName: '王小虎',
-                    affiliatedBranch: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    downloadTime: '2016-05-01',
-                    userName: '王小虎',
-                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    downloadTime: '2016-05-01',
-                    userName: '王小虎',
-                    affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
-                },]
+                // 日期的数据量
+                dataCount:"",
+                // 日期数组
+                selectdetail:[],
+                // 日志渲染列表
+                loglist:[],
+                // 下载量
+                detailtotaldown:"",
+                    // 详情变化
+                    changedetailopen:false,
+                
+
+                tableDatadetail: [
+                   {  
+                    //    数据日期  
+                    // dataTime:Date.now()+24*60*60*1000*3,
+                    dataTime:'2020-2',
+                    // 数据量
+                    dataCount:230,
+                    // 下载量
+                    downloads:50,
+
+                       logs:[
+                        {
+                            // 下载日期
+                            downloadTime:'2020-02' ,
+                            // 下载账户
+                            userName: '王小虎',
+                            // 所属分行
+                            affiliatedBranch: '上海市普陀区金沙江路 1517 弄'
+                        }, {
+                            downloadTime: '2020-03',
+                            userName: '王小虎',
+                            affiliatedBranch: '上海市普陀区金沙江路 1517 弄'
+                        },
+                         {
+                            downloadTime: '2020-05',
+                            userName: '王小虎',
+                            affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
+                        },
+                       ]
+                   },
+                   {  
+                    //    数据日期  
+                    // dataTime:Date.now()+24*60*60*1000*5,
+                    dataTime:'2020-03',
+                    // 数据量
+                    dataCount:20,
+                    // 下载量
+                    downloads:10,
+
+                    logs:[
+                        {
+                            downloadTime: "2020-02",
+                            userName: '王小虎',
+                            affiliatedBranch: '上海市普陀区金沙江路 1516 弄'
+                        },
+        
+                        {
+                            downloadTime: '2020-02',
+                            userName: '王小虎',
+                            affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
+                        }, {
+                            downloadTime: '2020-01',
+                            userName: '王小虎',
+                            affiliatedBranch: '上海市普陀区金沙江路 1518 弄'
+                        },
+                       ]
+                   },
+                   {  
+                    //    数据日期  
+                    dataTime:'2020-04',
+                    // 数据量
+                    dataCount:2050,
+                    // 下载量
+                    downloads:30,
+                    
+
+                       logs:[
+                        {
+                            downloadTime: "2020-02",
+                            userName: '王小虎',
+                            affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
+                        }, {
+                            downloadTime: '2020-07',
+                            userName: '王小虎',
+                            affiliatedBranch: '上海市普陀区金沙江路 1519 弄'
+                        },
+                       ]
+                   },
+            ]
                 ,
                 // 分析页数据
                 analy: false,
@@ -365,14 +423,15 @@
                 // 转化率
                 // conversionRate: null,
                 // 所属分行
-                affiliatedBranch: '',
+                affiliatedBranch: orgNo,
                 // 分析数据
                 tableDataAna: [{
-                    dataTime: Date.now(),
+                    dataTime: Date.now()+100,
 
                     // 日志下拉
                     // caretBottom: true,
                     convertNum: '1',
+                    id:1,
                     interventionNum: '300',
                     aumPromote:1,
                     conversionRate: '0.33',
@@ -406,8 +465,9 @@
                     }
                     ]
                 }, {
-                    dataTime: Date.now(),
+                    dataTime: Date.now()+500,
                     convertNum: '1',
+                    id:2,
                     // openfm: true,
                     // caretBottom: true,
                     interventionNum: '300',
@@ -434,8 +494,9 @@
                     }
                     ]
                 }, {
-                    dataTime: Date.now(),
+                    dataTime: Date.now()+400,
                     convertNum: '1',
+                    id:3,
                     interventionNum: '300',
                     aumPromote:1,
                     // openfm: true,
@@ -462,10 +523,11 @@
                     }
                     ]
                 }, {
-                    dataTime: Date.now(),
+                    dataTime: Date.now()+700,
                     convertNum: '1',
                     interventionNum: '300',
                     aumPromote:1,
+                    id:4,
                     // openfm: true,
                     // caretBottom: true,
                     conversionRate: '0.33',
@@ -506,22 +568,181 @@
                 // 728100 中信银行南昌分行
                 
 
-                options: [{
-                    value: 352100,
-                    label: '中信银行国际(中国)有限公司上海'
-                }, {
-                    value: 733600 ,
-                    label: '中信银行宁波分行'
-                }, {
-                    value: 758000,
-                    label: '中信银行银川分行'
-                }, {
-                    value: 722100,
-                    label: '中信银行沈阳分行'
-                }, {
-                    value:  728100,
-                    label: '中信银行南昌分行'
-                }],
+                options: 
+                [
+                    {
+                        value: 352100,
+                        label: '中信银行国际(中国)有限公司上海'
+                            },
+                    {
+                        value: 701100,
+                        label: '中信银行'
+                            },
+                    {
+                        value: 733600,
+                        label: '中信银行宁波分行'
+                            },
+                    {
+                        value: 758000,
+                        label: '中信银行银川分行'
+                            },
+                    {
+                        value: 722100,
+                        label: '中信银行沈阳分行'
+                            },
+                    {
+                        value: 728100,
+                        label: '中信银行南昌分行'
+                            },
+                    {
+                        value: 733990,
+                        label: '中信银行杭州分行'
+                            },
+                    {
+                        value: 746100,
+                        label: '中信银行兰州分行'
+                            },
+                    {
+                        value: 727100,
+                        label: '中信银行呼和浩特分行'
+                            },
+                    {
+                        value: 748100,
+                        label: '中信银行长春分行'
+                            },
+                    {
+                        value: 703400,
+                        label: '中信银行福州分行'
+                            },
+                    {
+                        value: 737200,
+                        label: '中信银行济南分行'
+                            },
+                    {
+                        value: 725100,
+                        label: '中信银行西安分行'
+                            },
+                    {
+                        value: 711020,
+                        label: '中信银行信用卡中心'
+                            },
+                    {
+                        value: 791100,
+                        label: '浙江临安中信村镇银行股份有限公司'
+                            },
+                    {
+                        value: 745100,
+                        label: '中信银行哈尔滨分行'
+                            },
+                    {
+                        value: 750100,
+                        label: '中信银行乌鲁木齐分行'
+                            },
+                    {
+                        value: 723000,
+                        label: '中信银行天津分行'
+                            },
+                    {
+                        value: 732300,
+                        label: '中信银行苏州分行'
+                            },
+                    {
+                        value: 724100,
+                        label: '中信银行石家庄分行'
+                            },
+                    {
+                        value: 729100,
+                        label: '中信银行南宁分行'
+                            },
+                    {
+                        value: 744100,
+                        label: '中信银行深圳分行'
+                            },
+                    {
+                        value: 358100,
+                        label: '中信银行国际(中国)有限公司北京'
+                            },
+                    {
+                        value: 351100,
+                        label: '中信银行国际(中国)有限公司总行营业部'
+                            },
+                    {
+                        value: 759000,
+                        label: '中信银行西宁分行'
+                            },
+                    {
+                        value: 726100,
+                        label: '中信银行太原分行'
+                            },
+                    {
+                        value: 747109,
+                        label: '中信银行贵阳分行'
+                            },
+                    {
+                        value: 737001,
+                        label: '中信银行青岛分行'
+                            },
+                    {
+                        value: 703260,
+                        label: '中信银行合肥分行'
+                            },
+                    {
+                        value: 768100,
+                        label: '中信银行拉萨分行'
+                            },
+                    {
+                        value: 742109,
+                        label: '中信银行重庆分行'
+                            },
+                    {
+                        value: 703220,
+                        label: '中信银行南京分行'
+                            },
+                    {
+                        value: 711100,
+                        label: '中信银行北京分行'
+                            },
+                    {
+                        value: 754000,
+                        label: '中信银行海口分行'
+                            },
+                    {
+                        value: 739109,
+                        label: '中信银行郑州分行'
+                            },
+                    {
+                        value: 740110,
+                        label: '中信银行长沙分行'
+                            },
+                    {
+                        value: 741100,
+                        label: '中信银行成都分行'
+                            },
+                    {
+                        value: 731109,
+                        label: '中信银行上海分行'
+                            },
+                    {
+                        value: 721100,
+                        label: '中信银行大连分行'
+                            },
+                    {
+                        value: 730100,
+                        label: '中信银行昆明分行'
+                            },
+                    {
+                        value: 744000,
+                        label: '中信银行广州分行'
+                            },
+                    {
+                        value: 734200,
+                        label: '中信银行厦门分行'
+                            },
+                    {
+                        value: 738100,
+                        label: '中信银行武汉分行'
+                            },
+                ]
 
             },
             computed:{
@@ -659,54 +880,136 @@
                 },
                 // 首页全部下载
                 downloadAll(val){
-                   console.log(val)
+                //    console.log(val)
                     this.downloadAllParams.modelId=val.modelId,
                     this.downloadAllParams.modelName=val.modelName,
                      this.downloadAllParams.dataBoxId=val.dataBoxId,
                     this.downloadAllParams.userName=this.userName,
                     this.downloadAllParams.orgNo=orgNo
                 // console.log(this.downloadAllParams)
-                    this.$confirm('老铁，此操作将退出登录, 是否继续?', '温馨提示', {
+                    this.$confirm('下载此模型全部, 是否继续?', '温馨提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',
                         type: 'warning'
                     }).then(async() => {
                 //    const{data} =axios.post('download/getData',this.downloadAllParams)
                 //    if(data.code==200){
-                //        this.$message.success('上传成功')
+                //        this.$message.success('下载成功')
                 //    }else{
-                //         this.$message.error('上传失败')
+                //         this.$message.error('下载失败')
                 //    }
                 })
                         
                 },
                 // 打开详情页
-               async openDetail(val) {
+                openDetail(val) {
                     this.detail = true
                     // console.log(val)
                     // this.detailParams.modelId=val.modelId
                     // this.detailParams.dataBoxId=val.dataBoxId
                     this.detailParams.orgNo=orgNo
                         this.getDetailDate()
-                        this.totaldetailBank()
+                        // this.totaldetailBank()
                         // 1611611616161616if
 
 
                 },
                 // 获取详情页数据
-                getDetailDate(){
+               async getDetailDate(){
                     // const {data:{data}} = await axios.post('model/getDetail',this.detailParams)
-                    // this.detailInfo =data.detail
-                    // this.tableDatadetail=data.log
+                    // this.detailInfo =data.datail
+                    // this.tableDatadetail=data.list
+                    // 日期转换
+                   
+               
+               
+                let changedate =[] 
+                this.tableDatadetail.forEach((item)=>{
+                        changedate.push(item.dataTime)
+                })
+                // console.log(changedate)
+                // 选择日期
+              
+                // console.log(this.selectdetail)
+                // 首次渲染索引
+            //  let dateindex= changedate.indexOf(Math.max.apply(Math,changedate))
+                    // console.log(dateindex)
+                //  首次渲染日期
+                // $
+                
+                // let date =new Date((this.tableDatadetail[dateindex].dataTime))
+                // let year =date.getFullYear()
+                // let mon=date.getMonth()+1
+                // let day =date.getDate()
+                // this.detailDate=year+'-'+mon+'-'+day
+                this.detailDate=this.tableDatadetail[0].dataTime
+                 
+                // 数据量
+                //  this.dataCount=this.tableDatadetail[dateindex].dataCount
+                 this.dataCount=this.tableDatadetail[0].dataCount
+                //  下载量
+                //  this.detailtotaldown=this.tableDatadetail[dateindex].downloads
+                 this.detailtotaldown=this.tableDatadetail[0].downloads
                     
+
+                //  this.loglist= this.tableDatadetail[dateindex].logs
+                 this.loglist= this.tableDatadetail[0].logs
+                 this.totaldetailBank()
+                 this.selectdetail=changedate.slice()
+                    
+                //  this.selectdetail =changedate.map((item)=>{
+                //          var date =new Date((item))
+                //          var year =date.getFullYear()
+                //          var mon=date.getMonth()+1
+                //          var day =date.getDate()
+                //        return  item=year+'-'+mon+'-'+day
+                        
+     
+                //      })
+                    
+                    //  console.log(this.selectdetail)
+                    //  console.log(this.selectdetail)
+                // this.loglist.forEach((item)=>{
+                //          var date =new Date((item.downloadTime))
+                //         var year =date.getFullYear()
+                //         var mon=date.getMonth()+1
+                //         var day =date.getDate()
+                //         item.downloadTime=year+'-'+mon+'-'+day   
+                // })
+                // this.changedetailopen=!this.changedetailopen
+                // this.tableDatadetail.forEach((item)=>{
+
+                       
+                //     var date =new Date(parseInt(item.dataTime))
+                //     var year =date.getFullYear()
+                //     var mon=date.getMonth()+1
+                //     var day =date.getDate()
+                //     item.dataTime=year+'-'+mon+'-'+day
+                //     item.logs.forEach((ele)=>{
+                //         var date =new Date(parseInt(ele.downloadTime))
+                //         var year =date.getFullYear()
+                //         var mon=date.getMonth()+1
+                //         var day =date.getDate()
+                //         ele.downloadTime=year+'-'+mon+'-'+day
+                //     })
+                // })
+               
+                
+                // this.
+
+              
+                    // console.log(this.tableDatadetail)
+                //    this. totaldetailBank()
                        
     
                     
 
                 },
+              
+
                 // 统计分行下载
                 totaldetailBank(){
-                    let  detailArr=this.tableDatadetail.concat()
+                    let  detailArr=this.loglist.slice()
                     
                     for(var i=0;i<detailArr.length;i++){
                                for(j=i+1;j<detailArr.length;j++){
@@ -724,8 +1027,23 @@
                 // 选择日期
                 changeDetailDate(val){
                     console.log(val)
-                    // this.detailDate=val
+                   let index= this.selectdetail.indexOf(val)
+                  this.loglist= this.tableDatadetail[index].logs
+                //   this.loglist.forEach((item)=>{
+                //     var date =new Date((item.downloadTime))
+                //     var year =date.getFullYear()
+                //     var mon=date.getMonth()+1
+                //     var day =date.getDate()
+                //     item.downloadTime=year+'-'+mon+'-'+day   
+                //   })
+                  this.totaldetailBank()
+                  this.dataCount=this.tableDatadetail[index].dataCount
+                  this.detailtotaldown=this.tableDatadetail[index].downloads
+                //   this.changedetailopen=!this.changedetailopen
+                  // this.detailDate=val
                     // console.log(this.detailDate)
+                    this.detailDownParams.dataTime=val
+                    console.log(this.detailDownParams)
                 },
                 
                 // 详情页下载
@@ -736,16 +1054,16 @@
                         this.detailDownParams.userName=this.userName,
                         this.detailDownParams.orgNo=orgNo
                         // console.log(this.detailDownParams)
-                        this.$confirm('老铁，此操作将退出登录, 是否继续?', '温馨提示', {
+                        this.$confirm('根据你选择日期下载, 是否继续?', '温馨提示', {
                             confirmButtonText: '确定',
                             cancelButtonText: '取消',
                             type: 'warning'
                         }).then(async() => {
                         //    const{data} =axios.post('download/getData',this.detailDownParams)
                         //    if(data.code==200){
-                        //        this.$message.success('上传成功')
+                        //        this.$message.success('下载成功')
                         //    }else{
-                        //         this.$message.error('上传失败')
+                        //         this.$message.error('下载失败')
                         //    }
                         })
                 },
@@ -802,12 +1120,12 @@
                 uploadSectionFile(parm) {
                     // console.log(parm)
                     let fileObj = parm.file;
-                    console.log(fileObj)
+                    // console.log(fileObj)
                     // FormData 对象
                     let form = new FormData();
                     // 文件对象
                     form.append("video", fileObj);
-                    console.log(form)
+                    // console.log(form)
                     //  axios({
                     //     method: 'post',
                     //     url: 'http://22.5.241.7/dacp/upload',
@@ -825,12 +1143,12 @@
                 editUploadSectionFile(parm) {
                     // console.log(parm)
                     let editFileObj = parm.file;
-                    console.log(editFileObj)
+                    // console.log(editFileObj)
                     // FormData 对象
                     let editForm = new FormData();
                     // 文件对象
                     editForm.append("video", editFileObj);
-                    console.log(editForm)
+                    // console.log(editForm)
                     //  axios({
                     //     method: 'post',
                     //     url: 'http://22.5.241.7/dacp/upload',
@@ -896,13 +1214,13 @@
                 },
                 handleSuccess(event, file, filelist) {
                     // this.videoFlag=true
-                    console.log(event,file,filelist)
+                    // console.log(event,file,filelist)
                     // this.videoFlag = true;
                     // this.videoUploadPercent = file.percentage.toFixed(0) * 1;
                 },
                 editHandleSuccess(event, file, filelist) {
                     //  this.videoEditFlag=true
-                     console.log(event,file,filelist)
+                    //  console.log(event,file,filelist)
                     //  this.videoEditPercent = file.percentage.toFixed(0) * 1;
                 },
                 // 发布
@@ -965,6 +1283,8 @@
                     this.getFormAna.modelId=val.modelName
                     this.getFormAna.dataBoxId=val.dataBoxId
                     this.getFormAna.orgNo=orgNo
+
+                    // console.log(this.getFormAna)
                     this.getDataAna()
 
                 },
@@ -979,7 +1299,7 @@
                     row.logColor = !row.logColor
                     this.tableDataAna.map((item) => {
                         // console.log(item)
-                        if (row.date != item.date) {
+                        if (row.id != item.id) {
                             // console.log(row.data)
                             // console.log(item)
                             // console.log(item.caretBottom)
@@ -1008,23 +1328,24 @@
                 },
                 // 接口获取对表格处理
                async getDataAna() {
-                //   const{data:{data}} =await axios.post('analys/getAnalyse',this.getFormAna)
+                //   const{data:{data}} =await axios.post('analyse/getAnalyse',this.getFormAna)
                 //   console.log(data)
                     // this.tableDataAna=data
-                    this.tableDataAna.forEach(item => {
-                        // item.trans = ((item.num / item.num2) * 100).toFixed(2)
+                    this.tableDataAna.forEach((item )=> {
+                        item.conversionRate = ((item.convertNum / item.interventionNum) * 100).toFixed(2)
                         // 录入打开
-                        var date =new Date(parseInt(item.dataTime))
+                        var date =new Date((item.dataTime))
                         var year =date.getFullYear()
                         var mon=date.getMonth()+1
                         var day =date.getDate()
-                        item.dataTime=year+'/'+mon+'/'+day
+                        item.dataTime=year+'-'+mon+'-'+day
                         item.openfm = true
                         // 日志下拉
                         item.caretBottom = false
                         // 日志颜色加粗
                         item.logColor = false
                     })
+                    // console.log(this.tableDataAna)
                 },
                 // 表格总计
                 handleSummary({ columns, data }) {
@@ -1060,9 +1381,12 @@
                 // 下拉选择变化
                 changeVal(val) {
                     // console.log(val)
+                    this.getFormAna.orgNo=val
+                    // console.log(this.getFormAna)
+                    this.getDataAna()
                     // 调接口重新渲染
-                    this.affiliatedBranch = val;
-                    console.log(this.affiliatedBranch)
+                    // this.affiliatedBranch = val;
+                    // console.log(this.affiliatedBranch)
                     // console.log(this.formAna.value)
                 },
                 // 表单录入打开
@@ -1071,7 +1395,7 @@
                     row.openfm = false
                     this.tableDataAna.map((item) => {
                         // console.log(item)
-                        if (row.date != item.date) {
+                        if (row.id != item.id) {
                             item.openfm = true
 
 
@@ -1095,6 +1419,7 @@
                     // this.formAna.conversionRate
                     // console.log(row)
                     // console.log(this.tableDataAna)
+                    console.log(this.formAna)
                 },
                 // 录入完成
               async  onsubmit(row) {
@@ -1139,7 +1464,7 @@
                     }
 
 
-                    // const{data}=axios.post('analys/update',param)
+                    // const{data}=axios.post('analyse/update',param)
                     // if(data.code==200){
                     //     this.$message.success('录入成功')
                      // 调用接口重新渲染

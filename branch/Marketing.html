@@ -59,11 +59,11 @@
 
                             <div style="height:24px;position: relative;">
                                 <span class=" card">{{item.modelName}}</span>
-                                <span class=" data-number">数据量{{item.modelNumber?item.modelNumber:0 }}</span>
+                                <span class=" data-number">数据量{{item.counts?item.counts:0 }}</span>
                             </div>
                             <div style="margin-top: 12px;height:14px;position: relative;">
-                                <span class="data">{{item.modelData  }}</span>
-                                <span class="aldown">已下载{{item.modelDownNum?item.modelDownNum:0}}次</span>
+                                <span class="data">{{item.createTime  }}</span>
+                                <span class="aldown">已下载{{item.downloads?item.downloads:0}}次</span>
                             </div>
                             <div class="introduce">
                                 <div style="font-size:16px">模型简介:</div>
@@ -161,10 +161,10 @@
                             <!-- 选择日期 -->
                             
                             <el-select v-model="detailDate" placeholder="请选择日期" @change='changeDetailDate'>
-                                <el-option v-for="(item,index) in detailOption" :key="index"  :value="item.value">
+                                <el-option v-for="(item,index) in selectdetail" :key="index"  :value="item">
                                 </el-option>
                             </el-select>
-                            <span class="detailnumber">20,200.345245245244</span>
+                            <span class="detailnumber">{{dataCount?dataCount:0}}</span>
                             
                         </div>
                         <div class="detail-list-bott">模型介绍</div>
@@ -192,13 +192,13 @@
 
                         <span class="left">下载日志</span>
                         <span class="right">
-                            累计下载n次
+                            累计下载{{detailtotaldown?detailtotaldown:0}}次
                         </span>
                     </div>
                     <div class="totalBank">{{totalBank?totalBank:0}}个分行下载</div>
                     <div>
                         <el-scrollbar style="height:250px;">
-                            <el-table :data="tableDatadetail" style="width: 100%" :header-cell-style='headdetailClass'
+                            <el-table :data="loglist" style="width: 100%" :header-cell-style='headdetailClass'
                                 :cell-style='rowClass'>
                                 <el-table-column prop="downloadTime" label="下载日期">
                                 </el-table-column>
@@ -209,7 +209,7 @@
                             </el-table>
                         </el-scrollbar>
                     </div>
-                    <div>总记录 30 条</div>
+                    <div>总记录 {{detailtotaldown?detailtotaldown:0}} 条</div>
                     <!-- <button>立即下载</button> -->
                     <el-button size='small' type='primary' @click='detailDown()'>立即下载</el-button>
                 </div>
