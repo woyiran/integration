@@ -5,7 +5,7 @@
         // })
        
         // Vue.filter('forMat',(val)=>{
-        //     let date =new Date(parseInt(val))
+        //     let date =new Date((val))
         //     let year =date.getFullYear()
         //     let mon=date.getMonth()+1
         //     let day =date.getDate()
@@ -19,8 +19,8 @@
         const url = window.location.href;
         const parm = decodeURI(url);
         const userparm = parm.split('?user=')[1];
-        var userInfo = decrypted("qwf+6SAWmJ8gvk7gkJetwYRLxSL28IZRZQD4t/hG+gP/amqOtEXiCCcYLgPr9cYeOGQK+12yrZl+PuwcNqsTSQ4qfO/CYA/KHZ+rNmT69FkZ0v4pxRt47ggIUQ1h77Dxen+NLcQ8iH50+tWbJ5DjnmshuLCx0n/JCIEjUjF/WqdREFDHd+zhzHm/29RKIELpSs+oXbOBZks75fj78A/eoerTirJNkyviJsWjU6bDxOOpbmDlPoB7oCjHmPD064rObixbnvISbK6JzJiEnm9Ik7dbueb+YPEw4Bja3JRfE6wLAFbai0mXyJ8OrbG1zVpSWljOCaAPi/WHyJgkhhn0SYKv8X/HvqEwYr6p3RnI/nLpAFNfeaxzQHuXpKkMM5qAKmX7zWrUCr7wyPk65SARgSt37kXTUMjggujsX2lERdadGMtNwNc4M8eA+Zd7IMdeRHmrMYg8vvlBCcC8JbsbPuRol/cuWxr7sIiw1pMDVGiUagEhPSOEO5RjTUwHtzIQ")
-        // var userInfo = decrypted(userparm)
+        // var userInfo = decrypted("qwf+6SAWmJ8gvk7gkJetwYRLxSL28IZRZQD4t/hG+gP/amqOtEXiCCcYLgPr9cYeOGQK+12yrZl+PuwcNqsTSQ4qfO/CYA/KHZ+rNmT69FkZ0v4pxRt47ggIUQ1h77Dxen+NLcQ8iH50+tWbJ5DjnmshuLCx0n/JCIEjUjF/WqdREFDHd+zhzHm/29RKIELpSs+oXbOBZks75fj78A/eoerTirJNkyviJsWjU6bDxOOpbmDlPoB7oCjHmPD064rObixbnvISbK6JzJiEnm9Ik7dbueb+YPEw4Bja3JRfE6wLAFbai0mXyJ8OrbG1zVpSWljOCaAPi/WHyJgkhhn0SYKv8X/HvqEwYr6p3RnI/nLpAFNfeaxzQHuXpKkMM5qAKmX7zWrUCr7wyPk65SARgSt37kXTUMjggujsX2lERdadGMtNwNc4M8eA+Zd7IMdeRHmrMYg8vvlBCcC8JbsbPuRol/cuWxr7sIiw1pMDVGiUagEhPSOEO5RjTUwHtzIQ")
+        var userInfo = decrypted(userparm)
 
         const { data: adminData } = JSON.parse(userInfo)
         const orgNo =Number(adminData.org.orgNo)
@@ -777,10 +777,6 @@
                 //     return data
                 // }
             },
-            watch: {
-              
-
-            },
             created() {
                 // 检查权限
                 this.checkPower()
@@ -858,25 +854,25 @@
                 },
                 // 查询营销名单内容
                 searchContent() {
-                    // this.reqParams.modelName=this.searchVal
-                    // this.reqParams.page = 1
-                    // this.getData()
+                    this.reqParams.modelName=this.searchVal
+                    this.reqParams.page = 1
+                    this.getData()
 
                 },
                 // 重置营销名单内容
                 resetContent() {
-                    // this.reqParams.modelName="",
-                    // this.reqParams.page=1,
-                    // this.reqParams.size=6
-                    // this.getData()
+                    this.reqParams.modelName="",
+                    this.reqParams.page=1,
+                    this.reqParams.size=6
+                    this.getData()
                 },
                 // 获得数据
                 async getData() {
 
-                    // const {data:{data}} =await axios.post('model/getModelList',this.reqParams)
-                    // console.log(data)
-                    // this.indexData=data.list
-                    // this.indexTotal=data.total
+                    const {data:{data}} =await axios.post('model/getModelList',this.reqParams)
+                    console.log(data)
+                    this.indexData=data.list
+                    this.indexTotal=data.total
                 },
                 // 首页全部下载
                 downloadAll(val){
@@ -892,12 +888,12 @@
                         cancelButtonText: '取消',
                         type: 'warning'
                     }).then(async() => {
-                //    const{data} =axios.post('download/getData',this.downloadAllParams)
-                //    if(data.code==200){
-                //        this.$message.success('下载成功')
-                //    }else{
-                //         this.$message.error('下载失败')
-                //    }
+                   const{data} =axios.post('download/getData',this.downloadAllParams)
+                   if(data.code==200){
+                       this.$message.success('下载成功')
+                   }else{
+                        this.$message.error('下载失败')
+                   }
                 })
                         
                 },
@@ -905,8 +901,8 @@
                 openDetail(val) {
                     this.detail = true
                     // console.log(val)
-                    // this.detailParams.modelId=val.modelId
-                    // this.detailParams.dataBoxId=val.dataBoxId
+                    this.detailParams.modelId=val.modelId
+                    this.detailParams.dataBoxId=val.dataBoxId
                     this.detailParams.orgNo=orgNo
                         this.getDetailDate()
                         // this.totaldetailBank()
@@ -916,9 +912,9 @@
                 },
                 // 获取详情页数据
                async getDetailDate(){
-                    // const {data:{data}} = await axios.post('model/getDetail',this.detailParams)
-                    // this.detailInfo =data.datail
-                    // this.tableDatadetail=data.list
+                    const {data:{data}} = await axios.post('model/getDetail',this.detailParams)
+                    this.detailInfo =data.datail
+                    this.tableDatadetail=data.list
                     // 日期转换
                    
                
@@ -1043,7 +1039,7 @@
                   // this.detailDate=val
                     // console.log(this.detailDate)
                     this.detailDownParams.dataTime=val
-                    console.log(this.detailDownParams)
+                    // console.log(this.detailDownParams)
                 },
                 
                 // 详情页下载
@@ -1059,45 +1055,45 @@
                             cancelButtonText: '取消',
                             type: 'warning'
                         }).then(async() => {
-                        //    const{data} =axios.post('download/getData',this.detailDownParams)
-                        //    if(data.code==200){
-                        //        this.$message.success('下载成功')
-                        //    }else{
-                        //         this.$message.error('下载失败')
-                        //    }
+                           const{data} =axios.post('download/getData',this.detailDownParams)
+                           if(data.code==200){
+                               this.$message.success('下载成功')
+                           }else{
+                                this.$message.error('下载失败')
+                           }
                         })
                 },
                 // 获取维护页数据
               async  getRepairData(){
-                      // const {data:{data}} =await axios.post('model/getList',this.repairParams) 
-                      // console.log(data)
-                    // this.tableData=data.list
-                    // this.repairTotal=data.total 
+                      const {data:{data}} =await axios.post('model/getList',this.repairParams) 
+                      console.log(data)
+                    this.tableData=data.list
+                    this.repairTotal=data.total 
                 },
                 // 查询维护页模型
                 searchRepairConcetn() {
-                    // this.repairParams.modelName=this.repairSearchVal
-                    // this.repairParams.page = 1
-                    // this.getRepairData()
-                    // this.repairSearchVal=''
+                    this.repairParams.modelName=this.repairSearchVal
+                    this.repairParams.page = 1
+                    this.getRepairData()
+                    this.repairSearchVal=''
                     
                 },
                 // 维护页重置
                 resetRepairContent() {
-                    // this.repairParams.modelName="",
-                    // this.repairParams.page=1,
-                    // this.repairParams.size=10
-                //    this.getRepairData()
+                    this.repairParams.modelName="",
+                    this.repairParams.page=1,
+                    this.repairParams.size=10
+                   this.getRepairData()
                 },
                 // 重建与编辑页方法
                 // 打开编辑页
                 openEdit(row){
                         this.editData=true
                         console.log(row)
-                        // this.editFormData.modelId=row.modelId
+                        this.editFormData.modelId=row.modelId
                         this.editFormData.modelName=row.modelName
-                        // this.editFormData.modelIntroduce=row.modelIntroduce
-                        // this.editFormData.dataBoxId=row.dataBoxId
+                        this.editFormData.modelIntroduce=row.modelIntroduce
+                        this.editFormData.dataBoxId=row.dataBoxId
                         this.editFormData.status=row.status
                         // console.log(this.editFormData.status)
 
@@ -1227,48 +1223,48 @@
                async publish() {
                     
                     this.formData.status = true
-                    // const { data } = axios.post('model/saveModel', this.formData)
-                    // if(data.code==200){
-                    //     this.$message.success('发布成功')
-                    // }else{
-                    //     this.$message.error('发布失败')
-                    // }
+                    const { data } = axios.post('model/saveModel', this.formData)
+                    if(data.code==200){
+                        this.$message.success('发布成功')
+                    }else{
+                        this.$message.error('发布失败')
+                    }
                     // console.log(data)
                     // this.formData.modelName='',
                     // this.formData.modelIntroduce='',
                     // this.formData.videoUrl='',
                     // this.formData.dataBoxId=''
                     // this.fileName=''
-                    // this.getRepairData()
+                    this.getRepairData()
                     this.rebuild=false
                 },
               async  editPublish() {
                     // this.editFormData.status = true
-                    // const { data } = axios.post('model/updateModel', this.editFormData)
-                    // if(data.code==200){
-                    //     this.$message.success('保存成功')
-                    // }else{
-                    //     this.$message.error('保存失败')
-                    // }
+                    const { data } = axios.post('model/updateModel', this.editFormData)
+                    if(data.code==200){
+                        this.$message.success('保存成功')
+                    }else{
+                        this.$message.error('保存失败')
+                    }
                     // console.log(data)
                     // this.formData.modelName='',
                     // this.formData.modelIntroduce='',
                     // this.formData.videoUrl='',
                     // this.formData.dataBoxId=''
                     // this.fileName=''
-                    // this.getRepairData()
+                    this.getRepairData()
                 },
                 // 保存
               async  save() {
                     this.formData.status = false
-                    // const { data } = axios.post('model/saveModel', this.formData)
-                    // console.log(data)
-                    // if(data.code==200){
-                    //     this.$message.success('保存成功')
-                    // }else{
-                    //     this.$message.error('保存失败')
-                    // }
-                    // this.getRepairData()
+                    const { data } = axios.post('model/saveModel', this.formData)
+                    console.log(data)
+                    if(data.code==200){
+                        this.$message.success('保存成功')
+                    }else{
+                        this.$message.error('保存失败')
+                    }
+                    this.getRepairData()
                 },
                async editSave() {
                     // this.editFormData.status = false
@@ -1328,9 +1324,9 @@
                 },
                 // 接口获取对表格处理
                async getDataAna() {
-                //   const{data:{data}} =await axios.post('analyse/getAnalyse',this.getFormAna)
-                //   console.log(data)
-                    // this.tableDataAna=data
+                  const{data:{data}} =await axios.post('analyse/getAnalyse',this.getFormAna)
+                  console.log(data)
+                    this.tableDataAna=data
                     this.tableDataAna.forEach((item )=> {
                         item.conversionRate = ((item.convertNum / item.interventionNum) * 100).toFixed(2)
                         // 录入打开
@@ -1445,7 +1441,7 @@
                     //   incres: null,
                     //   value: '选项1',
                     // }
-                        console.log(param)
+                        // console.log(param)
 
 
                     if (param.interventionNum == "" || isNaN(param.interventionNum) ) {//进行数字校验，如果不是数字填出对话框进行提示
@@ -1464,14 +1460,14 @@
                     }
 
 
-                    // const{data}=axios.post('analyse/update',param)
-                    // if(data.code==200){
-                    //     this.$message.success('录入成功')
-                     // 调用接口重新渲染
-                    // this.getDataAna()
-                    // }else{
-                    //     this.$message.error('录入失败')
-                    // }
+                    const{data}=axios.post('analyse/update',param)
+                    if(data.code==200){
+                        this.$message.success('录入成功')
+                    //  调用接口重新渲染
+                    this.getDataAna()
+                    }else{
+                        this.$message.error('录入失败')
+                    }
                     // console.log(data)
                    
 
@@ -1498,12 +1494,12 @@
                 changePager(newPage) {
                     // console.log(newPage)
                     this.reqParams.page = newPage
-                    // this.getData()
+                    this.getData()
                 },
                 // 维护页分页事件
                 repairChangePager(newPage) {
                     this.repairParams.page = newPage
-                    // this.getRepairData()
+                    this.getRepairData()
                 },
                 // 滑块开关事件
                 changeSwich(val) {
